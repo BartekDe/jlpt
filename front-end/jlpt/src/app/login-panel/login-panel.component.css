@@ -1,0 +1,10 @@
+.input-group {
+  max-height: 50px;
+}
+
+@media (max-width: 400px){
+  .input-group{
+    margin-bottom: 16px;
+  }
+
+}

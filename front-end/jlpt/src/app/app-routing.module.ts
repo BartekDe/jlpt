@@ -6,15 +6,16 @@ import {ResultsComponent} from "./results/results.component";
 import {ExerciseWizardComponent} from "./exercise-wizard/exercise-wizard.component";
 import {LessonWizardComponent} from "./lesson-wizard/lesson-wizard.component";
 import {TestWizardComponent} from "./test-wizard/test-wizard.component";
+import {LoginPanelComponent} from "./login-panel/login-panel.component";
 
 
 const routes: Routes = [
   //Konieczne będzie dodanie Guardsów - blokada przed wejściem na nie udostępnione dla konkretnego użytkownika dane
   //User
-  /*{
+  {
     path: '',
     component: LoginPanelComponent
-  },*/
+  },
   {
     path: 'profil',
     component: ProfilComponent
