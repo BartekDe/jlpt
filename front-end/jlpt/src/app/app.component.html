@@ -2,13 +2,13 @@
   <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
     <ul class="navbar-nav mr-auto" *ngIf="authService.role!==''">
       <li class="nav-item">
-        <a class="nav-link" routerLink="borrowedBooks" routerLinkActive="active" href="#">Profil</a>
+        <a class="nav-link" routerLink="profil" routerLinkActive="active" href="#">Profil</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="ownedBooks" routerLinkActive="active" href="#">Lekcje</a>
+        <a class="nav-link" routerLink="lessons" routerLinkActive="active" href="#">Lekcje</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="allBooks" routerLinkActive="active" href="#">Wyniki</a>
+        <a class="nav-link" routerLink="results" routerLinkActive="active" href="#">Wyniki</a>
       </li>
     </ul>
   </div>
@@ -27,13 +27,13 @@
   <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
     <ul class="navbar-nav ml-auto" *ngIf="authService.role==='Admin'">
       <li class="nav-item">
-        <a class="nav-link" routerLink="addBook" routerLinkActive="active" href="#">Ćwiczenie</a>
+        <a class="nav-link" routerLink="exercise-wizard" routerLinkActive="active" href="#">Ćwiczenie</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="receiveBook" routerLinkActive="active" href="#">Lekcja</a>
+        <a class="nav-link" routerLink="lesson-wizard" routerLinkActive="active" href="#">Lekcja</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" routerLink="releaseBook" routerLinkActive="active" href="#">Test</a>
+        <a class="nav-link" routerLink="test-wizard" routerLinkActive="active" href="#">Test</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto" *ngIf="authService.role!==''">
