@@ -13,6 +13,7 @@ import { LoginPanelComponent } from './login-panel/login-panel.component';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { RegisterPanelComponent } from './register-panel/register-panel.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {HttpClientModule} from "@angular/common/http";
     ExerciseWizardComponent,
     LessonWizardComponent,
     TestWizardComponent,
-    LoginPanelComponent
+    LoginPanelComponent,
+    RegisterPanelComponent
   ],
   imports: [
     BrowserModule,

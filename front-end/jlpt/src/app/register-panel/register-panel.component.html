@@ -1,6 +1,6 @@
-<form style="height: 100%;" [formGroup]="loginForm" (ngSubmit)="login()">
+<form style="height: 100%;" [formGroup]="registerForm" (ngSubmit)="register()">
   <div class="d-flex align-items-center justify-content-center flex-column" style="height: 80%;">
-    <h1>Zaloguj się</h1><br>
+    <h1>Zarejestruj się</h1><br>
 
     <div class="input-group col-sm-4">
       <input
@@ -16,8 +16,28 @@
       <input
         class="form-control border border-dark"
         type="text"
+        formControlName="email"
+        placeholder="Email"
+        aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default">
+    </div>
+
+    <div class="input-group col-sm-4">
+      <input
+        class="form-control border border-dark"
+        type="text"
         formControlName="password"
         placeholder="Hasło"
+        aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default">
+    </div>
+
+    <div class="input-group col-sm-4">
+      <input
+        class="form-control border border-dark"
+        type="text"
+        formControlName="checkPassword"
+        placeholder="Powtórz hasło"
         aria-label="Sizing example input"
         aria-describedby="inputGroup-sizing-default">
     </div>
@@ -26,13 +46,8 @@
       <button
         class="btn btn-outline-dark mr-3"
         type="submit"
-        [disabled]="!loginForm.valid">Zaloguj się</button>
-      <button
-        class="btn btn-outline-dark"
-        type="button"
-        (click)="register()">Zarejestruj się</button>
+        [disabled]="!registerForm.valid">Zarejestruj się</button>
     </div>
 
   </div>
 </form>
-

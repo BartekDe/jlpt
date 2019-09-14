@@ -7,6 +7,7 @@ import {ExerciseWizardComponent} from "./exercise-wizard/exercise-wizard.compone
 import {LessonWizardComponent} from "./lesson-wizard/lesson-wizard.component";
 import {TestWizardComponent} from "./test-wizard/test-wizard.component";
 import {LoginPanelComponent} from "./login-panel/login-panel.component";
+import {RegisterPanelComponent} from "./register-panel/register-panel.component";
 
 
 const routes: Routes = [
@@ -41,6 +42,12 @@ const routes: Routes = [
   {
     path: 'test-wizard',
     component: TestWizardComponent
+  },
+
+  //Other
+  {
+    path: 'register-panel',
+    component: RegisterPanelComponent
   }
 ];
 

@@ -3,26 +3,24 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-login-panel',
-  templateUrl: './login-panel.component.html',
-  styleUrls: ['./login-panel.component.css']
+  selector: 'app-register-panel',
+  templateUrl: './register-panel.component.html',
+  styleUrls: ['./register-panel.component.css']
 })
-export class LoginPanelComponent implements OnInit {
+export class RegisterPanelComponent implements OnInit {
 
-  loginForm = this.formBuilder.group({
+  registerForm = this.formBuilder.group({
     username: ['', Validators.required],
+    email: ['', Validators.required],
     password: ['', Validators.required],
+    checkPassword: ['', Validators.required],
   });
 
   constructor(private formBuilder: FormBuilder,
               private router: Router) { }
 
-  login() {
-
-  }
-
   register(){
-    this.router.navigate(['/register-panel']);
+    this.router.navigate(['/profil']);
   }
 
   ngOnInit() {
