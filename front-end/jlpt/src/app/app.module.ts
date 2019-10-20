@@ -10,10 +10,11 @@ import { ExerciseWizardComponent } from './exercise-wizard/exercise-wizard.compo
 import { LessonWizardComponent } from './lesson-wizard/lesson-wizard.component';
 import { TestWizardComponent } from './test-wizard/test-wizard.component';
 import { LoginPanelComponent } from './login-panel/login-panel.component';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RegisterPanelComponent } from './register-panel/register-panel.component';
+import {RequestInterceptor} from './RequestInterceptor';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,13 @@ import { RegisterPanelComponent } from './register-panel/register-panel.componen
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

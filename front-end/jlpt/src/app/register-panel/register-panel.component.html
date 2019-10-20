@@ -16,16 +16,6 @@
       <input
         class="form-control border border-dark"
         type="text"
-        formControlName="email"
-        placeholder="Email"
-        aria-label="Sizing example input"
-        aria-describedby="inputGroup-sizing-default">
-    </div>
-
-    <div class="input-group col-sm-4">
-      <input
-        class="form-control border border-dark"
-        type="text"
         formControlName="password"
         placeholder="Hasło"
         aria-label="Sizing example input"
@@ -36,8 +26,18 @@
       <input
         class="form-control border border-dark"
         type="text"
-        formControlName="checkPassword"
+        formControlName="repeatPassword"
         placeholder="Powtórz hasło"
+        aria-label="Sizing example input"
+        aria-describedby="inputGroup-sizing-default">
+    </div>
+
+    <div class="input-group col-sm-4">
+      <input
+        class="form-control border border-dark"
+        type="text"
+        formControlName="email"
+        placeholder="Email"
         aria-label="Sizing example input"
         aria-describedby="inputGroup-sizing-default">
     </div>
@@ -47,6 +47,10 @@
         class="btn btn-outline-dark mr-3"
         type="submit"
         [disabled]="!registerForm.valid">Zarejestruj się</button>
+      <button
+        class="btn btn-outline-dark"
+        type="button"
+        (click)="login()">Zaloguj się</button>
     </div>
 
   </div>
