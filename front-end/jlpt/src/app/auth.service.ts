@@ -26,6 +26,7 @@ export class AuthService {
   }
 
   registerUser(registerM: RegisterModel) {
+    this.route.navigate(['/']);
     return this.httpClient.post('http://localhost:8080/auth/register', registerM);
   }
 }

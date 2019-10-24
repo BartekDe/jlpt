@@ -3,5 +3,4 @@ export class RegisterModel {
   password: string;
   repeatPassword: string;
   email: string;
-  accessToken: string;
 }

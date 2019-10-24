@@ -29,24 +29,16 @@ export class RegisterPanelComponent implements OnInit {
   }
 
   register() {
-    this.submitted = true;
-    if (this.registerForm.invalid) {
-      return;
-    }
+    console.log('dupsko');
+
     const registerModel: RegisterModel = {
       username: this.f.username.value,
       password: this.f.password.value,
       repeatPassword: this.f.repeatPassword.value,
       email: this.f.email.value,
-      accessToken: this.authService.getToken()
     };
-    this.authService.registerUser(registerModel);
-    /*
-    // this.router.navigate(['/']);
-    console.log('I DID IT FRONT');
-    console.log(registerForm);
-    return this.httpClient.post('http://localhost:8080/auth/register', registerForm);
-    // this.router.navigate(['/'])*/
+    console.log(registerModel);
+    this.authService.registerUser(registerModel).subscribe();
   }
 
   login() {
