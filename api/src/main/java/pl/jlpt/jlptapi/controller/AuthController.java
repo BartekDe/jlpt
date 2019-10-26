@@ -18,6 +18,7 @@ import pl.jlpt.jlptapi.repository.AppUserRepository;
 import pl.jlpt.jlptapi.security.jwt.JwtTokenProvider;
 import pl.jlpt.jlptapi.service.UserRegisterService;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,7 +59,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody UserRegisterDto registrationData) {
+    public ResponseEntity register(@Valid @RequestBody UserRegisterDto registrationData) {
         this.userRegisterService.registerUser(registrationData);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
