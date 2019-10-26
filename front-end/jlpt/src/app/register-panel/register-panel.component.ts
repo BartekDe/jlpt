@@ -41,10 +41,6 @@ export class RegisterPanelComponent implements OnInit {
     this.authService.registerUser(registerModel).subscribe();
   }
 
-  login() {
-    this.router.navigate(['/']);
-  }
-
   ngOnInit() {
   }
 

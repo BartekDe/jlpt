@@ -10,8 +10,9 @@ import {map} from 'rxjs/operators';
 })
 export class AuthService {
 
-  role = '';
-  // role =  'Admin';
+  // role = '';
+  isLogedIn = false;
+   role =  'Admin';
   constructor(private route: Router,
               private httpClient: HttpClient) {
   }
@@ -22,6 +23,7 @@ export class AuthService {
 
   public saveToken(accessToken: string): void {
     localStorage.setItem('accessToken', accessToken);
+    this.isLogedIn = true;
     this.route.navigate(['/profil']);
   }
 

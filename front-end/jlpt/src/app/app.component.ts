@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {AuthService} from "./auth.service";
+import {AuthService} from './auth.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,12 +9,25 @@ import {AuthService} from "./auth.service";
 })
 export class AppComponent {
   title = 'jlpt';
+  loginPanel = true;
 
-  logout(){
-    //localStorage.removeItem("accessToken");
+  logout() {
+    // localStorage.removeItem("accessToken");
     this.authService.role = '';
+    this.loginPanel = false;
   }
 
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService,
+              private router: Router) {
+  }
+
+  register() {
+    this.loginPanel = false;
+    this.router.navigate(['/register-panel']);
+  }
+
+  login() {
+    this.loginPanel = true;
+    this.router.navigate(['/']);
   }
 }

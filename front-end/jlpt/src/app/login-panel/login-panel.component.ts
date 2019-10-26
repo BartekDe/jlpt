@@ -43,10 +43,6 @@ export class LoginPanelComponent implements OnInit {
     );
   }
 
-  register() {
-    this.router.navigate(['/register-panel']);
-  }
-
   ngOnInit() {
   }
 
