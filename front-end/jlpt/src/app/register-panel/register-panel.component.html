@@ -1,5 +1,5 @@
-<form style="height: 100%;" [formGroup]="registerForm" (ngSubmit)="register()">
-  <div class="d-flex align-items-center justify-content-center flex-column" style="height: 80%;">
+<form style="height: 100%;" [formGroup]="registerForm" (ngSubmit)="register()" xmlns="http://www.w3.org/1999/html">
+  <div class="d-flex align-items-center mt-5 pt-5 flex-column" style="height: 80%;">
     <h1>Zarejestruj się</h1><br>
 
     <div class="input-group col-sm-4">
@@ -15,7 +15,7 @@
     <div class="input-group col-sm-4">
       <input
         class="form-control border border-dark"
-        type="text"
+        type="password"
         formControlName="password"
         placeholder="Hasło"
         aria-label="Sizing example input"
@@ -25,7 +25,7 @@
     <div class="input-group col-sm-4">
       <input
         class="form-control border border-dark"
-        type="text"
+        type="password"
         formControlName="repeatPassword"
         placeholder="Powtórz hasło"
         aria-label="Sizing example input"
@@ -44,9 +44,26 @@
 
     <div>
       <button
-        class="btn btn-outline-dark mr-3"
+        class="btn btn-outline-dark mb-2"
         type="submit"
         [disabled]="!registerForm.valid">Zarejestruj się</button>
+    </div>
+
+    <div class="alert alert-danger input-group col-sm-4" role="alert" *ngIf="(username.errors && (username.dirty || username.touched))" >
+      <p *ngIf="username.errors.required && (username.dirty || username.touched)">Nazwa wymagana </p>
+      <p *ngIf="username.errors.pattern">Nazwa musi zawierać 4-16 znaków i składać się tylko z cyfer i liter </p>
+    </div>
+    <div class="alert alert-danger input-group col-sm-4" role="alert" *ngIf="(password.errors && (password.dirty || password.touched))" >
+      <p *ngIf="password.errors.required && (password.dirty || password.touched)">Hasło wymagane </p>
+      <p *ngIf="password.errors.pattern">Hasło musi zawierać 8-20 znaków w tym jedną cyfrę i literę </p>
+    </div>
+    <div class="alert alert-danger input-group col-sm-4" role="alert" *ngIf="(repeatPassword.errors && (repeatPassword.dirty || repeatPassword.touched))" >
+      <p *ngIf="repeatPassword.errors.required && (repeatPassword.dirty || repeatPassword.touched)">Powtórne hasło wymagane </p>
+      <p *ngIf="registerForm.controls.repeatPassword.errors?.MatchPassword">Hasła się nie zgadzają</p>
+    </div>
+    <div class="alert alert-danger input-group col-sm-4" role="alert" *ngIf="(email.errors && (email.dirty || email.touched))" >
+      <p *ngIf="email.errors.required && (email.dirty || email.touched)">Email wymagany </p>
+      <p *ngIf="email.errors.pattern">Email nie poprawny </p>
     </div>
 
   </div>

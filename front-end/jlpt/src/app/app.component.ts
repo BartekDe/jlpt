@@ -11,12 +11,6 @@ export class AppComponent {
   title = 'jlpt';
   loginPanel = true;
 
-  logout() {
-    // localStorage.removeItem("accessToken");
-    this.authService.role = '';
-    this.loginPanel = false;
-  }
-
   constructor(private authService: AuthService,
               private router: Router) {
   }
@@ -27,6 +21,13 @@ export class AppComponent {
   }
 
   login() {
+    this.loginPanel = true;
+    this.router.navigate(['/']);
+  }
+
+  logout() {
+    localStorage.removeItem('accessToken');
+    this.authService.role = '';
     this.loginPanel = true;
     this.router.navigate(['/']);
   }

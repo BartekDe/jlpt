@@ -1,21 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
-import {LoginService} from '../login.service';
 
 @Component({
   selector: 'app-login-panel',
   templateUrl: './login-panel.component.html',
   styleUrls: ['./login-panel.component.css']
 })
-export class LoginPanelComponent implements OnInit {
+export class LoginPanelComponent {
   loginForm: any;
   invalid = false;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private loginService: LoginService,
               private authService: AuthService) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -28,22 +26,21 @@ export class LoginPanelComponent implements OnInit {
       username: this.loginForm.value.username,
       password: this.loginForm.value.password
     };
-    // Data is {accessToken:"..."}
-    this.loginService.login(loginModel).subscribe(
+    this.authService.login(loginModel).subscribe(
       (data) => {
         this.invalid = false;
         /* tslint:disable:no-string-literal */
         this.authService.saveToken(data['accessToken']);
         this.authService.role = data['role'];
+        this.router.navigate(['/profil']);
         /* tslint:enable:no-string-literal */
       },
       () => {
         this.invalid = true;
+        alert('NIEPOPRAWNE DANE LOGOWANIA\n' +
+          `USERNAME:      ${this.loginForm.value.username}\n` +
+          `PASSWORD:      ${this.loginForm.value.password}`);
       }
     );
   }
-
-  ngOnInit() {
-  }
-
 }

@@ -6,6 +6,7 @@
       <input
         class="form-control border border-dark"
         type="text"
+        id="username"
         formControlName="username"
         placeholder="Nazwa"
         aria-label="Sizing example input"
@@ -15,7 +16,7 @@
     <div class="input-group col-sm-4">
       <input
         class="form-control border border-dark"
-        type="text"
+        type="password"
         formControlName="password"
         placeholder="Hasło"
         aria-label="Sizing example input"
@@ -24,7 +25,7 @@
 
     <div>
       <button
-        class="btn btn-outline-dark mr-3"
+        class="btn btn-outline-dark"
         type="submit"
         [disabled]="!loginForm.valid">Zaloguj się</button>
     </div>

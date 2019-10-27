@@ -16,6 +16,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RegisterPanelComponent } from './register-panel/register-panel.component';
 import {RequestInterceptor} from './RequestInterceptor';
 
+
 @NgModule({
   declarations: [
     AppComponent,
