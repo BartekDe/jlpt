@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ProfilComponent} from "./profil/profil.component";
-import {LessonsComponent} from "./lessons/lessons.component";
-import {ResultsComponent} from "./results/results.component";
-import {ExerciseWizardComponent} from "./exercise-wizard/exercise-wizard.component";
-import {LessonWizardComponent} from "./lesson-wizard/lesson-wizard.component";
-import {TestWizardComponent} from "./test-wizard/test-wizard.component";
-import {LoginPanelComponent} from "./login-panel/login-panel.component";
-import {RegisterPanelComponent} from "./register-panel/register-panel.component";
+import {ProfilComponent} from './profil/profil.component';
+import {LessonsComponent} from './lessons/lessons.component';
+import {ResultsComponent} from './results/results.component';
+import {ExerciseWizardComponent} from './exercise-wizard/exercise-wizard.component';
+import {LessonWizardComponent} from './lesson-wizard/lesson-wizard.component';
+import {TestWizardComponent} from './test-wizard/test-wizard.component';
+import {LoginPanelComponent} from './login-panel/login-panel.component';
+import {RegisterPanelComponent} from './register-panel/register-panel.component';
 
 
 const routes: Routes = [
-  //Konieczne będzie dodanie Guardsów - blokada przed wejściem na nie udostępnione dla konkretnego użytkownika dane
-  //User
+  // Konieczne będzie dodanie Guardsów - blokada przed wejściem na nie udostępnione dla konkretnego użytkownika dane
+  // User
   {
     path: '',
     component: LoginPanelComponent
@@ -30,7 +30,7 @@ const routes: Routes = [
     component: ResultsComponent
   },
 
-  //Admin
+  // Admin
   {
     path: 'exercise-wizard',
     component: ExerciseWizardComponent
@@ -44,7 +44,7 @@ const routes: Routes = [
     component: TestWizardComponent
   },
 
-  //Other
+  // Other
   {
     path: 'register-panel',
     component: RegisterPanelComponent

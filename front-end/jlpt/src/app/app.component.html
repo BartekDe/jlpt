@@ -36,11 +36,34 @@
         <a class="nav-link" routerLink="test-wizard" routerLinkActive="active" href="#">Test</a>
       </li>
     </ul>
-    <ul class="navbar-nav ml-auto" *ngIf="authService.role!==''">
+    <ul class="navbar-nav ml-auto" *ngIf="authService.role!=='' && authService.isLogedIn; else loggedOut">
       <li class="nav-item">
-        <a class="nav-link active" href="#" (click)="logout()">Wyloguj</a>
+        <button
+          class="btn btn-outline-light"
+          type="button"
+          (click)="logout()">Wyloguj się</button>
       </li>
     </ul>
+    <ng-template #loggedOut>
+      <ul class="navbar-nav ml-auto" *ngIf="loginPanel; else RegisterPanel" >
+        <li class="nav-item">
+          <button
+            class="btn btn-outline-light"
+            type="button"
+            (click)="register()">Zarejestruj się</button>
+        </li>
+      </ul>
+    </ng-template>
+    <ng-template #RegisterPanel>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <button
+            class="btn btn-outline-light"
+            type="button"
+            (click)="login()">Zaloguj się</button>
+        </li>
+      </ul>
+    </ng-template>
   </div>
 </nav>
 
