@@ -26,7 +26,11 @@ export class AuthService {
   getRole() {
     return this.httpClient.get('http://localhost:8080/auth/me').subscribe(
       (data) => {
-        // {}.roles.contains('ROLE_ADMIN');
+        if(data['roles'].includes('ROLE_ADMIN')) {
+          localStorage.setItem('isAdmin', 'true')
+        } else {
+          localStorage.setItem('isAdmin', 'false')
+        }
       });
   }
 
