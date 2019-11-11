@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import pl.jlpt.jlptapi.dto.request.creator.ExerciseCreatorDto;
+import pl.jlpt.jlptapi.dto.response.ExerciseDto;
 import pl.jlpt.jlptapi.entity.Exercise;
-import pl.jlpt.jlptapi.repository.ExerciseRepository;
 import pl.jlpt.jlptapi.security.CustomUserDetailsService;
 import pl.jlpt.jlptapi.service.creator.ExerciseCreatorService;
 
@@ -19,9 +20,6 @@ public class CreatorsController {
 
     @Autowired
     ExerciseCreatorService exerciseCreatorService;
-
-    @Autowired
-    ExerciseRepository exerciseRepository;
 
     @Autowired
     CustomUserDetailsService detailsService;
@@ -39,17 +37,30 @@ public class CreatorsController {
             @Valid @RequestBody ExerciseCreatorDto exerciseCreatorDto,
             @PathVariable Exercise exercise
     ) {
+        if (exercise == null) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Exercise not found");
+        } else {
+            exerciseCreatorService.editExercise(exercise, exerciseCreatorDto);
 
-        exerciseCreatorService.editExercise(exercise, exerciseCreatorDto);
-
-        return new ResponseEntity(HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.OK);
+        }
     }
 
     @GetMapping("/exercise/all")
     public ResponseEntity listAllExercises() {
-        List exercises = this.exerciseRepository.findAll();
+
+        List<ExerciseDto> exercises = exerciseCreatorService.getExerciseList();
 
         return new ResponseEntity(exercises, HttpStatus.OK);
+    }
+
+    @GetMapping("/exercise/{exercise}")
+    public ResponseEntity getSingleExercise(@PathVariable Exercise exercise) {
+        if (exercise == null) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Exercise not found");
+        } else {
+            return new ResponseEntity(exercise, HttpStatus.OK);
+        }
     }
 
 }
