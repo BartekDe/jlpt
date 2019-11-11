@@ -1,5 +1,6 @@
 package pl.jlpt.jlptapi.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -9,11 +10,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import pl.jlpt.jlptapi.security.jwt.JwtSecurityConfigurer;
 import pl.jlpt.jlptapi.security.jwt.JwtTokenProvider;
 
 @Component
 @EnableWebSecurity
+@EnableTransactionManagement
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -25,6 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -34,8 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers("/auth/login").permitAll()
-            .antMatchers(HttpMethod.GET, "/adres/testowy/permitall").permitAll()
-            .antMatchers(HttpMethod.GET, "/adres/testowy/admin").hasRole("ADMIN")
+            .antMatchers("/auth/register").permitAll()
+            .antMatchers("/creator/**").hasRole("ADMIN")
+            .anyRequest().authenticated()
             .and()
             .apply(new JwtSecurityConfigurer(jwtTokenProvider));
     }

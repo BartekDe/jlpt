@@ -13,6 +13,7 @@ import pl.jlpt.jlptapi.repository.AppUserRepository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +44,7 @@ public class UserRegisterService {
                 userRegisterDto.getEmail(),
                 password
         );
+        newAppUser.setRoles(Arrays.asList("ROLE_USER"));
 
         System.out.println(newAppUser);
 
