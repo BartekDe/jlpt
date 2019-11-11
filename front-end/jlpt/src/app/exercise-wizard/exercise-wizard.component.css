@@ -1,0 +1,33 @@
+.input-group {
+  max-height: 50px;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 400px){
+  .input-group{
+    margin-bottom: 20px;
+  }
+
+  .custom-select{
+    width: 90% !important;
+  }
+}
+
+.form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  opacity: 0.5;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+  font-size: 65%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}
+
+.ht-250 {
+  height: 250px;
+}

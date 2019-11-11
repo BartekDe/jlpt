@@ -8,9 +8,9 @@ import {LoginModel} from './models/LoginModel';
 })
 export class AuthService {
 
-  role = '';
+  // role = '';
   isLogedIn = false;
-  // role =  'Admin';
+  role =  'Admin';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -29,5 +29,12 @@ export class AuthService {
 
   registerUser(registerM: RegisterModel) {
     return this.httpClient.post('http://localhost:8080/auth/register', registerM);
+  }
+
+  public uploadImage(image: File) {
+    const formData = new FormData();
+    formData.append('image', image);
+
+    return this.httpClient.post('/api/v1/image-upload', formData); // CHANGE
   }
 }
