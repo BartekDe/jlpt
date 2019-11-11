@@ -12,8 +12,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -40,10 +44,10 @@ public class AppUser implements UserDetails {
     private String password;
 
     @JsonIgnore
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
-    private Date lastActivity;
+    private Timestamp lastActivity;
 
     private boolean isAdmin;
 
@@ -69,6 +73,7 @@ public class AppUser implements UserDetails {
         this.password = PASSWORD_ENCODER.encode(password);
     }
 
+    @OneToMany(fetch = FetchType.EAGER)
     public List<String> getRoles() {
         return roles;
     }

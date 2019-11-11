@@ -8,6 +8,7 @@ import lombok.Data;
 public class ExerciseCreatorDto {
 
     private int number;
+    private String type;
     private String name;
     private String content;
     private String answer1;
@@ -16,5 +17,6 @@ public class ExerciseCreatorDto {
     private String answer4;
     private String answer5;
     private String correctAnswer;
+    private String contentImage;
 
 }

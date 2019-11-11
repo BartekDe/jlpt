@@ -18,11 +18,7 @@ public class ExerciseCreatorService {
     public Exercise createExercise(ExerciseCreatorDto exerciseCreatorDto) {
 
         Exercise newExercise = new Exercise();
-        newExercise.setContent(exerciseCreatorDto.getContent());
-        newExercise.setAnswer1(exerciseCreatorDto.getAnswer());
-        newExercise.setNumber(exerciseCreatorDto.getNumber());
-        newExercise.setName(exerciseCreatorDto.getName());
-        newExercise.setCorrectAnswer(exerciseCreatorDto.getCorrectAnswer());
+        newExercise = this.createOrUpdateExercise(newExercise, exerciseCreatorDto);
 
         entityManager.persist(newExercise);
         entityManager.flush();
@@ -30,4 +26,28 @@ public class ExerciseCreatorService {
         return newExercise;
     }
 
+    public Exercise editExercise(Exercise exercise, ExerciseCreatorDto exerciseCreatorDto) {
+        exercise = this.createOrUpdateExercise(exercise, exerciseCreatorDto);
+
+        entityManager.persist(exercise);
+        entityManager.flush();
+
+        return exercise;
+    }
+
+    private Exercise createOrUpdateExercise(Exercise exercise, ExerciseCreatorDto exerciseCreatorDto) {
+        exercise.setContent(exerciseCreatorDto.getContent());
+        exercise.setContentImage(exerciseCreatorDto.getContentImage());
+        exercise.setType(exerciseCreatorDto.getType());
+        exercise.setAnswer1(exerciseCreatorDto.getAnswer1());
+        exercise.setAnswer2(exerciseCreatorDto.getAnswer2());
+        exercise.setAnswer3(exerciseCreatorDto.getAnswer3());
+        exercise.setAnswer4(exerciseCreatorDto.getAnswer4());
+        exercise.setAnswer5(exerciseCreatorDto.getAnswer5());
+        exercise.setNumber(exerciseCreatorDto.getNumber());
+        exercise.setName(exerciseCreatorDto.getName());
+        exercise.setCorrectAnswer(exerciseCreatorDto.getCorrectAnswer());
+
+        return exercise;
+    }
 }

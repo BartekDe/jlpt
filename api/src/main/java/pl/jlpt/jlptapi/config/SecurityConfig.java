@@ -9,11 +9,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import pl.jlpt.jlptapi.security.jwt.JwtSecurityConfigurer;
 import pl.jlpt.jlptapi.security.jwt.JwtTokenProvider;
 
 @Component
 @EnableWebSecurity
+@EnableTransactionManagement
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -34,8 +36,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers("/auth/login").permitAll()
-            .antMatchers(HttpMethod.GET, "/adres/testowy/permitall").permitAll()
-            .antMatchers(HttpMethod.GET, "/adres/testowy/admin").hasRole("ADMIN")
+            .antMatchers("/auth/register").permitAll()
+            .antMatchers("/creator/**").hasRole("ADMIN")
+            .anyRequest().authenticated()
             .and()
             .apply(new JwtSecurityConfigurer(jwtTokenProvider));
     }

@@ -1,8 +1,12 @@
 package pl.jlpt.jlptapi.security.jwt;
 
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.filter.GenericFilterBean;
+import pl.jlpt.jlptapi.exception.security.InvalidJwtAuthenticationException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

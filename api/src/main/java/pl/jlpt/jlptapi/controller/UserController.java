@@ -18,9 +18,4 @@ public class UserController {
     public List<AppUser> showAllUsers() {
         return this.appUserRepository.findByEmail("email@gmail.com");
     }
-
-    @GetMapping("/")
-    public String indexPage() {
-        return "hello world";
-    }
 }
