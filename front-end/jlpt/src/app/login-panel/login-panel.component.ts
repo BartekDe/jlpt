@@ -31,7 +31,12 @@ export class LoginPanelComponent {
         this.invalid = false;
         /* tslint:disable:no-string-literal */
         this.authService.saveToken(data['accessToken']);
-        this.authService.role = data['role'];
+        this.authService.role = 'Admin'; // data['role'];
+
+        /* if (this.authService.getRole().subscribe.roles.contains('ROLE_ADMIN')) {
+
+        } */
+
         this.router.navigate(['/profil']);
         /* tslint:enable:no-string-literal */
       },
