@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RegisterModel} from './models/RegisterModel';
 import {LoginModel} from './models/LoginModel';
 import {ExerciseModel} from './models/ExerciseModel';
@@ -15,8 +15,17 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {}
 
+  public saveToken(accessToken: string): void {
+    localStorage.setItem('accessToken', accessToken);
+    this.isLogedIn = true;
+  }
+
   getToken(): string {
     return localStorage.getItem('accessToken');
+  }
+
+  registerUser(registerM: RegisterModel) {
+    return this.httpClient.post('http://localhost:8080/auth/register', registerM);
   }
 
   login(loginModel: LoginModel) {
@@ -24,23 +33,22 @@ export class AuthService {
   }
 
   getRole() {
-    return this.httpClient.get('http://localhost:8080/auth/me').subscribe(
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + this.getToken()
+      })
+    };
+    return this.httpClient.get('http://localhost:8080/auth/me', httpOptions).subscribe(
       (data) => {
-        if(data['roles'].includes('ROLE_ADMIN')) {
-          localStorage.setItem('isAdmin', 'true')
+        /* tslint:disable:no-string-literal */
+        if (data['roles'].includes('ROLE_ADMIN')) {
+          localStorage.setItem('isAdmin', 'true');
         } else {
-          localStorage.setItem('isAdmin', 'false')
+          localStorage.setItem('isAdmin', 'false');
         }
+        /* tslint:enable:no-string-literal */
       });
-  }
-
-  public saveToken(accessToken: string): void {
-    localStorage.setItem('accessToken', accessToken);
-    this.isLogedIn = true;
-  }
-
-  registerUser(registerM: RegisterModel) {
-    return this.httpClient.post('http://localhost:8080/auth/register', registerM);
   }
 
   public uploadImage(image: File) {
@@ -51,6 +59,12 @@ export class AuthService {
   }
 
   public createExercise(exerciseM: ExerciseModel) {
-    return this.httpClient.post('http://localhost:8080/creator/exercise', exerciseM);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: 'Bearer ' + this.getToken()
+      })
+    };
+    return this.httpClient.post('http://localhost:8080/creator/exercise', exerciseM, httpOptions);
   }
 }
