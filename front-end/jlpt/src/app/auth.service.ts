@@ -42,11 +42,8 @@ export class AuthService {
     return this.httpClient.get('http://localhost:8080/auth/me', httpOptions).subscribe(
       (data) => {
         /* tslint:disable:no-string-literal */
-        if (data['roles'].includes('ROLE_ADMIN')) {
-          localStorage.setItem('isAdmin', 'true');
-        } else {
-          localStorage.setItem('isAdmin', 'false');
-        }
+        if (data['roles'].includes('ROLE_ADMIN')) { localStorage.setItem('isAdmin', 'true');
+        } else { localStorage.setItem('isAdmin', 'false'); }
         /* tslint:enable:no-string-literal */
       });
   }
@@ -65,6 +62,20 @@ export class AuthService {
         Authorization: 'Bearer ' + this.getToken()
       })
     };
-    return this.httpClient.post('http://localhost:8080/creator/exercise', exerciseM, httpOptions);
+    const dane = {
+      name: 'nazwanazwKreatorCONST',
+      type: 'TranslatePol',
+      content: 'contentcontent2',
+      contentImage: '',
+      correctAnswer: 'correct2',
+      answer1: 'wrong12',
+      answer2: 'wrong22',
+      answer3: 'wron32',
+      answer4: 'wrong42',
+      answer5: 'wrong52'
+    };
+    console.log('Bearer ' + this.getToken());
+    console.log('Dane ' + dane.name);
+    return this.httpClient.post('http://localhost:8080/creator/exercise', dane, httpOptions);
   }
 }
