@@ -48,4 +48,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .apply(new JwtSecurityConfigurer(jwtTokenProvider));
     }
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**");
+    }
+
 }
