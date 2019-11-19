@@ -56,26 +56,6 @@ export class AuthService {
   }
 
   public createExercise(exerciseM: ExerciseModel) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        Authorization: 'Bearer ' + this.getToken()
-      })
-    };
-    const dane = {
-      name: 'nazwanazwKreatorCONST',
-      type: 'TranslatePol',
-      content: 'contentcontent2',
-      contentImage: '',
-      correctAnswer: 'correct2',
-      answer1: 'wrong12',
-      answer2: 'wrong22',
-      answer3: 'wron32',
-      answer4: 'wrong42',
-      answer5: 'wrong52'
-    };
-    console.log('Bearer ' + this.getToken());
-    console.log('Dane ' + dane.name);
-    return this.httpClient.post('http://localhost:8080/creator/exercise', dane, httpOptions);
+    return this.httpClient.post('http://localhost:8080/creator/exercise', exerciseM);
   }
 }
