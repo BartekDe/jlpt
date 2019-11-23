@@ -35,6 +35,7 @@ public class Exercise {
 
     private String type;
 
+    @Column(length = 2500)
     private String content;
 
     private String correctAnswer;
@@ -45,13 +46,8 @@ public class Exercise {
     private String answer4;
     private String answer5;
 
+    @Column(length = 10485760)
     private String contentImage;
-
-    private String answerImage1;
-    private String answerImage2;
-    private String answerImage3;
-    private String answerImage4;
-    private String answerImage5;
 
     @ManyToMany(targetEntity = Lesson.class)
     private List<Lesson> lesson;
