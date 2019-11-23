@@ -19,7 +19,7 @@ export class RequestInterceptor implements HttpInterceptor {
     if (!request.url.includes('/auth/')) {
       request = request.clone({
         setHeaders: {
-          Authorization: `${this.auth.getToken()}`
+          Authorization: 'Bearer ' + `${this.auth.getToken()}`
         }
       });
     }

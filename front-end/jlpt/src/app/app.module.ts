@@ -15,6 +15,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RegisterPanelComponent } from './register-panel/register-panel.component';
 import {RequestInterceptor} from './RequestInterceptor';
+import { HiraganaComponent } from './lessons/hiragana/hiragana.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {RequestInterceptor} from './RequestInterceptor';
     LessonWizardComponent,
     TestWizardComponent,
     LoginPanelComponent,
-    RegisterPanelComponent
+    RegisterPanelComponent,
+    HiraganaComponent
   ],
   imports: [
     BrowserModule,

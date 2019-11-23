@@ -1,10 +1,8 @@
 import { Component} from '@angular/core';
 import {FormBuilder, NgForm, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
-
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
+import {Router} from '@angular/router';
+import {ExerciseModel} from '../models/ExerciseModel';
 
 @Component({
   selector: 'app-exercise-wizard',
@@ -13,11 +11,12 @@ class ImageSnippet {
 })
 export class ExerciseWizardComponent {
   exerciseForm: any;
-  selectedFile: ImageSnippet;
   imgURL: string | ArrayBuffer;
+  base64Str: any;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router) {
     this.exerciseForm = this.formBuilder.group({
       questionType: ['', Validators.required],
       questionName: ['', Validators.required],
@@ -42,16 +41,9 @@ export class ExerciseWizardComponent {
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
-    reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-      /*this.authService.uploadImage(this.selectedFile.file).subscribe(
-        (res) => {},
-        (err) => {});*/
-    });
-    reader.readAsDataURL(file); // ++
-    reader.onload = () => {
-      this.imgURL = reader.result;
-    };
+    reader.onloadend = () => { this.base64Str = reader.result; };
+    reader.readAsDataURL(file);
+    reader.onload = () => { this.imgURL = reader.result; };
   }
 
   reset(form: NgForm) {
@@ -59,11 +51,30 @@ export class ExerciseWizardComponent {
   }
 
   create() {
-    console.log('questionType: ' + this.f.questionType.value + '\nquestionName: ' + this.f.questionName.value +
-      '\nquestion: ' + this.f.question.value + '\nlongQuestion: ' + this.f.longQuestion.value +
-      '\nimageQuestion: ' + this.f.imageQuestion.value + '\nlongImageQuestion: ' + this.f.longImageQuestion.value +
-      '\ncorrectAnswer: ' + this.f.correctAnswer.value + '\nwrongAnswer1: ' + this.f.wrongAnswer1.value +
-      '\nwrongAnswer2: ' + this.f.wrongAnswer2.value + '\nwrongAnswer3: ' + this.f.wrongAnswer3.value +
-      '\nwrongAnswer4: ' + this.f.wrongAnswer4.value + '\nwrongAnswer5: ' + this.f.wrongAnswer5.value);
+    if (this.f.questionType.value === 'FillGapText' || this.f.questionType.value === 'ReadingCompText'
+                                                    || this.f.questionType.value === 'ReadingCompTextPict') {
+      this.f.question.value = this.f.longQuestion.value;
+    }
+
+    if (this.f.questionType.value !== 'DescribePict' && this.f.questionType.value !== 'ReadingCompTextPict') {
+      this.base64Str = '';
+    }
+
+    const exerciseModel: ExerciseModel = {
+      name: this.f.questionName.value,
+      type: this.f.questionType.value,
+      content: this.f.question.value,
+      contentImage: this.base64Str,
+      correctAnswer: this.f.correctAnswer.value,
+      answer1: this.f.wrongAnswer1.value,
+      answer2: this.f.wrongAnswer2.value,
+      answer3: this.f.wrongAnswer3.value,
+      answer4: this.f.wrongAnswer4.value,
+      answer5: this.f.wrongAnswer5.value,
+    };
+    this.authService.createExercise(exerciseModel).subscribe (
+      () => { alert('ĆWICZENIE ZOSTAŁO POPRAWNIE UTWORZONE I ZAPISANE'); },
+      () => { alert('WYSTĄPIŁ PROBLEM Z UTWORZENIEM ĆWICZENIA, SPRAWDŹ SWOJE UPRAWNIENIA'); }
+    );
   }
 }
