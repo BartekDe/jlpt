@@ -15,9 +15,9 @@ class ImageSnippet {
 })
 export class ExerciseWizardComponent {
   exerciseForm: any;
-  private invalid = false;
-  selectedFile: ImageSnippet;
+  // selectedFile: ImageSnippet;
   imgURL: string | ArrayBuffer;
+  base64Str: any;
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -46,16 +46,14 @@ export class ExerciseWizardComponent {
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
-    reader.addEventListener('load', (event: any) => {
-      this.selectedFile = new ImageSnippet(event.target.result, file);
-      /*this.authService.uploadImage(this.selectedFile.file).subscribe(
-        (res) => {},
-        (err) => {});*/
-    });
-    reader.readAsDataURL(file); // ++
-    reader.onload = () => {
-      this.imgURL = reader.result;
+    reader.onloadend = () => { console.log('READER: ', reader.result + '\n\n\n');
+                               this.base64Str = reader.result;
+                               console.log('BASE64: ', this.base64Str);
+                               console.log('LENGTH: ', this.base64Str.length);
     };
+
+    reader.readAsDataURL(file);
+    reader.onload = () => { this.imgURL = reader.result; };
   }
 
   reset(form: NgForm) {
@@ -65,33 +63,33 @@ export class ExerciseWizardComponent {
   create() {
     console.log('questionType: ' + this.f.questionType.value + '\nquestionName: ' + this.f.questionName.value +
       '\nquestion: ' + this.f.question.value + '\nlongQuestion: ' + this.f.longQuestion.value +
-      '\nimageQuestion: ' + this.f.imageQuestion.value + '\nlongImageQuestion: ' + this.f.longImageQuestion.value +
+
+      '\nimageQuestion: ' + this.base64Str + '\nlongImageQuestion: ' + this.f.longImageQuestion.value +
+
       '\ncorrectAnswer: ' + this.f.correctAnswer.value + '\nwrongAnswer1: ' + this.f.wrongAnswer1.value +
       '\nwrongAnswer2: ' + this.f.wrongAnswer2.value + '\nwrongAnswer3: ' + this.f.wrongAnswer3.value +
       '\nwrongAnswer4: ' + this.f.wrongAnswer4.value + '\nwrongAnswer5: ' + this.f.wrongAnswer5.value);
 
     if (this.f.questionType.value === 'FillGapText' || this.f.questionType.value === 'ReadingCompText'
                                                     || this.f.questionType.value === 'ReadingCompTextPict') {
-      this.f.questionType.value = this.f.longQuestion.value;
+      this.f.question.value = this.f.longQuestion.value;
     }
+
     const exerciseModel: ExerciseModel = {
-      name: this.f.questionName.value, type: this.f.questionType.value, content: this.f.question.value,
-      contentImage: '', // CHANGE base64
-      correctAnswer: this.f.correctAnswer.value, answer1: this.f.wrongAnswer1.value, answer2: this.f.wrongAnswer2.value,
-      answer3: this.f.wrongAnswer3.value, answer4: this.f.wrongAnswer4.value, answer5: this.f.wrongAnswer5.value,
+      name: this.f.questionName.value,
+      type: this.f.questionType.value,
+      content: this.f.question.value,
+      contentImage: this.base64Str, // GOOD ??
+      correctAnswer: this.f.correctAnswer.value,
+      answer1: this.f.wrongAnswer1.value,
+      answer2: this.f.wrongAnswer2.value,
+      answer3: this.f.wrongAnswer3.value,
+      answer4: this.f.wrongAnswer4.value,
+      answer5: this.f.wrongAnswer5.value,
     };
-    this.authService.createExercise(exerciseModel).subscribe(
-      () => {
-        this.router.navigate(['/']);
-      },
-      () => {
-        this.invalid = true;
-        alert('NIEPOPRAWNE DANE TWORZENIA ĆWICZENIA\n' +
-          `NAME:      ${this.exerciseForm.value.questionName}\n` +
-          `TYPE:      ${this.exerciseForm.value.questionType}\n` +
-          `QUESTION:  ${this.exerciseForm.value.question}\n` +
-          `CORRECT:   ${this.exerciseForm.value.correctAnswer}`);
-      }
+    this.authService.createExercise(exerciseModel).subscribe (
+      () => { alert('ĆWICZENIE ZOSTAŁO POPRAWNIE UTWORZONE I ZAPISANE'); },
+      () => { alert('WYSTĄPIŁ PROBLEM Z UTWORZENIEM ĆWICZENIA, SPRAWDŹ SWOJE UPRAWNIENIA'); }
     );
   }
 }

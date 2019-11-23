@@ -48,13 +48,6 @@ export class AuthService {
       });
   }
 
-  public uploadImage(image: File) {
-    const formData = new FormData();
-    formData.append('image', image);
-
-    return this.httpClient.post('/api/v1/image-upload', formData); // CHANGE
-  }
-
   public createExercise(exerciseM: ExerciseModel) {
     return this.httpClient.post('http://localhost:8080/creator/exercise', exerciseM);
   }
