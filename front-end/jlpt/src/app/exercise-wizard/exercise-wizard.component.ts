@@ -4,10 +4,6 @@ import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {ExerciseModel} from '../models/ExerciseModel';
 
-class ImageSnippet {
-  constructor(public src: string, public file: File) {}
-}
-
 @Component({
   selector: 'app-exercise-wizard',
   templateUrl: './exercise-wizard.component.html',
@@ -15,7 +11,6 @@ class ImageSnippet {
 })
 export class ExerciseWizardComponent {
   exerciseForm: any;
-  // selectedFile: ImageSnippet;
   imgURL: string | ArrayBuffer;
   base64Str: any;
 
@@ -46,12 +41,7 @@ export class ExerciseWizardComponent {
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
-    reader.onloadend = () => { console.log('READER: ', reader.result + '\n\n\n');
-                               this.base64Str = reader.result;
-                               console.log('BASE64: ', this.base64Str);
-                               console.log('LENGTH: ', this.base64Str.length);
-    };
-
+    reader.onloadend = () => { this.base64Str = reader.result; };
     reader.readAsDataURL(file);
     reader.onload = () => { this.imgURL = reader.result; };
   }
@@ -61,25 +51,20 @@ export class ExerciseWizardComponent {
   }
 
   create() {
-    console.log('questionType: ' + this.f.questionType.value + '\nquestionName: ' + this.f.questionName.value +
-      '\nquestion: ' + this.f.question.value + '\nlongQuestion: ' + this.f.longQuestion.value +
-
-      '\nimageQuestion: ' + this.base64Str + '\nlongImageQuestion: ' + this.f.longImageQuestion.value +
-
-      '\ncorrectAnswer: ' + this.f.correctAnswer.value + '\nwrongAnswer1: ' + this.f.wrongAnswer1.value +
-      '\nwrongAnswer2: ' + this.f.wrongAnswer2.value + '\nwrongAnswer3: ' + this.f.wrongAnswer3.value +
-      '\nwrongAnswer4: ' + this.f.wrongAnswer4.value + '\nwrongAnswer5: ' + this.f.wrongAnswer5.value);
-
     if (this.f.questionType.value === 'FillGapText' || this.f.questionType.value === 'ReadingCompText'
                                                     || this.f.questionType.value === 'ReadingCompTextPict') {
       this.f.question.value = this.f.longQuestion.value;
+    }
+
+    if (this.f.questionType.value !== 'DescribePict' && this.f.questionType.value !== 'ReadingCompTextPict') {
+      this.base64Str = '';
     }
 
     const exerciseModel: ExerciseModel = {
       name: this.f.questionName.value,
       type: this.f.questionType.value,
       content: this.f.question.value,
-      contentImage: this.base64Str, // GOOD ??
+      contentImage: this.base64Str,
       correctAnswer: this.f.correctAnswer.value,
       answer1: this.f.wrongAnswer1.value,
       answer2: this.f.wrongAnswer2.value,
