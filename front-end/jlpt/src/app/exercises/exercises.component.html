@@ -1,0 +1,65 @@
+<!--
+<div class="card" style="width: 80%">
+	<h3 class="card-title">Lekcja 1</h3>
+	<div class="card-body">
+		<a href="#"><button href="#" class="btn btn-light">
+			<img src="././assets/images/positive.png" alt="positive" id="opP"/>
+			<span>Ćwiczenie 1</span>
+		</button></a>
+		<a href="#"><button class="btn btn-light">
+			<img src="././assets/images/positive.png" alt="positive" id="opP"/>
+			<span>Ćwiczenie 2</span>
+		</button></a>
+		<a href="#"><button href="#" class="btn btn-light">
+			<img src="././assets/images/negative.png" alt="negative" id="opNeg"/>
+			<span>Ćwiczenie 3</span>
+		</button></a>
+		<a href="#"><button href="#" class="btn btn-light">
+			<img src="././assets/images/neutral.png" alt="neutral" id="opNeu"/>
+			<span>Ćwiczenie 4</span>
+		</button></a>
+		<a href="#"><button href="#" class="btn btn-light">
+			<img src="././assets/images/noOpinion.png" alt="noOpinion" id="opNo"/>
+			<span>Ćwiczenie 5</span>
+		</button></a>
+		<a href="#"><button href="#" class="btn btn-light" style="pointer-events:none">
+			<img src="././assets/images/locked.png" alt="locked" id="opL"/>
+			<span>Ćwiczenie 6</span>
+		</button></a>
+		<a href="#"><button href="#" class="btn btn-light" style="pointer-events:none">
+			<img src="././assets/images/locked.png" alt="locked" id="opL"/>
+			<span>Ćwiczenie 7</span>
+		</button></a>
+		<a href="#"><button href="#" class="btn btn-light" style="pointer-events:none">
+			<img src="././assets/images/locked.png" alt="locked" id="opL"/>
+			<span>Ćwiczenie 8</span>
+		</button></a>
+		<a href="#"><button href="#" class="btn btn-light" style="pointer-events:none">
+			<img src="././assets/images/locked.png" alt="locked" id="opL"/>
+			<span>Ćwiczenie 9</span>
+		</button></a>
+	</div>
+	
+</div>
+-->
+
+
+<div class="card" style="width: 80%">
+	<h3 class="card-title">Lekcja 1</h3>
+	<div class="card-body">
+	<div *ngFor="let exercise of exercises_index">
+		<a routerLink="/exercise-view">
+			<button class="btn btn-light" style="pointer-events:none" *ngIf="exercise.rate=='locked'">
+				<img src="././assets/images/{{exercise.rate}}.png" alt="opinion" id="op"/>
+				<span>Ćwiczenie {{exercise.id}}</span>
+			</button>
+			<button class="btn btn-light" *ngIf="exercise.rate!='locked'">
+				<img src="././assets/images/{{exercise.rate}}.png" alt="opinion" id="op"/>
+				<span>Ćwiczenie {{exercise.id}}</span>
+			</button>
+		</a>
+	</div>
+
+	</div>
+	
+</div>

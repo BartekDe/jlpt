@@ -1,0 +1,34 @@
+<div class="card" style="width: 80%">
+	<div class="card-body1">
+		<h2>Ćwiczenie 1</h2>
+		<button (click)=makeOpinion(1) class="btn btn-light" id="buttonPos" 
+		[style.background-color] = "opinion == 1 ? 'gold' : ''" [style.border] = "opinion == 1 ? '1px solid black' : ''">
+			<img src="././assets/images/positive.png" alt="opinion" id="opPos"/>
+		</button>
+		<button (click)=makeOpinion(2) class="btn btn-light" id="buttonNeu"
+		[style.background-color] = "opinion == 2 ? 'gold' : ''" [style.border] = "opinion == 2 ? '1px solid black' : ''">
+			<img src="././assets/images/neutral.png" alt="opinion" id="opNeu"/>
+		</button>
+		<button (click)=makeOpinion(3) class="btn btn-light" id="buttonNeg"
+		[style.background-color] = "opinion == 3 ? 'gold' : ''" [style.border] = "opinion == 3 ? '1px solid black' : ''">
+			<img src="././assets/images/negative.png" alt="opinion" id="opNeg"/>
+		</button>
+	</div>
+	<div class="card-body2">
+		<div id="question" class="btn btn-light">
+			<span>Treść ćwiczenia</span>
+		</div>
+		<button class="btn btn-light">
+			<span>Odpowiedź 1</span>
+		</button>
+		<button class="btn btn-light">
+			<span>Odpowiedź 2</span>
+		</button>
+		<button class="btn btn-light">
+			<span>Odpowiedź 3</span>
+		</button>
+		<button class="btn btn-light">
+			<span>Odpowiedź 4</span>
+		</button>
+	</div>	
+</div>
