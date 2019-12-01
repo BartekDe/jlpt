@@ -11,6 +11,7 @@ import { LessonViewComponent } from './lesson-view/lesson-view.component';
 import {TestWizardComponent} from './test-wizard/test-wizard.component';
 import {LoginPanelComponent} from './login-panel/login-panel.component';
 import {RegisterPanelComponent} from './register-panel/register-panel.component';
+import {HiraganaComponent} from './exercises/hiragana/hiragana.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'exercise-view',
     component: ExerciseViewComponent
+  },
+  {
+    path: 'exercises-hiragana',
+    component: HiraganaComponent
   },
   {
     path: 'results',
