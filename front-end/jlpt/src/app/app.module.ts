@@ -19,7 +19,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RegisterPanelComponent } from './register-panel/register-panel.component';
 import {RequestInterceptor} from './RequestInterceptor';
-import { HiraganaComponent } from './exercises/hiragana/hiragana.component';
+import { AlphabetComponent } from './exercises/alphabet/alphabet.component';
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import { HiraganaComponent } from './exercises/hiragana/hiragana.component';
     TestWizardComponent,
     LoginPanelComponent,
     RegisterPanelComponent,
-    HiraganaComponent
+    AlphabetComponent
   ],
   imports: [
     BrowserModule,

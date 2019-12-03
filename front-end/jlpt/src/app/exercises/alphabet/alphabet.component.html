@@ -1,16 +1,18 @@
 <div class="d-flex align-items-center mt-5 pt-5 flex-column" style="height: 90%;">
-  <h1>HIRAGANA</h1>
+  <h1>{{alphabet}}</h1>
 
   <div class = "row w-100 p-5">
     <div class="col-lg-2 display">
       <button
         class="m-3 btn btn-outline-light"
-        (click)="changeMode()">{{mode}}
+        (click)="changeMode()">{{modeLabel}}
       </button>
       <div style="height:2px; width: 90%; background: white; margin: auto"></div>
       <div class="m-1">Wybrany znak</div>
-      <div class="m-1" style="font-size:64px;">{{translateHiragana}}</div>
+      <div class="m-1" style="font-size:64px;">{{translateAlphabet}}</div>
       <div class="m-1">{{translateRomaji}}</div>
+      <div class="m-1 smallDisplay" *ngIf="alphabet == 'Kanji'">On: {{onReading}}</div>
+      <div class="m-1 smallDisplay" *ngIf="alphabet == 'Kanji'">Kun: {{kunReading}}</div>
       <div style="height:2px; width: 90%; background: white; margin: auto"></div>
       <div *ngIf="mode === 'Sprawdzian';">
         <div class="m-1">Wskaż</div>
@@ -26,41 +28,34 @@
       </div>
     </div>
     <div class="col-lg-10" style="background-color:white;">
-      <br> <ng-container *ngFor="let row of hiragana; let i = index">
-        <div class="row justify-content-center" *ngIf="row != hiragana[8] && row != hiragana[14]; else endOrEightRow">
+      <br> <ng-container *ngFor="let row of kana; let i = index">
+        <div class="row justify-content-center" *ngIf="row != kana[8] && row != kana[14]; else endOrEightRow">
           <ng-container *ngFor="let sign of row; let j = index">
-            <button [id]="i*10+j"
-                    [ngClass]="{
-                      'btn-warning': translateHiragana == sign[0],
-                      'btn-danger': translateHiragana != sign[0],
+            <button [ngClass]="{
+                      'btn-warning': translateAlphabet == sign[0],
+                      'btn-danger': translateAlphabet != sign[0],
                       'col-lg-1': true
                     }"
                     (click)="selectSign(i, j)"
                     *ngIf="sign != row[5]; else fifthtCol">{{sign[0]}}
             </button>
-            <ng-template #fifthtCol>
-              <div class="w-my"></div>
-            </ng-template>
+            <ng-template #fifthtCol> <div class="w-my"></div> </ng-template>
           </ng-container>
         </div>
         <ng-template #endOrEightRow>
-          <div class="row justify-content-center" *ngIf="row == hiragana[14]; else eightRow">
+          <div class="row justify-content-center" *ngIf="row == kana[14]; else eightRow">
             <ng-container *ngFor="let sign of row; let j = index">
-              <button
-                [id]="i*10+j"
-                [ngClass]="{
-                      'btn-warning': translateHiragana == sign[0],
-                      'btn-danger': translateHiragana != sign[0],
-                      'col-lg-1': true
-                    }"
+              <button [ngClass]="{
+                        'btn-warning': translateAlphabet == sign[0],
+                        'btn-danger': translateAlphabet != sign[0],
+                        'col-lg-1': true
+                }"
                 (click)="selectSign(i,j)">{{sign[0]}}
               </button>
             </ng-container>
             <div class="alterPos"></div>
           </div>
-          <ng-template #eightRow>
-            <div class="h-my" ></div>
-          </ng-template>
+          <ng-template #eightRow> <div class="h-my"></div> </ng-template>
         </ng-template>
       </ng-container> <br>
     </div>

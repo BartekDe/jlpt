@@ -22,3 +22,8 @@ button {
   text-align: center;
   font-size: 32px;
 }
+
+.smallDisplay {
+  text-align: left;
+  font-size: 18px;
+}

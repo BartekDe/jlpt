@@ -11,64 +11,30 @@ import { LessonViewComponent } from './lesson-view/lesson-view.component';
 import {TestWizardComponent} from './test-wizard/test-wizard.component';
 import {LoginPanelComponent} from './login-panel/login-panel.component';
 import {RegisterPanelComponent} from './register-panel/register-panel.component';
-import {HiraganaComponent} from './exercises/hiragana/hiragana.component';
+import {AlphabetComponent} from './exercises/alphabet/alphabet.component';
 
 
 const routes: Routes = [
   // Konieczne będzie dodanie Guardsów - blokada przed wejściem na nie udostępnione dla konkretnego użytkownika dane
   // User
-  {
-    path: '',
-    component: LoginPanelComponent
-  },
-  {
-    path: 'profil',
-    component: ProfilComponent
-  },
-  {
-    path: 'lessons',
-    component: LessonsComponent
-  },
-  {
-    path: 'lesson-view',
-    component: LessonViewComponent
-  },
-  {
-    path: 'exercises',
-    component: ExercisesComponent
-  },
-  {
-    path: 'exercise-view',
-    component: ExerciseViewComponent
-  },
-  {
-    path: 'exercises-hiragana',
-    component: HiraganaComponent
-  },
-  {
-    path: 'results',
-    component: ResultsComponent
-  },
+  { path: '', component: LoginPanelComponent },
+  { path: 'profil', component: ProfilComponent },
+  { path: 'lessons', component: LessonsComponent },
+  { path: 'lesson-view', component: LessonViewComponent },
+  { path: 'exercises', component: ExercisesComponent },
+  { path: 'exercise-view', component: ExerciseViewComponent },
+  { path: 'exercises-hiragana', component: AlphabetComponent, data: { kana: 'Hiragana' } },
+  { path: 'exercises-katakana', component: AlphabetComponent, data: { kana: 'Katakana' } },
+  { path: 'exercises-kanji', component: AlphabetComponent, data: { kana: 'Kanji' } },
+  { path: 'results', component: ResultsComponent },
 
   // Admin
-  {
-    path: 'exercise-wizard',
-    component: ExerciseWizardComponent
-  },
-  {
-    path: 'lesson-wizard',
-    component: LessonWizardComponent
-  },
-  {
-    path: 'test-wizard',
-    component: TestWizardComponent
-  },
+  { path: 'exercise-wizard', component: ExerciseWizardComponent },
+  { path: 'lesson-wizard', component: LessonWizardComponent },
+  { path: 'test-wizard', component: TestWizardComponent },
 
   // Other
-  {
-    path: 'register-panel',
-    component: RegisterPanelComponent
-  }
+  { path: 'register-panel', component: RegisterPanelComponent }
 ];
 
 @NgModule({
