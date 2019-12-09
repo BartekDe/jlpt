@@ -1,0 +1,29 @@
+button {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 1px;
+}
+
+.h-my {
+  height: 12px;
+}
+
+.w-my {
+  width: 12px;
+}
+
+.alterPos {
+  width: 43.5%;
+}
+
+.display {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  font-size: 32px;
+}
+
+.smallDisplay {
+  text-align: left;
+  font-size: 18px;
+}

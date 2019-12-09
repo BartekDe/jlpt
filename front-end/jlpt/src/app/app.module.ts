@@ -19,6 +19,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RegisterPanelComponent } from './register-panel/register-panel.component';
 import {RequestInterceptor} from './RequestInterceptor';
+import { AlphabetComponent } from './exercises/alphabet/alphabet.component';
 
 
 @NgModule({
@@ -26,19 +27,20 @@ import {RequestInterceptor} from './RequestInterceptor';
     AppComponent,
     ProfilComponent,
     LessonsComponent,
-	ExercisesComponent,
+    ExercisesComponent,
     ResultsComponent,
     ExerciseWizardComponent,
-	ExerciseViewComponent,
+    ExerciseViewComponent,
     LessonWizardComponent,
-	LessonViewComponent,
+    LessonViewComponent,
     TestWizardComponent,
     LoginPanelComponent,
-    RegisterPanelComponent
+    RegisterPanelComponent,
+    AlphabetComponent
   ],
   imports: [
     BrowserModule,
-	PdfViewerModule,
+    PdfViewerModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
