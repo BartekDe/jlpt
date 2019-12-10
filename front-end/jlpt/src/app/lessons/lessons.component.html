@@ -1,1 +1,125 @@
-<p>lessons works!</p>
+<!--<div class="container">
+	<div class="card" style="width: 31.3%">
+		<div class="card-body">
+			<h5 class="card-title">Lekcja 1</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Hiragana</h6>
+			<a id="buttonT" href="#" class="btn btn-dark">Teoria</a>
+			<img src="././assets/images/v.jpg" alt="v" id="IMGv">
+			<a id="buttonE" href="#" class="btn btn-dark">Ćwiczenia</a>
+			<img src="././assets/images/v.jpg" alt="v" id="IMGv">
+		</div>
+	</div>
+
+	<div class="card" style="width: 31.3%">
+		<div class="card-body">
+			<h5 class="card-title">Lekcja 2</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Katakana</h6>
+			<a id="buttonT" href="#" class="btn btn-dark">Teoria</a>
+			<img src="././assets/images/v.jpg" alt="v" id="IMGv">
+			<a id="buttonE" href="#" class="btn btn-dark">Ćwiczenia</a>
+			<img src="././assets/images/v.jpg" alt="v" id="IMGv">
+		</div>
+	</div>
+	
+	<div class="card" style="width: 31.3%">
+		<div class="card-body">
+			<h5 class="card-title">Lekcja 3</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Kanji</h6>
+			<a id="buttonT" href="#" class="btn btn-dark">Teoria</a>
+			<img src="././assets/images/v.jpg" alt="v" id="IMGv">
+			<a id="buttonE" href="#" class="btn btn-dark">Ćwiczenia</a>
+			<img src="././assets/images/x.jpg" alt="x" id="IMGx">
+		</div>
+	</div>
+	
+	<div class="card" style="width: 31.3%; opacity:75%; pointer-events:none">
+		<div class="card-body">
+			<h5 class="card-title">Lekcja 4</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji 4</h6>
+			<a id="buttonT" href="#" class="btn btn-dark">Teoria</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+			<a id="buttonE" href="#" class="btn btn-dark">Ćwiczenia</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+		</div>
+	</div>
+	
+	<div class="card" style="width: 31.3%; opacity:75%; pointer-events:none">
+		<div class="card-body">
+			<h5 class="card-title">Lekcja 5</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji 5</h6>
+			<a id="buttonT" href="#" class="btn btn-dark">Teoria</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+			<a id="buttonE" href="#" class="btn btn-dark">Ćwiczenia</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+		</div>
+	</div>
+	
+	<div class="card" style="width: 31.3%; opacity:75%; pointer-events:none">
+		<div class="card-body">
+			<h5 class="card-title">Lekcja 6</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji 6</h6>
+			<a id="buttonT" href="#" class="btn btn-dark">Teoria</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+			<a id="buttonE" href="#" class="btn btn-dark">Ćwiczenia</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+		</div>
+	</div>
+	
+	<div class="card" style="width: 31.3%; opacity:75%; pointer-events:none">
+		<div class="card-body">
+			<h5 class="card-title">Lekcja 7</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji 7</h6>
+			<a id="buttonT" href="#" class="btn btn-dark">Teoria</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+			<a id="buttonE" href="#" class="btn btn-dark">Ćwiczenia</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+		</div>
+	</div>
+	
+	<div class="card" style="width: 31.3%; opacity:75%; pointer-events:none">
+		<div class="card-body">
+			<h5 class="card-title">Lekcja 8</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji 8</h6>
+			<a id="buttonT" href="#" class="btn btn-dark">Teoria</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+			<a id="buttonE" href="#" class="btn btn-dark">Ćwiczenia</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+		</div>
+	</div>
+	
+	<div class="card" style="width: 31.3%; opacity:75%; pointer-events:none">
+		<div class="card-body">
+			<h5 class="card-title">Lekcja 9</h5>
+			<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji 9</h6>
+			<a id="buttonT" href="#" class="btn btn-dark">Teoria</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+			<a id="buttonE" href="#" class="btn btn-dark">Ćwiczenia</a>
+			<img src="././assets/images/none.jpg" alt="none" id="IMGnone">
+		</div>
+	</div>
+</div>-->
+
+<div class="container">
+	<div *ngFor="let lesson of lessons_index">
+		<div class="card" style="width: 31.3%; opacity:75%; pointer-events:none" *ngIf="lesson.rateT=='none'">
+			<div class="card-body">
+				<h5 class="card-title">Lekcja {{lesson.id}}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji {{lesson.id}}</h6>
+				<a id="buttonT" routerLink="/lesson-view" class="btn btn-dark">Teoria</a>
+				<img src="././assets/images/{{lesson.rateT}}.png" alt="img" id="IMG">
+				<a id="buttonE" routerLink="/exercises" class="btn btn-dark">Ćwiczenia</a>
+				<img src="././assets/images/{{lesson.rateE}}.png" alt="img" id="IMG">
+			</div>
+		</div>
+		<div class="card" style="width: 31.3%" *ngIf="lesson.rateT!='none'">
+			<div class="card-body">
+				<h5 class="card-title">Lekcja {{lesson.id}}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji {{lesson.id}}</h6>
+				<a id="buttonT" routerLink="/lesson-view" class="btn btn-dark">Teoria</a>
+				<img src="././assets/images/{{lesson.rateT}}.png" alt="img" id="IMG">
+				<a id="buttonE" routerLink="/exercises" class="btn btn-dark">Ćwiczenia</a>
+				<img src="././assets/images/{{lesson.rateE}}.png" alt="img" id="IMG">
+			</div>
+		</div>
+	</div>
+</div>
