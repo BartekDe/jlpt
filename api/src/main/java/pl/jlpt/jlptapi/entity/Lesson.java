@@ -1,14 +1,18 @@
 package pl.jlpt.jlptapi.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Lesson {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -19,4 +23,13 @@ public class Lesson {
     private String name;
 
     private int number;
+
+    private int successCount;
+
+    @ManyToMany(targetEntity = Exercise.class)
+    private List<Exercise> exercises;
+
+    public void increaseSuccessCount(int count) {
+        this.successCount += count;
+    }
 }
