@@ -5,11 +5,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import pl.jlpt.jlptapi.dto.request.creator.ExerciseCreatorDto;
+import pl.jlpt.jlptapi.dto.request.creator.FilterExerciseDto;
 import pl.jlpt.jlptapi.dto.response.ExerciseDto;
 import pl.jlpt.jlptapi.entity.Exercise;
 import pl.jlpt.jlptapi.service.creator.ExerciseCreatorService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,7 +25,7 @@ public class ExerciseController {
     }
 
     @PostMapping("/exercise")
-    public ResponseEntity createExercise(@Valid @RequestBody ExerciseCreatorDto exerciseCreatorDto) {
+    public ResponseEntity createExercise(@RequestBody ExerciseCreatorDto exerciseCreatorDto) {
 
         exerciseCreatorService.createExercise(exerciseCreatorDto);
 
@@ -45,11 +47,18 @@ public class ExerciseController {
     }
 
     @GetMapping("/exercise/all")
-    public ResponseEntity listAllExercises() {
+    public ResponseEntity listExercisesByType(@RequestBody FilterExerciseDto filterExerciseDto) {
 
-        List<ExerciseDto> exercises = exerciseCreatorService.getExerciseList();
+        List<Exercise> exercises = exerciseCreatorService.getExerciseList();
 
-        return new ResponseEntity<>(exercises, HttpStatus.OK);
+        List<Exercise> correctExercises = new ArrayList<>();
+        for (Exercise exercise : exercises) {
+            if (exercise.getType().equals(filterExerciseDto.getExerciseType())) {
+                correctExercises.add(exercise);
+            }
+        }
+
+        return new ResponseEntity<>(correctExercises, HttpStatus.OK);
     }
 
     @GetMapping("/exercise/{exercise}")

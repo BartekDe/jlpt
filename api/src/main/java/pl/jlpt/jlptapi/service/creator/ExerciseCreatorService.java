@@ -50,10 +50,8 @@ public class ExerciseCreatorService {
         return exercise;
     }
 
-    public List<ExerciseDto> getExerciseList() {
-        List<Exercise> exercises = this.exerciseRepository.findAll();
-        return exercises.stream().map(exercise -> this.convertToDto(exercise))
-                .collect(Collectors.toList());
+    public List<Exercise> getExerciseList() {
+        return this.exerciseRepository.findAll();
     }
 
     private ExerciseDto convertToDto(Exercise exercise) {
