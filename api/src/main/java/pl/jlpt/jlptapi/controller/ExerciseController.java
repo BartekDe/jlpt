@@ -1,6 +1,5 @@
 package pl.jlpt.jlptapi.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +7,6 @@ import org.springframework.web.client.HttpClientErrorException;
 import pl.jlpt.jlptapi.dto.request.creator.ExerciseCreatorDto;
 import pl.jlpt.jlptapi.dto.response.ExerciseDto;
 import pl.jlpt.jlptapi.entity.Exercise;
-import pl.jlpt.jlptapi.security.CustomUserDetailsService;
 import pl.jlpt.jlptapi.service.creator.ExerciseCreatorService;
 
 import javax.validation.Valid;
@@ -18,11 +16,11 @@ import java.util.List;
 @RequestMapping("/creator")
 public class ExerciseController {
 
-    @Autowired
-    ExerciseCreatorService exerciseCreatorService;
+    private ExerciseCreatorService exerciseCreatorService;
 
-    @Autowired
-    CustomUserDetailsService detailsService;
+    public ExerciseController(ExerciseCreatorService exerciseCreatorService) {
+        this.exerciseCreatorService = exerciseCreatorService;
+    }
 
     @PostMapping("/exercise")
     public ResponseEntity createExercise(@Valid @RequestBody ExerciseCreatorDto exerciseCreatorDto) {
@@ -51,7 +49,7 @@ public class ExerciseController {
 
         List<ExerciseDto> exercises = exerciseCreatorService.getExerciseList();
 
-        return new ResponseEntity(exercises, HttpStatus.OK);
+        return new ResponseEntity<>(exercises, HttpStatus.OK);
     }
 
     @GetMapping("/exercise/{exercise}")

@@ -16,20 +16,24 @@ import java.util.stream.Collectors;
 @Component
 public class ExerciseCreatorService {
 
-    @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
+    private ExerciseRepository exerciseRepository;
+    private ModelMapper modelMapper;
 
-    @Autowired
-    ExerciseRepository exerciseRepository;
-
-    @Autowired
-    ModelMapper modelMapper;
+    public ExerciseCreatorService(
+        EntityManager entityManager,
+        ExerciseRepository exerciseRepository,
+        ModelMapper modelMapper
+    ) {
+        this.entityManager = entityManager;
+        this.exerciseRepository = exerciseRepository;
+        this.modelMapper = modelMapper;
+    }
 
     @Transactional
     public Exercise createExercise(ExerciseCreatorDto exerciseCreatorDto) {
 
-        Exercise newExercise = new Exercise();
-        newExercise = this.createOrUpdateExercise(newExercise, exerciseCreatorDto);
+        Exercise newExercise = this.createOrUpdateExercise(new Exercise(), exerciseCreatorDto);
 
         entityManager.persist(newExercise);
         entityManager.flush();
@@ -53,8 +57,7 @@ public class ExerciseCreatorService {
     }
 
     private ExerciseDto convertToDto(Exercise exercise) {
-        ExerciseDto exerciseDto = modelMapper.map(exercise, ExerciseDto.class);
-        return exerciseDto;
+        return modelMapper.map(exercise, ExerciseDto.class);
     }
 
     private Exercise createOrUpdateExercise(Exercise exercise, ExerciseCreatorDto exerciseCreatorDto) {
