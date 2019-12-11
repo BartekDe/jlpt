@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.cors.CorsConfiguration;
 import pl.jlpt.jlptapi.security.jwt.JwtSecurityConfigurer;
 import pl.jlpt.jlptapi.security.jwt.JwtTokenProvider;
 
@@ -47,5 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()
             .and()
             .apply(new JwtSecurityConfigurer(jwtTokenProvider));
+
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
     }
 }
