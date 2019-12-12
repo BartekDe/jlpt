@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
-@RequestMapping("/lesson")
+@RequestMapping("/creator/lesson")
 public class LessonController {
 
     private LessonService lessonService;
