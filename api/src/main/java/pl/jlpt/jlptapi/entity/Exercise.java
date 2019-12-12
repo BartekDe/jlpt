@@ -51,4 +51,7 @@ public class Exercise {
 
     @ManyToMany(targetEntity = Lesson.class)
     private List<Lesson> lesson;
+
+    @ManyToMany(targetEntity = Exercise.class)
+    private List<Test> test;
 }
