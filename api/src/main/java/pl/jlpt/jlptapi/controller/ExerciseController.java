@@ -53,8 +53,11 @@ public class ExerciseController {
 
         List<Exercise> correctExercises = new ArrayList<>();
         for (Exercise exercise : exercises) {
-            if (exercise.getType().equals(type)) {
-                correctExercises.add(exercise);
+            if (exercise != null) {
+                System.out.println(type);
+                if (exercise.getType().equals(type)) {
+                    correctExercises.add(exercise);
+                }
             }
         }
 
