@@ -32,6 +32,12 @@
   height: 600px;
 }
 
+.exercise_list
+{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 .lewo, .prawo
 {
   background-color: #f2f2f2;
