@@ -47,7 +47,7 @@ public class ExerciseController {
     }
 
     @GetMapping("/exercise/all")
-    public ResponseEntity listExercisesByType(@PathVariable String type) {
+    public ResponseEntity listExercisesByType(@RequestParam String type) {
 
         List<Exercise> exercises = exerciseCreatorService.getExerciseList();
 
