@@ -47,13 +47,13 @@ public class ExerciseController {
     }
 
     @GetMapping("/exercise/all")
-    public ResponseEntity listExercisesByType(@RequestBody FilterExerciseDto filterExerciseDto) {
+    public ResponseEntity listExercisesByType(@PathVariable String type) {
 
         List<Exercise> exercises = exerciseCreatorService.getExerciseList();
 
         List<Exercise> correctExercises = new ArrayList<>();
         for (Exercise exercise : exercises) {
-            if (exercise.getType().equals(filterExerciseDto.getExerciseType())) {
+            if (exercise.getType().equals(type)) {
                 correctExercises.add(exercise);
             }
         }
