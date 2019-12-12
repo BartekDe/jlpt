@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RegisterModel} from './models/RegisterModel';
 import {LoginModel} from './models/LoginModel';
 import {ExerciseModel} from './models/ExerciseModel';
+import {LessonModel} from './models/LessonModel';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,9 @@ export class AuthService {
 
   public createExercise(exerciseM: ExerciseModel) {
     return this.httpClient.post('http://localhost:8080/creator/exercise', exerciseM);
+  }
+  
+  public createLesson(lessonM: LessonModel) {
+    return this.httpClient.post('http://localhost:8080/creator/lesson', lessonM);
   }
 }
