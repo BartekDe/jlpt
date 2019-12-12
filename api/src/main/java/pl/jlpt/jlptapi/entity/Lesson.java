@@ -18,6 +18,7 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
+    @Column(length = 10485760)
     private String theory;
 
     private String name;
