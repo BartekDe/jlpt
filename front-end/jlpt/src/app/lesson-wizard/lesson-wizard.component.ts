@@ -35,13 +35,13 @@ const CONST_EXERCISES_CHOSE = [{id: 1, name:'Ćwiczenie 1', type: 1},
 						{id: 10, name:'Napisz innymi słowami'},
 						{id: 11, name:'Wskaż co przedstawia zdjęcie'}];*/
 						
-const CONST_TYPE_CHOSE = [{id: "TranslatePol", name:'Przetłumacz ... na polski'}, 
-						{id: "TranslateHira", name:'Przetłumacz ... na hiragane'},
-						{id: "TranslateKata", name:'Przetłumacz ... na katakane'},
-						{id: "TranslateKanji", name:'Przetłumacz ... na kanji'},
-						{id: "FillGap", name:'Wstaw odpowiednie słowo w ...'},
+const CONST_TYPE_CHOSE = [{id: "TranslatePol", name:'Przetłumacz na polski'}, 
+						{id: "TranslateHira", name:'Przetłumacz na hiragane'},
+						{id: "TranslateKata", name:'Przetłumacz na katakane'},
+						{id: "TranslateKanji", name:'Przetłumacz na kanji'},
+						{id: "FillGap", name:'Wstaw odpowiednie słowo w lukę'},
 						{id: "OrderWords", name:'Uszereguj zdanie, wskaż które słowo znajdzie się w miejscu z *'},
-						{id: "FillGapText", name:'Wstaw odpowiednie słowo w ... w dłuższym tekście'},
+						{id: "FillGapText", name:'Wstaw odpowiednie słowo w lukę w dłuższym tekście'},
 						{id: "ReadingCompText", name:'Czytanie ze zrozumieniem, odpowiedz na podstawie tekstu'},
 						{id: "ReadingCompTextPict", name:'Czytanie ze zrozumieniem i zdjęciem, odpowiedz na podstawie tekstu i zdjęcia'},
 						{id: "WriteInOtherWords", name:'Napisz innymi słowami'},
@@ -77,6 +77,7 @@ export class LessonWizardComponent implements OnInit{
   type_index = CONST_TYPE_CHOSE;
   chosen_exercises_index = [];
   chosen_type_index = [];
+  temp_array = [];
   
   ngOnInit(){
 	  const lessonTypeModel: LessonTypeModel = {
@@ -85,20 +86,21 @@ export class LessonWizardComponent implements OnInit{
 	  console.log('DUPSKO!!!!!');
 	  console.log(lessonTypeModel);
   this.httpClient.get('http://localhost:8080/creator/exercise/all?type=TranslatePol').subscribe(
-  //this.exercise_list = this.httpClient.get('http://localhost:8080/creator/exercise/10').subscribe(
+  //this.exercise_list = this.httpClient.get('http://localhost:8080/creator/exercise/all').subscribe(
       (data) => {
 		  console.log(data);
 		  this.exercise_list = data;
+		  this.currentTypeName = "Przetłumacz ... na polski";
 		  return data;
       },
 	  () => {
-		  console.log(this.exercise_list);
+		  //console.log(this.exercise_list);
 	  }
     ); 
 	  
   }
   
-  addExercise(exercise: Object)
+  addExercise(exercise: any)
   {
 	let data = this.chosen_exercises_index.find(ob => ob['id'] === exercise.id);
 	if(data === undefined)
@@ -115,6 +117,14 @@ export class LessonWizardComponent implements OnInit{
 	{
 		this.chosen_type_index.push({id: type_id});
 	}
+	this.httpClient.get('http://localhost:8080/creator/exercise/all?type='+type_id).subscribe(
+		(data) => {
+			console.log(data);
+			this.exercise_list = data;
+			return data;
+		},
+		() => {}
+	  ); 
   }
   
   addTypeName(type_name: string)
@@ -170,11 +180,16 @@ export class LessonWizardComponent implements OnInit{
   }
   
   create() {
+	for(var i=0; i < this.chosen_exercises_index.length; i++)
+    {
+	  this.temp_array[i]=this.chosen_exercises_index[i].id;
+    }
     const lessonModel: LessonModel = {
 	  name: this.lessonForm.value.lessonName,
-      contentPdf: this.base64Str,
-	  exerciseList: this.chosen_exercises_index,
-    };
+      theory: this.base64Str,
+	  exerciseIds: this.temp_array,
+	};
+	console.log(lessonModel);
     this.authService.createLesson(lessonModel).subscribe (
       () => { alert('LEKCJA ZOSTAŁA POPRAWNIE UTWORZONA I ZAPISANA'); },
       () => { alert('WYSTĄPIŁ PROBLEM Z UTWORZENIEM LEKCJI, SPRAWDŹ SWOJE UPRAWNIENIA'); }

@@ -54,6 +54,6 @@ export class AuthService {
   }
   
   public createLesson(lessonM: LessonModel) {
-    return this.httpClient.post('http://localhost:8080/creator/exercise', lessonM);
+    return this.httpClient.post('http://localhost:8080/creator/lesson', lessonM);
   }
 }
