@@ -49,11 +49,15 @@
 	<div class="card-body">
 	<div *ngFor="let exercise of exercises_index">
 		<a routerLink="/exercise-view">
-			<button class="btn btn-light" style="pointer-events:none" *ngIf="exercise.rate=='locked'">
+			<!--<button class="btn btn-light" style="pointer-events:none" *ngIf="exercise.rate=='locked'">
 				<img src="././assets/images/{{exercise.rate}}.png" alt="opinion" id="op"/>
 				<span>Ćwiczenie {{exercise.id}}</span>
 			</button>
 			<button class="btn btn-light" *ngIf="exercise.rate!='locked'">
+				<img src="././assets/images/{{exercise.rate}}.png" alt="opinion" id="op"/>
+				<span>Ćwiczenie {{exercise.id}}</span>
+			</button>-->
+			<button class="btn btn-light">
 				<img src="././assets/images/{{exercise.rate}}.png" alt="opinion" id="op"/>
 				<span>Ćwiczenie {{exercise.id}}</span>
 			</button>

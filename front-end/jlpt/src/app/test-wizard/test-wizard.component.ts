@@ -1,81 +1,82 @@
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, NgForm, Validators} from '@angular/forms';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../auth.service';
-import { PDFDocumentProxy } from 'ng2-pdf-viewer';
+import {TestModel} from '../models/TestModel';
 
-const CONST_EXERCISES_CHOSE = [{id: 1, name:'Ćwiczenie 1', type: 1}, 
-						{id: 2, name:'Ćwiczenie 2', type: 1},
-						{id: 3, name:'Ćwiczenie 3', type: 2},
-						{id: 4, name:'Ćwiczenie 4', type: 3},
-						{id: 5, name:'Ćwiczenie 5', type: 4},
-						{id: 6, name:'Ćwiczenie 6', type: 4},
-						{id: 7, name:'Ćwiczenie 7', type: 4},
-						{id: 8, name:'Ćwiczenie 8', type: 5},
-						{id: 9, name:'Ćwiczenie 9', type: 6},
-						{id: 10, name:'Ćwiczenie 10', type: 7},
-						{id: 11, name:'Ćwiczenie 11', type: 8},
-						{id: 12, name:'Ćwiczenie 12', type: 9},
-						{id: 13, name:'Ćwiczenie 13', type: 9},
-						{id: 14, name:'Ćwiczenie 14', type: 10},
-						{id: 15, name:'Ćwiczenie 15', type: 11}];
 						
-const CONST_TYPE_CHOSE = [{id: 1, name:'Przetłumacz ... na polski'}, 
-						{id: 2, name:'Przetłumacz ... na hiragane'},
-						{id: 3, name:'Przetłumacz ... na katakane'},
-						{id: 4, name:'Przetłumacz ... na kanji'},
-						{id: 5, name:'Wstaw odpowiednie słowo w ...'},
-						{id: 6, name:'Uszereguj zdanie, wskaż które słowo znajdzie się w miejscu z *'},
-						{id: 7, name:'Wstaw odpowiednie słowo w ... w dłuższym tekście'},
-						{id: 8, name:'Czytanie ze zrozumieniem, odpowiedz na podstawie tekstu'},
-						{id: 9, name:'Czytanie ze zrozumieniem i zdjęciem, odpowiedz na podstawie tekstu i zdjęcia'},
-						{id: 10, name:'Napisz innymi słowami'},
-						{id: 11, name:'Wskaż co przedstawia zdjęcie'}];
+const CONST_TYPE_CHOSE = [{id: "TranslatePol", name:'Przetłumacz na polski'}, 
+						{id: "TranslateHira", name:'Przetłumacz na hiragane'},
+						{id: "TranslateKata", name:'Przetłumacz na katakane'},
+						{id: "TranslateKanji", name:'Przetłumacz na kanji'},
+						{id: "FillGap", name:'Wstaw odpowiednie słowo w lukę'},
+						{id: "OrderWords", name:'Uszereguj zdanie, wskaż które słowo znajdzie się w miejscu z *'},
+						{id: "FillGapText", name:'Wstaw odpowiednie słowo w lukę w dłuższym tekście'},
+						{id: "ReadingCompText", name:'Czytanie ze zrozumieniem, odpowiedz na podstawie tekstu'},
+						{id: "ReadingCompTextPict", name:'Czytanie ze zrozumieniem i zdjęciem, odpowiedz na podstawie tekstu i zdjęcia'},
+						{id: "WriteInOtherWords", name:'Napisz innymi słowami'},
+						{id: "DescribePict", name:'Wskaż co przedstawia zdjęcie'}];
 
 @Component({
   selector: 'app-test-wizard',
   templateUrl: './test-wizard.component.html',
   styleUrls: ['./test-wizard.component.css']
 })
-export class TestWizardComponent{
+export class TestWizardComponent implements OnInit{
   testForm: any;
-  pdfSrc: string | ArrayBuffer = "";
-  totalPages: string;
-  currentPage: number = 1;
-  numberOfPages: number;
-  scale: number = 0.5;
-  pdf: PDFDocumentProxy;
-  currentType: number = 0;
   currentTypeName: string = '';
+  exercise_list: any;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService) {
+              private authService: AuthService,
+			  private httpClient: HttpClient) {
     this.testForm = this.formBuilder.group({
-      testName: ['', Validators.required]     
+	  testName: ['', Validators.required],
+	  testDuration: ['', Validators.required]     
     });
   }
-  
-  exercises_index = CONST_EXERCISES_CHOSE;
   type_index = CONST_TYPE_CHOSE;
   chosen_exercises_index = [];
   chosen_type_index = [];
+  temp_array = [];
   
-  addExercise(exercise_name: string)
+  ngOnInit(){
+  this.httpClient.get('http://localhost:8080/creator/exercise/all?type=TranslatePol').subscribe(
+      (data) => {
+		  console.log(data);
+		  this.exercise_list = data;
+		  this.currentTypeName = "Przetłumacz ... na polski";
+		  return data;
+      },
+	  () => {}
+    ); 
+	  
+  }
+  
+  addExercise(exercise: any)
   {
-	let data = this.chosen_exercises_index.find(ob => ob['name'] === exercise_name);
+	let data = this.chosen_exercises_index.find(ob => ob['id'] === exercise.id);
 	if(data === undefined)
 	{
-		this.chosen_exercises_index.push({id: 1, name: exercise_name});
+		this.chosen_exercises_index.push({id: exercise.id, name: exercise.name});
 	}
   }
   
   addType(type_id: number)
   {
-	this.currentType = type_id;
 	let data = this.chosen_type_index.find(ob => ob['id'] === type_id);
 	if(data === undefined)
 	{
 		this.chosen_type_index.push({id: type_id});
 	}
+	this.httpClient.get('http://localhost:8080/creator/exercise/all?type='+type_id).subscribe(
+		(data) => {
+			console.log(data);
+			this.exercise_list = data;
+			return data;
+		},
+		() => {}
+	  ); 
   }
   
   addTypeName(type_name: string)
@@ -88,12 +89,36 @@ export class TestWizardComponent{
 	let index: number = this.chosen_exercises_index.findIndex(item => item.name === exercise_name);
 	this.chosen_exercises_index.splice(index, 1);
   }
-
+  
   reset(form: NgForm) {
-	this.currentType=0;
-	this.currentTypeName='';
     form.reset();
 	this.chosen_exercises_index.length=0;
+	this.httpClient.get('http://localhost:8080/creator/exercise/all?type=TranslatePol').subscribe(
+      (data) => {
+		  console.log(data);
+		  this.exercise_list = data;
+		  this.currentTypeName = "Przetłumacz ... na polski";
+		  return data;
+      },
+	  () => {}
+    ); 
   }
-
+  
+  create() {
+	for(var i=0; i < this.chosen_exercises_index.length; i++)
+    {
+	  this.temp_array[i]=this.chosen_exercises_index[i].id;
+    }
+    const testModel: TestModel = {
+	  name: this.testForm.value.testName,
+	  duration: this.testForm.value.testDuration,
+	  exerciseIds: this.temp_array,
+	};
+	console.log(testModel);
+    this.authService.createTest(testModel).subscribe (
+      () => { alert('TEST ZOSTAŁ POPRAWNIE UTWORZONY I ZAPISANY'); },
+      () => { alert('WYSTĄPIŁ PROBLEM Z UTWORZENIEM TESTU, SPRAWDŹ SWOJE UPRAWNIENIA'); }
+    );
+  }
+  
 }

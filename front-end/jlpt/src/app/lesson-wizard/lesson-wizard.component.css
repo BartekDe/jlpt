@@ -35,7 +35,9 @@
 .exercise_list
 {
 	margin-top: 10px;
-	margin-bottom: 10px;
+  margin-bottom: 10px;
+  width: 450px;
+  text-align: left;
 }
 
 .lewo, .prawo

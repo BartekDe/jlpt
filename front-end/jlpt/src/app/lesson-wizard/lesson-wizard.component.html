@@ -30,10 +30,10 @@
 
   <div style="margin-top:10px" *ngIf="this.currentTypeName != ''"><h6>{{this.currentTypeName}}</h6></div>
   <div class="exercise_list">
-	<h1>Lista ćwiczeń</h1>
+	<h1 style="text-align: center">Lista ćwiczeń</h1>
 	<div *ngFor="let chosen_exercise of chosen_exercises_index">
 		<p>{{chosen_exercise.name}}
-			<button (click)=deleteExercise(chosen_exercise.name) id="deleteButton" class="btn btn-light">Usuń</button>
+			<button (click)=deleteExercise(chosen_exercise.name) id="deleteButton" class="btn btn-light" style="float:right">Usuń</button>
 		</p>
 	</div>
   </div>

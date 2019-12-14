@@ -101,7 +101,7 @@
 
 <div class="container">
 	<div *ngFor="let lesson of lessons_index">
-		<div class="card" style="width: 31.3%; opacity:75%; pointer-events:none" *ngIf="lesson.rateT=='none'">
+		<!--<div class="card" style="width: 31.3%; opacity:75%; pointer-events:none" *ngIf="lesson.rateT=='none'">
 			<div class="card-body">
 				<h5 class="card-title">Lekcja {{lesson.id}}</h5>
 				<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji {{lesson.id}}</h6>
@@ -112,6 +112,16 @@
 			</div>
 		</div>
 		<div class="card" style="width: 31.3%" *ngIf="lesson.rateT!='none'">
+			<div class="card-body">
+				<h5 class="card-title">Lekcja {{lesson.id}}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji {{lesson.id}}</h6>
+				<a id="buttonT" routerLink="/lesson-view" class="btn btn-dark">Teoria</a>
+				<img src="././assets/images/{{lesson.rateT}}.png" alt="img" id="IMG">
+				<a id="buttonE" routerLink="/exercises" class="btn btn-dark">Ćwiczenia</a>
+				<img src="././assets/images/{{lesson.rateE}}.png" alt="img" id="IMG">
+			</div>
+		</div>-->
+		<div class="card" style="width: 31.3%">
 			<div class="card-body">
 				<h5 class="card-title">Lekcja {{lesson.id}}</h5>
 				<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji {{lesson.id}}</h6>
