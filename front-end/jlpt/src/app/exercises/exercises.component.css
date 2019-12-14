@@ -10,7 +10,7 @@
 }
 
 .card{
-	margin-top: 6vw;
+	margin-top: 100px;
 	margin-left: 10%;
 	margin-right: 10%;
 	border: none;
@@ -23,7 +23,7 @@ button{
 	width: 27%;
 	height: 10vw;
 	float: left;
-	font-size: 140%;
+	font-size: 115%;
 }
 
 button:hover{

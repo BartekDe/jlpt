@@ -1,49 +1,57 @@
-<form style="height: 100%;" [formGroup]="testForm" (ngSubmit)="create()">
-<div class="d-flex align-items-center mt-5 pt-5 flex-column" style="height: 80%;">
-  <h1>Stwórz test</h1><br>
+<form style="height: 100%;" [formGroup]="testForm">
+	<div class="d-flex align-items-center mt-5 pt-5 flex-column" style="height: 80%;">
+	  <h1>Stwórz test</h1><br>
+	
+	  <div class="input-group col-sm-4">
+		<input class="form-control border border-dark" type="text" id="testName"
+			   formControlName="testName">
+		<label class="form-control-placeholder" for="testName">Nazwa testu</label>
+	  </div>
 
-  <div class="input-group col-sm-4">
-    <input class="form-control border border-dark" type="text" id="testName"
-           formControlName="testName">
-    <label class="form-control-placeholder" for="questionName">Nazwa testu</label>
-  </div>
-  
-  <div class="d-inline-block">
-	<div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown" style="margin-right: 15px">
-		<button class="btn btn-light" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Wybierz typ ćwiczenia</button>		
-		<div ngbDropdownMenu aria-labelledby="dropdownManual">
-			<div *ngFor="let type of type_index">
-				<button (click)=addType(type.id) (click)=addTypeName(type.name) ngbDropdownItem>{{type.name}}</button>
+	  <div class="input-group col-sm-4">
+		<input class="form-control border border-dark" type="number" id="testDuration"
+			   formControlName="testDuration">
+		<label class="form-control-placeholder" for="testDuration">Dlugość trwania testu (w minutach)</label>
+	  </div>
+	  
+	  <div class="d-inline-block">
+		<div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown" style="margin-right: 15px">
+			<button class="btn btn-light" id="dropdownManual" ngbDropdownAnchor (focus)="myDrop.open()">Wybierz typ ćwiczenia</button>		
+			<div ngbDropdownMenu aria-labelledby="dropdownManual">
+				<div *ngFor="let type of type_index">
+					<button (click)=addType(type.id) (click)=addTypeName(type.name) ngbDropdownItem>{{type.name}}</button>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="d-inline-block" ngbDropdown #myDrop2="ngbDropdown">
-		<button class="btn btn-light" id="dropdownManual2" ngbDropdownAnchor (focus)="myDrop2.open()">Wybierz ćwiczenie</button>		
-		<div ngbDropdownMenu aria-labelledby="dropdownManual2">
-			<div *ngFor="let exercise of exercises_index">
-				<button (click)=addExercise(exercise.name) ngbDropdownItem *ngIf="exercise.type == currentType">{{exercise.name}}</button>
+		<div class="d-inline-block" ngbDropdown #myDrop2="ngbDropdown">
+			<button class="btn btn-light" id="dropdownManual2" ngbDropdownAnchor (focus)="myDrop2.open()">Wybierz ćwiczenie</button>		
+			<div ngbDropdownMenu aria-labelledby="dropdownManual2">
+				<div *ngFor="let exercise of exercise_list">
+					<button (click)=addExercise(exercise) ngbDropdownItem>{{exercise.name}}</button>
+				</div>
 			</div>
 		</div>
+	  </div>
+	
+	  <div style="margin-top:10px" *ngIf="this.currentTypeName != ''"><h6>{{this.currentTypeName}}</h6></div>
+	  <div class="exercise_list">
+		<h1 style="text-align: center">Lista ćwiczeń</h1>
+		<div *ngFor="let chosen_exercise of chosen_exercises_index">
+			<p>{{chosen_exercise.name}}
+				<button (click)=deleteExercise(chosen_exercise.name) id="deleteButton" class="btn btn-light" style="float:right">Usuń</button>
+			</p>
+		</div>
+	</div>	  
+	
+	<div class="mb-3">
+	  <button
+		(click) = create()
+	    class="btn btn-outline-dark"
+	    type="submit"
+	    [disabled]="!testForm.valid">Stwórz</button>
+	  <button class="btn btn-outline-dark ml-5" type="button" (click)="reset(testForm)">Wyczyść</button>
 	</div>
-  </div>
-
-  <div style="margin-top:10px" *ngIf="this.currentTypeName != ''"><h6>{{this.currentTypeName}}</h6></div>
-  <div class="exercise_list">
-	<h1>Lista ćwiczeń</h1>
-	<div *ngFor="let chosen_exercise of chosen_exercises_index">
-		<p>{{chosen_exercise.name}}
-			<button (click)=deleteExercise(chosen_exercise.name) id="deleteButton" class="btn btn-light">Usuń</button>
-		</p>
+	
 	</div>
-  </div> 
-
-  <div class="mb-3">
-    <button
-      class="btn btn-outline-dark"
-      type="submit"
-      [disabled]="!testForm.valid">Stwórz</button>
-    <button class="btn btn-outline-dark ml-5" type="button" (click)="reset(testForm)">Wyczyść</button>
-  </div>
-
-</div>
-</form>
+	</form>
+	

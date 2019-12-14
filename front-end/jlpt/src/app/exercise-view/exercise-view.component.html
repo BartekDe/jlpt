@@ -18,16 +18,20 @@
 		<div id="question" class="btn btn-light">
 			<span>Treść ćwiczenia</span>
 		</div>
-		<button class="btn btn-light">
+		<button (click)=takeAnswer(1) class="btn btn-light"
+		[style.background-color] = "answer == 1 ? 'red' : ''" [style.border] = "answer == 1 ? '1px solid black' : ''">
 			<span>Odpowiedź 1</span>
 		</button>
-		<button class="btn btn-light">
+		<button (click)=takeAnswer(2) class="btn btn-light"
+		[style.background-color] = "answer == 2 ? 'lime' : ''" [style.border] = "answer == 2 ? '1px solid black' : ''">
 			<span>Odpowiedź 2</span>
 		</button>
-		<button class="btn btn-light">
+		<button (click)=takeAnswer(3) class="btn btn-light"
+		[style.background-color] = "answer == 3 ? 'red' : ''" [style.border] = "answer == 3 ? '1px solid black' : ''">
 			<span>Odpowiedź 3</span>
 		</button>
-		<button class="btn btn-light">
+		<button (click)=takeAnswer(4) class="btn btn-light"
+		[style.background-color] = "answer == 4 ? 'red' : ''" [style.border] = "answer == 4 ? '1px solid black' : ''">
 			<span>Odpowiedź 4</span>
 		</button>
 	</div>	

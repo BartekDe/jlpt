@@ -4,6 +4,7 @@ import {RegisterModel} from './models/RegisterModel';
 import {LoginModel} from './models/LoginModel';
 import {ExerciseModel} from './models/ExerciseModel';
 import {LessonModel} from './models/LessonModel';
+import {TestModel} from './models/TestModel';
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +56,9 @@ export class AuthService {
   
   public createLesson(lessonM: LessonModel) {
     return this.httpClient.post('http://localhost:8080/creator/lesson', lessonM);
+  }
+
+  public createTest(testM: TestModel) {
+    return this.httpClient.post('http://localhost:8080/creator/test', testM);
   }
 }
