@@ -20,6 +20,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { RegisterPanelComponent } from './register-panel/register-panel.component';
 import {RequestInterceptor} from './RequestInterceptor';
 import { AlphabetComponent } from './exercises/alphabet/alphabet.component';
+import { TestsComponent } from './tests/tests.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { AlphabetComponent } from './exercises/alphabet/alphabet.component';
     TestWizardComponent,
     LoginPanelComponent,
     RegisterPanelComponent,
-    AlphabetComponent
+    AlphabetComponent,
+    TestsComponent
   ],
   imports: [
     BrowserModule,

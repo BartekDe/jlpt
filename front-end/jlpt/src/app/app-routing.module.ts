@@ -12,6 +12,7 @@ import {TestWizardComponent} from './test-wizard/test-wizard.component';
 import {LoginPanelComponent} from './login-panel/login-panel.component';
 import {RegisterPanelComponent} from './register-panel/register-panel.component';
 import {AlphabetComponent} from './exercises/alphabet/alphabet.component';
+import {TestsComponent} from './tests/tests.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'profil', component: ProfilComponent },
   { path: 'lessons', component: LessonsComponent },
   { path: 'lesson-view', component: LessonViewComponent },
+  { path: 'tests', component: TestsComponent },
   { path: 'exercises', component: ExercisesComponent },
   { path: 'exercise-view', component: ExerciseViewComponent },
   { path: 'exercises-hiragana', component: AlphabetComponent, data: { kana: 'Hiragana' } },
