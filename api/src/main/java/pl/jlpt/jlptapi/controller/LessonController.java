@@ -54,7 +54,9 @@ public class LessonController {
     @GetMapping("/all")
     public ResponseEntity getLessons() {
 
-        List<Lesson> lessons = this.lessonRepository.findAll(Sort.by("number").ascending());
+        List<Lesson> lessons = this.lessonRepository.findAll(
+                Sort.by("number").ascending()
+        );
         return new ResponseEntity<>(lessons, HttpStatus.OK);
     }
 
