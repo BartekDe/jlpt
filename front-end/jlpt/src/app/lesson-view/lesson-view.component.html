@@ -1,6 +1,6 @@
 <div class="card" style="width: 80%">
-	<h3 class="card-title">Lekcja 1</h3>
-	<div class="przyciskiZoom" style="width: 100%; text-align:center;">
+	<h3 [innerHTML]="labelText" class="card-title"></h3>
+	<!--<div class="przyciskiZoom" style="width: 100%; text-align:center;">
 	<button class="smaller" (click)=zoomOut($event) *ngIf="pdfSrc != ''">
 		-</button>
 	<button class="bigger" (click)=zoomIn($event) *ngIf="pdfSrc != ''">
@@ -23,7 +23,29 @@
 			<img src="././assets/images/left.png" alt="left" id="left"/></button>
 		<button class="prawo" (click)=changePageRight($event) *ngIf="pdfSrc != ''">
 			<img src="././assets/images/right.png" alt="right" id="right"/></button>
-    </div>
+	</div>-->
+	<div class="przyciski">
+		<button class="lewo" (click)=changePageLeft($event) *ngIf="pdfSrc != ''">
+		  <img src="././assets/images/left.png" alt="left" id="left"/></button>
+		<button class="smaller" (click)=zoomOut($event) *ngIf="pdfSrc != ''">
+		  -</button>
+		<button class="bigger" (click)=zoomIn($event) *ngIf="pdfSrc != ''">
+		  +</button>
+		<button class="prawo" (click)=changePageRight($event) *ngIf="pdfSrc != ''">
+		  <img src="././assets/images/right.png" alt="right" id="right"/></button>
+	</div>
+	
+	<div style="width: 100%;" *ngIf="pdfSrc != ''">
+	  <pdf-viewer [src]="pdfSrc" 
+				  [render-text]="true"
+				  style="display: block;"
+				  (after-load-complete)="callBackFn($event)"
+				  [page]="currentPage.toString()"
+				  [show-all]="false"
+				  [zoom]="scale.toString()"
+	  ></pdf-viewer>
+	</div>
+
 	<div style="width: 100%; text-align:center; margin-bottom: 10px;">
 		<button id="goExercises" class="btn btn-light" routerLink="/exercises" >Przejdź do ćwiczeń</button>
 	</div>

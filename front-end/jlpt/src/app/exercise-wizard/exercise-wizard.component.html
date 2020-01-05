@@ -5,14 +5,14 @@
   <select class="custom-select mb-4" id="questionType" formControlName="questionType" style="width: 30%;">
     <option value="0" selected>Wybierz typ ćwiczenia</option>
     <option value="TranslatePol">[1] Przetłumacz '...' na polski</option>
-    <option value="TranslateHira">[2] Przetłumacz '...' na hiragane</option>
-    <option value="TranslateKata">[3] Przetłumacz '...' na katakane</option>
+    <option value="TranslateHira">[2] Przetłumacz '...' na hiraganę</option>
+    <option value="TranslateKata">[3] Przetłumacz '...' na katakanę</option>
     <option value="TranslateKanji">[4] Przetłumacz '...' na kanji</option>
     <option value="FillGap">[5] Wstaw odpowiednie słowo w '...'</option>
     <option value="OrderWords">[6] Uszereguj zdanie, wskaż które słowo znajdzie się w miejscu z '*'</option>
     <option value="FillGapText">[7] Wstaw odpowiednie słowo w '...' w dłuższym tekście</option>
-    <option value="ReadingCompText">[8] Czytanie ze zrozumieniem, odpowiedz na podstawie tesktu</option>
-    <option value="ReadingCompTextPict">[9] Czytanie ze zrozumieniem i zdjęciem, odpowiedz na podstawie tekstu i zdjęcia</option>
+    <option value="ReadingCompText">[8] Czytanie ze zrozumieniem, odpowiedz na podstawie tekstu</option>
+    <option value="ReadingCompTextPict">[9] Czytanie ze zrozumieniem, odpowiedz na podstawie tekstu i zdjęcia</option>
     <option value="WriteInOtherWords">[10] Napisz innymi słowami</option>
     <option value="DescribePict">[11] Wskaż co przedstawia zdjęcie</option>
   </select>
@@ -46,27 +46,27 @@
     <div class="input-group col-sm-4 " *ngIf="questionType != 0">
       <input class="form-control border border-success text-success font-weight-bold" type="text" id="correctAnswer"
              formControlName="correctAnswer" autocomplete="off">
-      <label class="form-control-placeholder text-success" for="correctAnswer">Poprawna odpowiedz</label></div>
+      <label class="form-control-placeholder text-success" for="correctAnswer">Poprawna odpowiedź</label></div>
     <div class="input-group col-sm-4 " *ngIf="questionType != 0">
       <input class="form-control border border-danger text-danger font-weight-bold" type="text" id="wrongAnswer1"
              formControlName="wrongAnswer1" autocomplete="off">
-      <label class="form-control-placeholder text-danger" for="wrongAnswer1">Błędna odpowiedz</label></div>
+      <label class="form-control-placeholder text-danger" for="wrongAnswer1">Błędna odpowiedź</label></div>
     <div class="input-group col-sm-4 " *ngIf="questionType != 0">
       <input class="form-control border border-danger text-danger font-weight-bold" type="text" id="wrongAnswer2"
              formControlName="wrongAnswer2" autocomplete="off">
-      <label class="form-control-placeholder text-danger" for="wrongAnswer2">Błędna odpowiedz</label></div>
+      <label class="form-control-placeholder text-danger" for="wrongAnswer2">Błędna odpowiedź</label></div>
     <div class="input-group col-sm-4 " *ngIf="questionType != 0">
       <input class="form-control border border-danger text-danger font-weight-bold" type="text" id="wrongAnswer3"
              formControlName="wrongAnswer3" autocomplete="off">
-      <label class="form-control-placeholder text-danger" for="wrongAnswer3">Błędna odpowiedz</label></div>
+      <label class="form-control-placeholder text-danger" for="wrongAnswer3">Błędna odpowiedź</label></div>
     <div class="input-group col-sm-4 " *ngIf="questionType != 0">
       <input class="form-control border border-danger text-danger font-weight-bold" type="text" id="wrongAnswer4"
              formControlName="wrongAnswer4" autocomplete="off">
-      <label class="form-control-placeholder text-danger" for="wrongAnswer4">Błędna odpowiedz</label></div>
+      <label class="form-control-placeholder text-danger" for="wrongAnswer4">Błędna odpowiedź</label></div>
     <div class="input-group col-sm-4 " *ngIf="questionType != 0">
       <input class="form-control border border-danger text-danger font-weight-bold" type="text" id="wrongAnswer5"
              formControlName="wrongAnswer5" autocomplete="off">
-      <label class="form-control-placeholder text-danger" for="wrongAnswer5">Błędna odpowiedz</label></div>
+      <label class="form-control-placeholder text-danger" for="wrongAnswer5">Błędna odpowiedź</label></div>
 
   <ng-template #LongText>
     <div class="form-group col-sm-4" *ngIf="questionType == 'FillGapText' || questionType == 'ReadingCompText' ||

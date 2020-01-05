@@ -124,8 +124,8 @@
 		<div class="card" style="width: 31.3%">
 			<div class="card-body">
 				<h5 class="card-title">Lekcja {{lesson.id}}</h5>
-				<h6 class="card-subtitle mb-2 text-muted">Nazwa lekcji {{lesson.id}}</h6>
-				<a id="buttonT" routerLink="/lesson-view" class="btn btn-dark">Teoria</a>
+				<h6 class="card-subtitle mb-2 text-muted">{{lesson.name}}</h6>
+				<a id="buttonT" (click)=goTheory(lesson.name) routerLink="/lesson-view" class="btn btn-dark">Teoria</a>
 				<img src="././assets/images/{{lesson.rateT}}.png" alt="img" id="IMG">
 				<a id="buttonE" routerLink="/exercises" class="btn btn-dark">Ćwiczenia</a>
 				<img src="././assets/images/{{lesson.rateE}}.png" alt="img" id="IMG">

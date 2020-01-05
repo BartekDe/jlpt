@@ -1,0 +1,13 @@
+<div class="container">
+	<div *ngFor="let test of test_index">
+		<div class="card" style="width: 31.3%">
+			<div class="card-body">
+				<h5 class="card-title">Test {{test.id}}</h5>
+				<h6 class="card-subtitle mb-2 text-muted">{{test.name}}</h6>
+				<h6 id="timeInfo" class="card-subtitle text-muted">Czas na wykonanie: {{test.time}} minut</h6>
+				<a id="buttonE" routerLink="/test-exercises" class="btn btn-dark">Ćwiczenia</a>
+				<img src="././assets/images/{{test.rateE}}.png" alt="img" id="IMG">
+			</div>
+		</div>
+	</div>
+</div>

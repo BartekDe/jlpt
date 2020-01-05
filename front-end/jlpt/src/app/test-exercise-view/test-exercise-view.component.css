@@ -1,0 +1,74 @@
+.input-group {
+  max-height: 50px;
+}
+
+@media (max-width: 400px){
+  .input-group{
+    margin-bottom: 16px;
+  }
+
+}
+
+h2{
+    display: inline-block;
+    float: left;
+	margin-right: 25%;
+}
+
+.timeBar
+{
+	width: 200px;
+	height: 40px;
+	float: right;
+	margin-top: -30px;
+	margin-right: 25px;
+}
+
+.card{
+	margin-top: 100px;
+	margin-left: 10%;
+	margin-right: 10%;
+	border: none;
+}
+
+button{
+	margin-right: 3%;
+	margin-left: 3%;
+	margin-bottom: 5%;
+	width: 44%;
+	height: 100px;
+	float: left;
+	font-size: 140%;
+}
+
+button:hover{
+	border: 1px solid black;
+	box-shadow: 1px 1px 1px 1px;
+}
+
+#question
+{
+	width: 94%;
+	margin-left: 3%;
+	margin-bottom: 5%;
+	height: 100px;
+	pointer-events: none;
+	font-size: 140%;
+	padding-top: 30px;
+}
+
+#buttonPos, #buttonNeu, #buttonNeg
+{
+	margin-right: 1%;
+	margin-left: 1%;
+	margin-bottom: 5%;
+	font-size: 100%;
+	width: 70px;
+	height: 50px;
+}
+
+#opPos, #opNeu, #opNeg
+{
+	height: 100%;
+	width: 100%;
+}

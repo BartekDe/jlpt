@@ -10,6 +10,24 @@ export class ProfilComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+  }
+    
+
+  changeUsername()
+  {
+    /*alert('NAZWA UŻYTKOWNIKA ZOSTAŁA ZMIENIONA');*/
+    alert('PODANA NAZWA UŻYTKOWNIKA JEST ZAJĘTA');
+  }
+
+  changePassword()
+  {
+    alert('HASŁO UŻYTKOWNIKA ZOSTAŁO ZMIENIONE');
+  }
+
+  deleteAccount()
+  {
+    alert('KONTO ZOSTAŁO USUNIĘTE');
   }
 
 }
