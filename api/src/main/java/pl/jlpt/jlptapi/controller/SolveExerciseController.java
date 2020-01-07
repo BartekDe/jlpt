@@ -53,5 +53,26 @@ public class SolveExerciseController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
 
+    @PostMapping("/test/solve-exercise")
+    @Transactional
+    public ResponseEntity solveTestsExercise(@RequestBody ExerciseAttemptDto exerciseAttemptDto, @AuthenticationPrincipal AppUser user) {
+
+        Exercise exercise = this.exerciseRepository.getOne(exerciseAttemptDto.exerciseId);
+        Lesson lesson = this.lessonRepository.getOne(exerciseAttemptDto.lessonId);
+
+        ExerciseSolveAttempt exerciseSolveAttempt = ExerciseSolveAttempt.builder()
+                .user(user)
+                .exercise(exercise)
+                .lesson(lesson)
+                .isRight(exerciseAttemptDto.correct)
+                .selfEvaluation(exerciseAttemptDto.rate)
+                .build();
+
+        this.entityManager.persist(exerciseSolveAttempt);
+        this.entityManager.flush();
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
+
 
 }
