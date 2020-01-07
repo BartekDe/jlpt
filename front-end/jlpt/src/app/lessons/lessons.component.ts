@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+
 const CONST_LESSONS = [{id: 1, name: 'Hiragana', rateT:'v', rateE:'v'}, 
 						{id: 2, name: 'Katakana', rateT:'v', rateE:'v'},
 						{id: 3, name: 'Kanji', rateT:'v', rateE:'x'},
@@ -16,16 +19,38 @@ const CONST_LESSONS = [{id: 1, name: 'Hiragana', rateT:'v', rateE:'v'},
   styleUrls: ['./lessons.component.css']
 })
 export class LessonsComponent implements OnInit {
+  lesson_list: any;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient,
+    private router: Router) {};
   lessons_index = CONST_LESSONS;
+  
 
   ngOnInit() {
+    this.httpClient.get('http://localhost:8080/creator/lesson/all').subscribe(
+      (data) => {
+      console.log(data);
+      this.lesson_list = data;
+		  return data;
+      },
+	  () => {
+	  }
+    ); 
   }
 
-  goTheory(napis: string)
+  goElsewhere(id: string)
   {
-	localStorage.setItem('name', napis);
+    localStorage.setItem('lessonID', id);
   }
+
+  checkExercise(name: string)
+  {
+    if(name === "Hiragana") this.router.navigate(['/exercises-hiragana']);
+    else if(name === "Katakana") this.router.navigate(['/exercises-katakana']);
+    else if(name === "Kanji") this.router.navigate(['/exercises-kanji']);
+    else this.router.navigate(['/exercises']);
+  }
+
+
 
 }

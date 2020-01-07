@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {ProfilComponent} from './profil/profil.component';
 import {LessonsComponent} from './lessons/lessons.component';
 import {ExercisesComponent} from './exercises/exercises.component';
+import {DailyExercisesComponent} from './daily-exercises/daily-exercises.component';
 import {TestExercisesComponent} from './test-exercises/test-exercises.component';
 import {ResultsComponent} from './results/results.component';
 import {ExerciseWizardComponent} from './exercise-wizard/exercise-wizard.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'lesson-view', component: LessonViewComponent },
   { path: 'tests', component: TestsComponent },
   { path: 'exercises', component: ExercisesComponent },
+  { path: 'daily-exercises', component: DailyExercisesComponent },
   { path: 'test-exercises', component: TestExercisesComponent },
   { path: 'exercise-view', component: ExerciseViewComponent },
   { path: 'test-exercise-view', component: TestExerciseViewComponent },

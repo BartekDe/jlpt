@@ -1,6 +1,6 @@
 <div class="card" style="width: 80%">
 	<div class="card-body1">
-		<h2>Wypełnij lukę</h2>
+		<h2 [innerHTML]="labelText"></h2>
 		<button (click)=makeOpinion(1) class="btn btn-light" id="buttonPos" 
 		[style.background-color] = "opinion == 1 ? 'lime' : ''" [style.border] = "opinion == 1 ? '1px solid black' : ''"
 		[style.pointer-events] = "opinion == 0 ? 'auto' : 'none'">
@@ -18,10 +18,10 @@
 		</button>
 	</div>
 	<div class="card-body2">
-		<div id="question" class="btn btn-light">
+		<!--<div id="question" class="btn btn-light">
 			<span>’...’　を　わすれましたから、じかんが　わかりません</span>
 		</div>
-		<!--<button (click)=takeAnswer(1) class="btn btn-light" id='answer1'
+		<button (click)=takeAnswer(1) class="btn btn-light" id='answer1'
 		[style.background-color] = "answer == 1 ? 'red' : ''" [style.border] = "answer == 1 ? '1px solid black' : ''">
 			<span>めがね</span>
 		</button>
@@ -43,29 +43,39 @@
 				<span>{{answer.name}}</span>
 			</button>
 		</div>-->
-		<button (click)=takeAnswer(1) class="btn btn-light" id='answer1'
+		<div id="question" class="btn btn-light">
+			<span>{{exercise_text}}</span>
+		</div>
+		<button (click)=takeAnswer(1) class="btn btn-light"
 		[style.background-color] = "answer == 1 && rightPosition == 1 ? 'lime' : answer == 1 ? 'red' : ''" 
 		[style.border] = "answer == 1 ? '1px solid black' : ''"
 		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
 			<span>{{answer_array[0].name}}</span>
 		</button>
-		<button (click)=takeAnswer(2) class="btn btn-light" id='answer2'
+		<button (click)=takeAnswer(2) class="btn btn-light"
 		[style.background-color] = "answer == 2 && rightPosition == 2 ? 'lime' : answer == 2 ? 'red' : ''" 
 		[style.border] = "answer == 2 ? '1px solid black' : ''"
 		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
 			<span>{{answer_array[1].name}}</span>
 		</button>
-		<button (click)=takeAnswer(3) class="btn btn-light" id='answer3'
+		<button (click)=takeAnswer(3) class="btn btn-light"
 		[style.background-color] = "answer == 3 && rightPosition == 3 ? 'lime' : answer == 3 ? 'red' : ''" 
 		[style.border] = "answer == 3 ? '1px solid black' : ''"
 		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
 			<span>{{answer_array[2].name}}</span>
 		</button>
-		<button (click)=takeAnswer(4) class="btn btn-light" id='answer4'
+		<button (click)=takeAnswer(4) class="btn btn-light"
 		[style.background-color] = "answer == 4 && rightPosition == 4 ? 'lime' : answer == 4 ? 'red' : ''" 
 		[style.border] = "answer == 4 ? '1px solid black' : ''"
 		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
 			<span>{{answer_array[3].name}}</span>
 		</button>
 	</div>	
+		<!--<button (click)=nextExercise() routerLink="/exercise-view" class="btn btn-light navigation1">
+			<img src="././assets/images/right.png" alt="right" id="right"/>
+		</button>-->
+		<button (click)=sendAnswer() class="btn btn-light sendButton">
+			<span>OK</span>
+		</button>
+	
 </div>
