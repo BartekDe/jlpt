@@ -47,7 +47,7 @@ public class SolveExerciseController {
                 .selfEvaluation(exerciseAttemptDto.rate)
                 .build();
 
-        this.entityManager.persist(exerciseAttemptDto);
+        this.entityManager.persist(exerciseSolveAttempt);
         this.entityManager.flush();
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
