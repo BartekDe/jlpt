@@ -37,7 +37,18 @@ button:hover{
 	box-shadow: 1px 1px 1px 1px;
 }
 
-#question
+#question1
+{
+	width: 94%;
+	margin-left: 3%;
+	margin-bottom: 5%;
+	height: 150px;
+	pointer-events: none;
+	font-size: 140%;
+	padding-top: 30px;
+}
+
+#question2
 {
 	width: 94%;
 	margin-left: 3%;
@@ -89,4 +100,11 @@ button:hover{
 	height: 50px;
 	margin: auto;
 	margin-bottom: 10px;
+}
+
+#imageQuestion
+{
+	height: 100%;
+	width: 100px;
+	padding-bottom: 20px;
 }

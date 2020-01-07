@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   sendAnswer(exerciseAnswerMode: ExerciseAnswerModel) {
-    return this.httpClient.post('http://localhost:8080/auth/login', exerciseAnswerMode);
+    return this.httpClient.post('http://localhost:8080/lesson/solve-exercise', exerciseAnswerMode);
   }
 
   getRole() {

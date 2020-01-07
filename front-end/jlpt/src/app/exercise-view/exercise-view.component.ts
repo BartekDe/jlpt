@@ -33,6 +33,8 @@ export class ExerciseViewComponent implements OnInit {
   {id: 2, name: 'じしょ'},
   {id: 3, name: 'めがね'},
   {id: 4, name: 'でんわ'}];*/
+  exercise_type: string;
+  imgSrc: string | ArrayBuffer;
   exercise_text: string;
   right_answer = [];
   wrong_answer_array = [];
@@ -75,9 +77,11 @@ export class ExerciseViewComponent implements OnInit {
       else if(this.tempArray.type === "OrderWords") this.labelText = "Podstaw słowo w miejsce '*'";
       else if(this.tempArray.type === "FillGapText") this.labelText = "Wypełnij lukę";
       else if(this.tempArray.type === "ReadingCompText") this.labelText = "Odpowiedz na podstawie tekstu";
-      else if(this.tempArray.type === "ReadingCompTextPict") this.labelText = "Odpowiedz na podstawie zdjęcia";
+      else if(this.tempArray.type === "ReadingCompTextPict") this.labelText = "Odpowiedz na podstawie zdjęcia i tekstu";
       else if(this.tempArray.type === "WriteInOtherWords") this.labelText = "Napisz innymi słowami";
       else if(this.tempArray.type === "DescribePict") this.labelText = "Wskaż co przedstawia zdjęcie";
+      this.exercise_type = this.tempArray.type;
+      this.imgSrc = this.tempArray.contentImage;
       this.exercise_text = this.tempArray.content;
       this.right_answer = [{name: this.tempArray.correctAnswer}];
       this.wrong_answer_array = [{id: 0, name: this.tempArray.answer1}, 

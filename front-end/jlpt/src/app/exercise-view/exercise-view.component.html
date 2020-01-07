@@ -43,7 +43,11 @@
 				<span>{{answer.name}}</span>
 			</button>
 		</div>-->
-		<div id="question" class="btn btn-light">
+		<div id="question1" class="btn btn-light" *ngIf = "exercise_type === 'DescribePict'"><img id = "imageQuestion" src={{imgSrc}}></div>
+		<div id="question1" class="btn btn-light" *ngIf = "exercise_type === 'ReadingCompTextPict'"><img id = "imageQuestion" src={{imgSrc}}>
+			<span>{{exercise_text}}</span>
+		</div>
+		<div id="question2" class="btn btn-light" *ngIf = "exercise_type !== 'DescribePict' && exercise_type !== 'ReadingCompTextPict'">
 			<span>{{exercise_text}}</span>
 		</div>
 		<button (click)=takeAnswer(1) class="btn btn-light"
