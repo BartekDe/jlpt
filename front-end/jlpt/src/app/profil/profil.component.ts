@@ -47,8 +47,8 @@ export class ProfilComponent implements OnInit {
 
   deleteAccount() {
     this.authService.deleteAccount().subscribe(
-      () => { console.log(); },
-      () => { console.log(); }
+      () => { this.router.navigate(['/']); },
+      () => { console.log('Lel'); }
     );
   }
 
