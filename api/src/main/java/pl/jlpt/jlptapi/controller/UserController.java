@@ -34,9 +34,7 @@ public class UserController {
     @Transactional
     public ResponseEntity editUserPassword(@RequestBody EditProfileDto editProfileDto, @AuthenticationPrincipal AppUser user) {
 
-        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        String password = passwordEncoder.encode(editProfileDto.password);
-        user.setPassword("chuj" + password);
+        user.setPassword(editProfileDto.password);
 
         this.appUserRepository.save(user);
         this.entityManager.flush();

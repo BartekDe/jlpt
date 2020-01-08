@@ -70,7 +70,7 @@ public class AppUser implements UserDetails {
     }
 
     public void setPassword(String password) {
-        this.password = PASSWORD_ENCODER.encode(password);
+        this.password = "{bcrypt}" + PASSWORD_ENCODER.encode(password);
     }
 
     @OneToMany(fetch = FetchType.EAGER)
