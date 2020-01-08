@@ -58,7 +58,7 @@ public class UserController {
     @Transactional
     public ResponseEntity deleteUser(@AuthenticationPrincipal AppUser user) {
         user = this.appUserRepository.findById(user.getId()).get();
-        this.appUserRepository.delete(user);
+        this.entityManager.remove(user);
         this.entityManager.flush();
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
