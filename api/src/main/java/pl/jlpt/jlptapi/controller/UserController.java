@@ -36,7 +36,7 @@ public class UserController {
 
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         String password = passwordEncoder.encode(editProfileDto.password);
-        user.setPassword(password);
+        user.setPassword("{bcrypt}" + password);
 
         this.appUserRepository.save(user);
         this.entityManager.flush();
