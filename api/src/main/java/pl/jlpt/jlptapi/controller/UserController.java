@@ -38,7 +38,7 @@ public class UserController {
         String password = passwordEncoder.encode(editProfileDto.password);
         user.setPassword(password);
 
-        this.entityManager.persist(user);
+        this.appUserRepository.save(user);
         this.entityManager.flush();
 
         return new ResponseEntity(HttpStatus.OK);
@@ -50,7 +50,7 @@ public class UserController {
 
         user.setUsername(editProfileDto.username);
 
-        this.entityManager.persist(user);
+        this.appUserRepository.save(user);
         this.entityManager.flush();
 
         return new ResponseEntity(HttpStatus.OK);
