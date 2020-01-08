@@ -55,4 +55,13 @@ public class UserController {
 
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @PostMapping("/user")
+    @Transactional
+    public ResponseEntity deleteUser(@AuthenticationPrincipal AppUser user) {
+        this.appUserRepository.delete(user);
+        this.entityManager.flush();
+
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 }
