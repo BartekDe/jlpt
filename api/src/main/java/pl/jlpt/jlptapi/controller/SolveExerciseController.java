@@ -72,10 +72,11 @@ public class SolveExerciseController {
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-//
-//    @PostMapping("/test/finish")
-//    public ResponseEntity finishSolvingTest(@RequestBody FinishSolvingTestDto finishSolvingTestDto) {
-//        return new ResponseEntity(HttpStatus.NO_CONTENT);
-//    }
+
+    @PostMapping("/test/finish")
+    public ResponseEntity finishSolvingTest() {
+        TestResult testResult = new TestResult();
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 
 }
