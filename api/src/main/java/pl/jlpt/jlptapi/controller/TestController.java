@@ -1,6 +1,7 @@
 package pl.jlpt.jlptapi.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,8 +50,11 @@ public class TestController {
     @GetMapping("/tests")
     public ResponseEntity getAllTests() {
 
-        List<Test> tests = this.testRepository.findAll();
-        return new ResponseEntity<>(tests, HttpStatus.OK);
+        List<Test> tests = this.testRepository.findAll(
+                Sort.by("id").ascending()
+        );
+        tests.add(Test.builder().id(1L).name("dupa").build());
+        return ResponseEntity.ok(tests);
     }
 
 }
