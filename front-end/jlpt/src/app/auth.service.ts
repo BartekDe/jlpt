@@ -71,4 +71,13 @@ export class AuthService {
   public changeUsername(profilModel: ProfilModel) {
     return this.httpClient.post('http://localhost:8080/user/username', profilModel);
   }
+
+  public changePassword(profilModel: ProfilModel) {
+    return this.httpClient.post('http://localhost:8080/user/password', profilModel);
+  }
+
+  public deleteAccount() {
+    return this.httpClient.delete('http://localhost:8080/user/delete');
+  }
+
 }

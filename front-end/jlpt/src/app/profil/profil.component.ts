@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
 import { ProfilModel } from '../models/ProfilModel';
 
 @Component({
@@ -12,6 +13,7 @@ export class ProfilComponent implements OnInit {
   editForm: any;
 
   constructor(private formBuilder: FormBuilder,
+              private router: Router,
               private authService: AuthService) {
     this.editForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -27,16 +29,27 @@ export class ProfilComponent implements OnInit {
       password: ''
     };
     this.authService.changeUsername(profilModel).subscribe(
-      () => { console.log('BOOBS'); console.log(profilModel); },
-      () => { console.log('DUPA'); console.log(profilModel); });
+      () => { console.log(profilModel); },
+      () => { console.log(profilModel); }
+      );
   }
 
   changePassword() {
-    alert('HASŁO UŻYTKOWNIKA ZOSTAŁO ZMIENIONE');
+    const profilModel: ProfilModel = {
+      username: '',
+      password: this.editForm.value.password
+    };
+    this.authService.changePassword(profilModel).subscribe(
+      () => { console.log(profilModel); },
+      () => { console.log(profilModel); }
+      );
   }
 
   deleteAccount() {
-    alert('KONTO ZOSTAŁO USUNIĘTE');
+    this.authService.deleteAccount().subscribe(
+      () => { console.log(); },
+      () => { console.log(); }
+    );
   }
 
 }
