@@ -6,6 +6,7 @@ import {ExerciseModel} from './models/ExerciseModel';
 import {LessonModel} from './models/LessonModel';
 import {TestModel} from './models/TestModel';
 import {ExerciseAnswerModel} from './models/ExerciseAnswerModel';
+import {ProfilModel} from './models/ProfilModel';
 
 @Injectable({
   providedIn: 'root'
@@ -58,7 +59,7 @@ export class AuthService {
   public createExercise(exerciseM: ExerciseModel) {
     return this.httpClient.post('http://localhost:8080/creator/exercise', exerciseM);
   }
-  
+
   public createLesson(lessonM: LessonModel) {
     return this.httpClient.post('http://localhost:8080/creator/lesson', lessonM);
   }
@@ -66,4 +67,17 @@ export class AuthService {
   public createTest(testM: TestModel) {
     return this.httpClient.post('http://localhost:8080/creator/test', testM);
   }
+
+  public changeUsername(profilModel: ProfilModel) {
+    return this.httpClient.post('http://localhost:8080/user/username', profilModel);
+  }
+
+  public changePassword(profilModel: ProfilModel) {
+    return this.httpClient.post('http://localhost:8080/user/password', profilModel);
+  }
+
+  public deleteAccount() {
+    return this.httpClient.post('http://localhost:8080/user', '');
+  }
+
 }
