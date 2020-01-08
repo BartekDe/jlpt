@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DailyExerciseController {
-
-    @GetMapping("/dailies")
-    public ResponseEntity getDailyExercises() {
-
-    }
+//
+//    @GetMapping("/dailies")
+//    public ResponseEntity getDailyExercises() {
+//
+//    }
 
 }
