@@ -24,6 +24,9 @@ public class ExerciseSolveAttempt {
     @ManyToOne(targetEntity = Lesson.class)
     private Lesson lesson;
 
+    @ManyToOne(targetEntity = Test.class)
+    private Test test;
+
     @ManyToOne(targetEntity = Exercise.class)
     private Exercise exercise;
 
