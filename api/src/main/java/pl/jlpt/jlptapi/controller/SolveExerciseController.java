@@ -103,13 +103,13 @@ public class SolveExerciseController {
 
         return new ResponseEntity<>(testResult, HttpStatus.OK);
     }
-
-    @GetMapping("/test/{test}/leaderboard")
-    public ResponseEntity testLeaderboard() {
-
-
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+//
+//    @GetMapping("/test/leaderboard")
+//    public ResponseEntity testLeaderboard() {
+//
+//
+//
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 
 }
