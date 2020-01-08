@@ -12,32 +12,26 @@ export class ProfilComponent implements OnInit {
   editForm: any;
 
   constructor(private formBuilder: FormBuilder,
-    private router: Router,
-    private authService: AuthService) {
+              private router: Router,
+              private authService: AuthService) {
     this.editForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
 }
 
-  ngOnInit() {
+  ngOnInit() {}
 
-  }
-    
-
-  changeUsername()
-  {
+  changeUsername() {
     /*alert('NAZWA UŻYTKOWNIKA ZOSTAŁA ZMIENIONA');*/
     alert('PODANA NAZWA UŻYTKOWNIKA JEST ZAJĘTA');
   }
 
-  changePassword()
-  {
+  changePassword() {
     alert('HASŁO UŻYTKOWNIKA ZOSTAŁO ZMIENIONE');
   }
 
-  deleteAccount()
-  {
+  deleteAccount() {
     alert('KONTO ZOSTAŁO USUNIĘTE');
   }
 
