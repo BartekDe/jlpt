@@ -35,11 +35,8 @@ public class UserController {
     public ResponseEntity editUserPassword(@RequestBody EditProfileDto editProfileDto, @AuthenticationPrincipal AppUser user) {
 
         PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        String password = "{bcrypt}";
-        password += passwordEncoder.encode(editProfileDto.password);
-        user.setPassword(password);
-
-        System.out.println(password);
+        String password = passwordEncoder.encode(editProfileDto.password);
+        user.setPassword("chuj" + password);
 
         this.appUserRepository.save(user);
         this.entityManager.flush();
