@@ -4,21 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import pl.jlpt.jlptapi.dto.request.ExerciseAttemptDto;
-import pl.jlpt.jlptapi.entity.AppUser;
-import pl.jlpt.jlptapi.entity.Exercise;
-import pl.jlpt.jlptapi.entity.ExerciseSolveAttempt;
-import pl.jlpt.jlptapi.entity.Lesson;
+import pl.jlpt.jlptapi.entity.*;
 import pl.jlpt.jlptapi.repository.ExerciseRepository;
 import pl.jlpt.jlptapi.repository.LessonRepository;
+import pl.jlpt.jlptapi.repository.TestRepository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.security.Principal;
 
 @RestController
 public class SolveExerciseController {
@@ -28,6 +24,9 @@ public class SolveExerciseController {
 
     @Autowired
     private LessonRepository lessonRepository;
+
+    @Autowired
+    private TestRepository testRepository;
 
     @Autowired
     private EntityManager entityManager;
@@ -58,12 +57,12 @@ public class SolveExerciseController {
     public ResponseEntity solveTestsExercise(@RequestBody ExerciseAttemptDto exerciseAttemptDto, @AuthenticationPrincipal AppUser user) {
 
         Exercise exercise = this.exerciseRepository.getOne(exerciseAttemptDto.exerciseId);
-        Lesson lesson = this.lessonRepository.getOne(exerciseAttemptDto.lessonId);
+        Test test = this.testRepository.getOne(exerciseAttemptDto.testId);
 
         ExerciseSolveAttempt exerciseSolveAttempt = ExerciseSolveAttempt.builder()
                 .user(user)
                 .exercise(exercise)
-                .lesson(lesson)
+                .test(test)
                 .isRight(exerciseAttemptDto.correct)
                 .selfEvaluation(exerciseAttemptDto.rate)
                 .build();
@@ -73,6 +72,5 @@ public class SolveExerciseController {
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
-
 
 }
