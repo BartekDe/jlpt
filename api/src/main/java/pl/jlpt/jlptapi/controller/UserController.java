@@ -39,6 +39,8 @@ public class UserController {
         password += passwordEncoder.encode(editProfileDto.password);
         user.setPassword(password);
 
+        System.out.println(password);
+
         this.appUserRepository.save(user);
         this.entityManager.flush();
 
