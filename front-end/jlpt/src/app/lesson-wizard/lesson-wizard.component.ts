@@ -6,7 +6,7 @@ import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 import {LessonModel} from '../models/LessonModel';
 
 						
-const CONST_TYPE_CHOSE = [{id: "TranslatePol", name:'Przetłumacz na polski'}, 
+const CONST_TYPE_CHOOSE = [{id: "TranslatePol", name:'Przetłumacz na polski'}, 
 						{id: "TranslateHira", name:'Przetłumacz na hiragane'},
 						{id: "TranslateKata", name:'Przetłumacz na katakane'},
 						{id: "TranslateKanji", name:'Przetłumacz na kanji'},
@@ -43,7 +43,7 @@ export class LessonWizardComponent implements OnInit{
       longImageQuestion: ['', ]      
     });
   }
-  type_index = CONST_TYPE_CHOSE;
+  type_index = CONST_TYPE_CHOOSE;
   chosen_exercises_index = [];
   chosen_type_index = [];
   temp_array = [];
@@ -103,7 +103,7 @@ export class LessonWizardComponent implements OnInit{
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
     const reader = new FileReader();
-	reader.onloadend = () => { this.base64Str = reader.result; };
+	  reader.onloadend = () => { this.base64Str = reader.result; };
     reader.readAsDataURL(file);
     reader.onload = () => {
 	  this.pdfSrc= reader.result;
@@ -136,8 +136,8 @@ export class LessonWizardComponent implements OnInit{
   reset(form: NgForm) {
 	this.pdfSrc="";
     form.reset();
-	this.chosen_exercises_index.length=0;
-	this.httpClient.get('http://localhost:8080/creator/exercise/all?type=TranslatePol').subscribe(
+	  this.chosen_exercises_index.length=0;
+	  this.httpClient.get('http://localhost:8080/creator/exercise/all?type=TranslatePol').subscribe(
       (data) => {
 		  console.log(data);
 		  this.exercise_list = data;
@@ -155,7 +155,7 @@ export class LessonWizardComponent implements OnInit{
     }
     const lessonModel: LessonModel = {
 	  name: this.lessonForm.value.lessonName,
-      theory: this.base64Str,
+    theory: this.base64Str,
 	  exerciseIds: this.temp_array,
 	};
 	console.log(lessonModel);

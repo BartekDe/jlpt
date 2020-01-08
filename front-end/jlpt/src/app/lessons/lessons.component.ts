@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-const CONST_LESSONS = [{id: 1, rateT:'v', rateE:'v'}, 
-						{id: 2, rateT:'v', rateE:'v'},
-						{id: 3, rateT:'v', rateE:'x'},
-						{id: 4, rateT:'none', rateE:'none'},
-						{id: 5, rateT:'none', rateE:'none'},
-						{id: 6, rateT:'none', rateE:'none'},
-						{id: 7, rateT:'none', rateE:'none'},
-						{id: 8, rateT:'none', rateE:'none'},
-						{id: 9, rateT:'none', rateE:'none'}];
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+
+const CONST_LESSONS = [{id: 1, name: 'Hiragana', rateT:'v', rateE:'v'}, 
+						{id: 2, name: 'Katakana', rateT:'v', rateE:'v'},
+						{id: 3, name: 'Kanji', rateT:'v', rateE:'x'},
+						{id: 4, name: 'Pozdrowienia i zwroty grzecznościowe', rateT:'none', rateE:'none'},
+						{id: 5, name: 'Liczebniki', rateT:'none', rateE:'none'},
+						{id: 6, name: 'Dni tygodnia', rateT:'none', rateE:'none'},
+						{id: 7, name: 'Dni miesiąca', rateT:'none', rateE:'none'},
+						{id: 8, name: 'Miesiące', rateT:'none', rateE:'none'},
+						{id: 9, name: 'Pytanie o wiek', rateT:'none', rateE:'none'}];
 
 
 @Component({
@@ -16,11 +19,38 @@ const CONST_LESSONS = [{id: 1, rateT:'v', rateE:'v'},
   styleUrls: ['./lessons.component.css']
 })
 export class LessonsComponent implements OnInit {
+  lesson_list: any;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient,
+    private router: Router) {};
   lessons_index = CONST_LESSONS;
+  
 
   ngOnInit() {
+    this.httpClient.get('http://localhost:8080/creator/lesson/all').subscribe(
+      (data) => {
+      console.log(data);
+      this.lesson_list = data;
+		  return data;
+      },
+	  () => {
+	  }
+    ); 
   }
+
+  goElsewhere(id: string)
+  {
+    localStorage.setItem('lessonID', id);
+  }
+
+  checkExercise(name: string)
+  {
+    if(name === "Hiragana") this.router.navigate(['/exercises-hiragana']);
+    else if(name === "Katakana") this.router.navigate(['/exercises-katakana']);
+    else if(name === "Kanji") this.router.navigate(['/exercises-kanji']);
+    else this.router.navigate(['/exercises']);
+  }
+
+
 
 }

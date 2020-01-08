@@ -1,38 +1,85 @@
 <div class="card" style="width: 80%">
 	<div class="card-body1">
-		<h2>Ćwiczenie 1</h2>
+		<h2 [innerHTML]="labelText"></h2>
 		<button (click)=makeOpinion(1) class="btn btn-light" id="buttonPos" 
-		[style.background-color] = "opinion == 1 ? 'green' : ''" [style.border] = "opinion == 1 ? '1px solid black' : ''">
+		[style.background-color] = "opinion == 1 ? 'lime' : ''" [style.border] = "opinion == 1 ? '1px solid black' : ''"
+		[style.pointer-events] = "opinion == 0 ? 'auto' : 'none'">
 			<img src="././assets/images/positive.png" alt="opinion" id="opPos"/>
 		</button>
 		<button (click)=makeOpinion(2) class="btn btn-light" id="buttonNeu"
-		[style.background-color] = "opinion == 2 ? 'gold' : ''" [style.border] = "opinion == 2 ? '1px solid black' : ''">
+		[style.background-color] = "opinion == 2 ? 'gold' : ''" [style.border] = "opinion == 2 ? '1px solid black' : ''"
+		[style.pointer-events] = "opinion == 0 ? 'auto' : 'none'">
 			<img src="././assets/images/neutral.png" alt="opinion" id="opNeu"/>
 		</button>
 		<button (click)=makeOpinion(3) class="btn btn-light" id="buttonNeg"
-		[style.background-color] = "opinion == 3 ? 'red' : ''" [style.border] = "opinion == 3 ? '1px solid black' : ''">
+		[style.background-color] = "opinion == 3 ? 'red' : ''" [style.border] = "opinion == 3 ? '1px solid black' : ''"
+		[style.pointer-events] = "opinion == 0 ? 'auto' : 'none'">
 			<img src="././assets/images/negative.png" alt="opinion" id="opNeg"/>
 		</button>
 	</div>
 	<div class="card-body2">
-		<div id="question" class="btn btn-light">
-			<span>Treść ćwiczenia</span>
+		<!--<div id="question" class="btn btn-light">
+			<span>’...’　を　わすれましたから、じかんが　わかりません</span>
+		</div>
+		<button (click)=takeAnswer(1) class="btn btn-light" id='answer1'
+		[style.background-color] = "answer == 1 ? 'red' : ''" [style.border] = "answer == 1 ? '1px solid black' : ''">
+			<span>めがね</span>
+		</button>
+		<button (click)=takeAnswer(2) class="btn btn-light" id='answer2'
+		[style.background-color] = "answer == 2 ? 'red' : ''" [style.border] = "answer == 2 ? '1px solid black' : ''">
+			<span>さいふ</span>
+		</button>
+		<button (click)=takeAnswer(3) class="btn btn-light" id='answer3'
+		[style.background-color] = "answer == 3 ? 'red' : ''" [style.border] = "answer == 3 ? '1px solid black' : ''">
+			<span>ちず</span>
+		</button>
+		<button (click)=takeAnswer(4) class="btn btn-light" id='answer4'
+		[style.background-color] = "answer == 4 ? 'lime' : ''" [style.border] = "answer == 4 ? '1px solid black' : ''">
+			<span>とけい</span>
+		</button>-->
+		<!--<div *ngFor="let answer of answer_array">
+			<button (click)=takeAnswer($index) class="btn btn-light"
+				[style.background-color] = "answer == $index ? 'lime' : ''" [style.border] = "answer == $index ? '1px solid black' : ''">
+				<span>{{answer.name}}</span>
+			</button>
+		</div>-->
+		<div id="question1" class="btn btn-light" *ngIf = "exercise_type === 'DescribePict'"><img id = "imageQuestion" src={{imgSrc}}></div>
+		<div id="question1" class="btn btn-light" *ngIf = "exercise_type === 'ReadingCompTextPict'"><img id = "imageQuestion" src={{imgSrc}}>
+			<span>{{exercise_text}}</span>
+		</div>
+		<div id="question2" class="btn btn-light" *ngIf = "exercise_type !== 'DescribePict' && exercise_type !== 'ReadingCompTextPict'">
+			<span>{{exercise_text}}</span>
 		</div>
 		<button (click)=takeAnswer(1) class="btn btn-light"
-		[style.background-color] = "answer == 1 ? 'red' : ''" [style.border] = "answer == 1 ? '1px solid black' : ''">
-			<span>Odpowiedź 1</span>
+		[style.background-color] = "answer == 1 && rightPosition == 1 ? 'lime' : answer == 1 ? 'red' : ''" 
+		[style.border] = "answer == 1 ? '1px solid black' : ''"
+		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
+			<span>{{answer_array[0].name}}</span>
 		</button>
 		<button (click)=takeAnswer(2) class="btn btn-light"
-		[style.background-color] = "answer == 2 ? 'lime' : ''" [style.border] = "answer == 2 ? '1px solid black' : ''">
-			<span>Odpowiedź 2</span>
+		[style.background-color] = "answer == 2 && rightPosition == 2 ? 'lime' : answer == 2 ? 'red' : ''" 
+		[style.border] = "answer == 2 ? '1px solid black' : ''"
+		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
+			<span>{{answer_array[1].name}}</span>
 		</button>
 		<button (click)=takeAnswer(3) class="btn btn-light"
-		[style.background-color] = "answer == 3 ? 'red' : ''" [style.border] = "answer == 3 ? '1px solid black' : ''">
-			<span>Odpowiedź 3</span>
+		[style.background-color] = "answer == 3 && rightPosition == 3 ? 'lime' : answer == 3 ? 'red' : ''" 
+		[style.border] = "answer == 3 ? '1px solid black' : ''"
+		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
+			<span>{{answer_array[2].name}}</span>
 		</button>
 		<button (click)=takeAnswer(4) class="btn btn-light"
-		[style.background-color] = "answer == 4 ? 'red' : ''" [style.border] = "answer == 4 ? '1px solid black' : ''">
-			<span>Odpowiedź 4</span>
+		[style.background-color] = "answer == 4 && rightPosition == 4 ? 'lime' : answer == 4 ? 'red' : ''" 
+		[style.border] = "answer == 4 ? '1px solid black' : ''"
+		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
+			<span>{{answer_array[3].name}}</span>
 		</button>
 	</div>	
+		<!--<button (click)=nextExercise() routerLink="/exercise-view" class="btn btn-light navigation1">
+			<img src="././assets/images/right.png" alt="right" id="right"/>
+		</button>-->
+		<button (click)=sendAnswer() class="btn btn-light sendButton">
+			<span>OK</span>
+		</button>
+	
 </div>

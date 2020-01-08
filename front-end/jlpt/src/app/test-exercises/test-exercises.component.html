@@ -1,0 +1,13 @@
+<div class="card" style="width: 80%">
+	<h3 class="card-title">Słownictwo 1</h3>
+	<p><ngb-progressbar class="timeBar" type="dark" [value]="95">23:39</ngb-progressbar></p>
+	<div class="card-body">
+	<div *ngFor="let exercise of exercises_index">
+		<a routerLink="/test-exercise-view">
+			<button class="btn btn-light">
+				<span>Ćwiczenie {{exercise.id}}</span>
+			</button>
+		</a>
+	</div>
+	</div>
+</div>

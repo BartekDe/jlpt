@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
+import { TestBed } from '@angular/core/testing';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-lesson-view',
@@ -8,14 +10,16 @@ import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 })
 //const opinion = 0;
 export class LessonViewComponent implements OnInit {
-  pdfSrc: string | ArrayBuffer = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+  pdfSrc: string | ArrayBuffer;
   totalPages: string;
   currentPage: number = 1;
   numberOfPages: number;
   scale: number = 0.5;
   pdf: PDFDocumentProxy;
+  labelText: string;
+  tempArray: any;
   
-  constructor() { }
+  constructor(private httpClient: HttpClient) {};
   
   callBackFn(pdf: PDFDocumentProxy) {
 	this.numberOfPages = pdf.numPages;
@@ -40,6 +44,17 @@ export class LessonViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.httpClient.get('http://localhost:8080/creator/lesson/'+localStorage.getItem('lessonID')).subscribe(
+      (data) => {
+      console.log(data);
+      this.tempArray = data;
+      this.labelText = this.tempArray.name;
+      this.pdfSrc = this.tempArray.theory;
+		  return data;
+      },
+	  () => {
+	  }
+    ); 
   }
 
 }

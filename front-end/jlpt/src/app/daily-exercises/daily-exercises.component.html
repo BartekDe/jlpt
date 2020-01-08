@@ -1,10 +1,9 @@
 <div class="card" style="width: 80%">
-	<h3 [innerHTML]="labelText" class="card-title"></h3>
+	<h3 class="card-title">Zadania dnia</h3>
 	<div class="card-body">
 	<div *ngFor="let exercise of exerciseArray; index as i">
 		<a routerLink="/exercise-view">
 			<button (click)=goExercise(exercise.id) class="btn btn-light">
-				<!--<img src="././assets/images/{{exercise.rate}}.png" alt="opinion" id="op"/> (click)=goExercise(i) -->
 				<span>Ćwiczenie {{i+1}}</span>
 			</button>
 		</a>

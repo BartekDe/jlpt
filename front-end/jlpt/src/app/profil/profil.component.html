@@ -1,4 +1,4 @@
-<div class="card" style="width: 80%">
+<div class="card" style="width: 80%" [formGroup]="editForm">
     <h1>Edycja profilu</h1>
         <div class="card-body1">
 	      <div class="input-group sm-4">
@@ -10,7 +10,7 @@
               placeholder="Nazwa"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-default">
-              <button id="changeUsername" class="btn btn-light">
+              <button (click)=changeUsername() id="changeUsername" class="btn btn-light">
                 <span>Zmień nazwę</span>
               </button>
           </div>
@@ -25,13 +25,13 @@
               placeholder="Hasło"
               aria-label="Sizing example input"
               aria-describedby="inputGroup-sizing-default">
-            <button id="changePassword" class="btn btn-light">
+            <button (click)=changePassword() id="changePassword" class="btn btn-light">
                 <span>Zmień hasło</span>
             </button>
           </div>
         </div>
 	<div class="card-body3">
-		<button id="deleteButton" class="btn btn-outline-dark">
+		<button (click)=deleteAccount() id="deleteButton" class="btn btn-outline-dark">
 			<span>Usuń konto</span>
 		</button>
 	</div>	

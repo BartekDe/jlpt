@@ -5,6 +5,7 @@ import {LoginModel} from './models/LoginModel';
 import {ExerciseModel} from './models/ExerciseModel';
 import {LessonModel} from './models/LessonModel';
 import {TestModel} from './models/TestModel';
+import {ExerciseAnswerModel} from './models/ExerciseAnswerModel';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class AuthService {
 
   login(loginModel: LoginModel) {
     return this.httpClient.post('http://localhost:8080/auth/login', loginModel);
+  }
+
+  sendAnswer(exerciseAnswerMode: ExerciseAnswerModel) {
+    return this.httpClient.post('http://localhost:8080/lesson/solve-exercise', exerciseAnswerMode);
   }
 
   getRole() {

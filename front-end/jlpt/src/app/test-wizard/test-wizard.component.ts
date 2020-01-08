@@ -117,7 +117,7 @@ export class TestWizardComponent implements OnInit{
 	console.log(testModel);
     this.authService.createTest(testModel).subscribe (
       () => { alert('TEST ZOSTAŁ POPRAWNIE UTWORZONY I ZAPISANY'); },
-      () => { alert('WYSTĄPIŁ PROBLEM Z UTWORZENIEM TESTU, SPRAWDŹ SWOJE UPRAWNIENIA'); }
+	  () => { alert('WYSTĄPIŁ PROBLEM Z UTWORZENIEM TESTU, SPRAWDŹ SWOJE UPRAWNIENIA'); }
     );
   }
   
