@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.jlpt.jlptapi.dto.request.creator.TestCreatorDto;
 import pl.jlpt.jlptapi.entity.Exercise;
 import pl.jlpt.jlptapi.entity.Test;
@@ -53,8 +50,13 @@ public class TestController {
         List<Test> tests = this.testRepository.findAll(
                 Sort.by("id").ascending()
         );
-        tests.add(Test.builder().id(1L).name("dupa").build());
         return ResponseEntity.ok(tests);
+    }
+
+    @GetMapping("/tests/{test}")
+    public ResponseEntity getTest(@PathVariable Test test) {
+
+        return ResponseEntity.ok(test);
     }
 
 }
