@@ -47,20 +47,24 @@ public class ExerciseController {
     }
 
     @GetMapping("/exercise/all")
-    public ResponseEntity listExercisesByType(@RequestParam String type) {
-
+    public ResponseEntity listExercisesByType(@RequestParam(required = false) String type) {
         List<Exercise> exercises = exerciseCreatorService.getExerciseList();
 
-        List<Exercise> correctExercises = new ArrayList<>();
-        for (Exercise exercise : exercises) {
-            if (exercise != null) {
-                if (exercise.getType().equals(type)) {
-                    correctExercises.add(exercise);
+
+        if (null != type) {
+            List<Exercise> correctExercises = new ArrayList<>();
+            for (Exercise exercise : exercises) {
+                if (exercise != null) {
+                    if (exercise.getType().equals(type)) {
+                        correctExercises.add(exercise);
+                    }
                 }
             }
+
+            exercises = correctExercises;
         }
 
-        return new ResponseEntity<>(correctExercises, HttpStatus.OK);
+        return new ResponseEntity<>(exercises, HttpStatus.OK);
     }
 
     @GetMapping("/exercise/{exercise}")
