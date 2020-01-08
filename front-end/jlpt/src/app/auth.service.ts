@@ -77,7 +77,7 @@ export class AuthService {
   }
 
   public deleteAccount() {
-    return this.httpClient.delete('http://localhost:8080/user/delete');
+    return this.httpClient.post('http://localhost:8080/user', '');
   }
 
 }
