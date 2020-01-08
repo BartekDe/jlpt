@@ -3,10 +3,11 @@ package pl.jlpt.jlptapi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+import pl.jlpt.jlptapi.dto.request.EditProfileDto;
 import pl.jlpt.jlptapi.entity.AppUser;
 import pl.jlpt.jlptapi.repository.AppUserRepository;
 
@@ -24,7 +25,13 @@ public class UserController {
     }
 
     @PutMapping("/user/{user}")
-    public ResponseEntity editUserProfile(@PathVariable AppUser user) {
+    public ResponseEntity editUserProfile(@PathVariable AppUser user, @RequestBody EditProfileDto editProfileDto) {
+        user.setUsername(editProfileDto.username);
+
+        PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        String password = passwordEncoder.encode(editProfileDto.password);
+        user.setPassword(password);
+
         return new ResponseEntity(HttpStatus.OK);
     }
 }
