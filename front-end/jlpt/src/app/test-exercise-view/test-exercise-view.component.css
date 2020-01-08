@@ -12,7 +12,16 @@
 h2{
     display: inline-block;
     float: left;
-	margin-right: 9%;
+	margin-right: 25%;
+}
+
+.timeBar
+{
+	width: 200px;
+	height: 40px;
+	float: right;
+	margin-top: -30px;
+	margin-right: 25px;
 }
 
 .card{
@@ -37,18 +46,7 @@ button:hover{
 	box-shadow: 1px 1px 1px 1px;
 }
 
-#question1
-{
-	width: 94%;
-	margin-left: 3%;
-	margin-bottom: 5%;
-	height: 150px;
-	pointer-events: none;
-	font-size: 140%;
-	padding-top: 30px;
-}
-
-#question2
+#question
 {
 	width: 94%;
 	margin-left: 3%;
@@ -67,44 +65,10 @@ button:hover{
 	font-size: 100%;
 	width: 70px;
 	height: 50px;
-	/*float: right;*/
 }
-
-/*#buttonPos:hover, #buttonNeu:hover, #buttonNeg:hover
-{
-}*/
 
 #opPos, #opNeu, #opNeg
 {
 	height: 100%;
 	width: 100%;
-}
-
-/*.navigation1
-{
-	width: 100px;
-	height: 50px;
-	margin: auto;
-	margin-bottom: 10px;
-}
-
-#right
-{
-  	width: 25px;
-  	height: 20px;
-}*/
-
-.sendButton
-{
-	width: 100px;
-	height: 50px;
-	margin: auto;
-	margin-bottom: 10px;
-}
-
-#imageQuestion
-{
-	height: 100%;
-	width: 100px;
-	padding-bottom: 20px;
 }

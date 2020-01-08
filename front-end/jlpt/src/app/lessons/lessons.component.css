@@ -9,15 +9,18 @@
 
 }
 
+h6
+{
+	font-size: 89.5%;
+}
+
 .container {
 	margin-top: 80px;
 }
 
 .card {
 	float: left;
-	margin-left: 1%;
-	margin-right: 1%;
-	margin-top: 2%;
+	margin: 1%;
 }
 
 .card:hover{
@@ -31,6 +34,7 @@
 	margin-bottom: 5%;
 	margin-right: 1%;
 	width: 85%;
+	color: white;
 }
 
 /*#buttonT:hover
@@ -53,6 +57,7 @@
 	margin-bottom: 5%;
 	margin-right: 1%;
 	width: 85%;
+	color: white;
 }
 
 /*#buttonE:hover

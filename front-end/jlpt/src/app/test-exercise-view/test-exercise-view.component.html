@@ -1,0 +1,27 @@
+<div class="card" style="width: 80%">
+	<div class="card-body1" style="margin-bottom: 10px">
+		<h2>Przetłumacz '...' na hiraganę</h2>
+		<p><ngb-progressbar class="timeBar" type="dark" [value]="94">23:29</ngb-progressbar></p>
+	</div>
+	<div class="card-body2">
+		<div id="question" class="btn btn-light">
+			<span>きょうしつで　’書’いて　ください</span>
+		</div>
+		<button (click)=takeAnswer(1) class="btn btn-light"
+		[style.background-color] = "answer == 1 ? 'red' : ''" [style.border] = "answer == 1 ? '1px solid black' : ''">
+			<span>ひいて</span>
+		</button>
+		<button (click)=takeAnswer(2) class="btn btn-light"
+		[style.background-color] = "answer == 2 ? 'lime' : ''" [style.border] = "answer == 2 ? '1px solid black' : ''">
+			<span>かいて</span>
+		</button>
+		<button (click)=takeAnswer(3) class="btn btn-light"
+		[style.background-color] = "answer == 3 ? 'red' : ''" [style.border] = "answer == 3 ? '1px solid black' : ''">
+			<span>きいて</span>
+		</button>
+		<button (click)=takeAnswer(4) class="btn btn-light"
+		[style.background-color] = "answer == 4 ? 'red' : ''" [style.border] = "answer == 4 ? '1px solid black' : ''">
+			<span>まいて</span>
+		</button>
+	</div>	
+</div>

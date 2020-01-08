@@ -2,7 +2,7 @@
   <h1>{{alphabet}}</h1>
 
   <div class = "row w-100 p-5">
-    <div class="col-lg-2 display">
+    <div class="col-lg-3 display">
       <button
         class="m-3 btn btn-outline-light"
         (click)="changeMode()">{{modeLabel}}
@@ -27,7 +27,7 @@
         <div class="m-1">({{percent}})</div>
       </div>
     </div>
-    <div class="col-lg-10" style="background-color:white;">
+    <div class="col-lg-9" style="background-color:white;">
       <br> <ng-container *ngFor="let row of kana; let i = index">
         <div class="row justify-content-center" *ngIf="row != kana[8] && row != kana[14]; else endOrEightRow">
           <ng-container *ngFor="let sign of row; let j = index">
