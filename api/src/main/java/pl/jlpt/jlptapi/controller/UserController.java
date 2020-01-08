@@ -57,6 +57,7 @@ public class UserController {
     @PostMapping("/user")
     @Transactional
     public ResponseEntity deleteUser(@AuthenticationPrincipal AppUser user) {
+        user = this.appUserRepository.findById(user.getId()).get();
         this.appUserRepository.delete(user);
         this.entityManager.flush();
 
