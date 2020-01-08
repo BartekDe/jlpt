@@ -51,7 +51,7 @@ public class ExerciseController {
         List<Exercise> exercises = exerciseCreatorService.getExerciseList();
 
 
-        if (!type.isEmpty()) {
+        if (null != type) {
             List<Exercise> correctExercises = new ArrayList<>();
             for (Exercise exercise : exercises) {
                 if (exercise != null) {
