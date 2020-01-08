@@ -30,7 +30,7 @@ public class UserController {
         return this.appUserRepository.findByEmail("email@gmail.com");
     }
 
-    @PutMapping("/user/password")
+    @PostMapping("/user/password")
     @Transactional
     public ResponseEntity editUserPassword(@RequestBody EditProfileDto editProfileDto, @AuthenticationPrincipal AppUser user) {
 
@@ -44,7 +44,7 @@ public class UserController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @PutMapping("/user/username")
+    @PostMapping("/user/username")
     @Transactional
     public ResponseEntity editUsername(@RequestBody EditProfileDto editProfileDto, @AuthenticationPrincipal AppUser user) {
 

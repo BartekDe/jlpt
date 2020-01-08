@@ -13,7 +13,9 @@ import pl.jlpt.jlptapi.repository.TestRepository;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TestController {
@@ -50,6 +52,12 @@ public class TestController {
         List<Test> tests = this.testRepository.findAll(
                 Sort.by("id").ascending()
         );
+
+        Map exIds = new HashMap<Integer, Long>();
+        for (int i = 0; i < tests.size(); ++i) {
+            exIds.put(i, tests.get(i).getId());
+        }
+
         return ResponseEntity.ok(tests);
     }
 
