@@ -6,7 +6,7 @@ import {ExerciseModel} from './models/ExerciseModel';
 import {LessonModel} from './models/LessonModel';
 import {TestModel} from './models/TestModel';
 import {ExerciseAnswerModel} from './models/ExerciseAnswerModel';
-import {ProfilModel} from "./models/ProfilModel";
+import {ProfilModel} from './models/ProfilModel';
 
 @Injectable({
   providedIn: 'root'
@@ -69,6 +69,6 @@ export class AuthService {
   }
 
   public changeUsername(profilModel: ProfilModel) {
-    return this.httpClient.put('http://localhost:8080', profilModel);
+    return this.httpClient.post('http://localhost:8080/user/username', profilModel);
   }
 }
