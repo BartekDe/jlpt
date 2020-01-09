@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import pl.jlpt.jlptapi.dto.request.ExerciseAttemptDto;
+import pl.jlpt.jlptapi.dto.response.DailyLeaderboardDto;
 import pl.jlpt.jlptapi.dto.response.LessonLeaderboardDto;
 import pl.jlpt.jlptapi.dto.response.TestLeaderboardDto;
 import pl.jlpt.jlptapi.entity.*;
@@ -35,6 +36,9 @@ public class SolveExerciseController {
 
     @Autowired
     private LessonExerciseSolveAttemptRepository lessonExerciseSolveAttemptRepository;
+
+    @Autowired
+    private DailyExerciseSolveAttemptRepository dailyExerciseSolveAttemptRepository;
 
     @Autowired
     private AppUserRepository appUserRepository;
@@ -155,30 +159,37 @@ public class SolveExerciseController {
 
         return new ResponseEntity<>(leaderboard, HttpStatus.OK);
     }
-//
-//    @GetMapping("/daily/leaderboard")
-//    public ResponseEntity dailyLeaderboard() {
-//
-//        List<DailyExerciseSolveAttempt> solveAttempts = new
-//
-//        // show users sorted by percentage of correctly done exercises
-//        List<AppUser> allUsers = this.appUserRepository.findAll();
-//
-//        NavigableMap<Integer, AppUser> userScores = new TreeMap<>();
-//
-//        for (AppUser user : allUsers) {
-//            int userScore = 0;
-//            List<LessonExerciseSolveAttempt> solveAttempts = this.lessonExerciseSolveAttemptRepository.findByUser(user);
-//            for (LessonExerciseSolveAttempt solveAttempt : solveAttempts) {
-//                if (solveAttempt.isRight()) {
-//                    userScore++;
-//                }
-//            }
-//            userScores.put(userScore, user);
-//        }
-//
-//        return new ResponseEntity<>(userScores.descendingMap(), HttpStatus.OK);
-//    }
-//
+
+    @GetMapping("/daily/leaderboard")
+    public ResponseEntity dailyLeaderboard() {
+
+        java.sql.Date today = new java.sql.Date((new java.util.Date()).getTime());
+
+        List<DailyExerciseSolveAttempt> todaysDailySolves = this.dailyExerciseSolveAttemptRepository.findByDailyExerciseSetDate(today);
+
+        List<DailyLeaderboardDto> leaderboard = new ArrayList<>();
+
+        // show users sorted by percentage of correctly done exercises
+        List<AppUser> allUsers = this.appUserRepository.findAll();
+
+        for (AppUser user : allUsers) {
+            int userScore = 0;
+            int time = 0;
+            for (DailyExerciseSolveAttempt solveAttempt : todaysDailySolves) {
+                if (solveAttempt.isRight()) {
+                    userScore++;
+                }
+                time += solveAttempt.getTime();
+            }
+            DailyLeaderboardDto dailyLeaderboardDto = DailyLeaderboardDto.builder().score(userScore).username(user.getUsername()).time(time).build();
+            leaderboard.add(dailyLeaderboardDto);
+        }
+
+        leaderboard.sort((o1, o2) -> o2.score - o1.score);
+        leaderboard.sort((o1, o2) -> o1.time - o2.time);
+
+        return new ResponseEntity<>(leaderboard, HttpStatus.OK);
+    }
+
 
 }
