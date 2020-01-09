@@ -65,9 +65,11 @@ public class LessonController {
             List<LessonExerciseSolveAttempt> solveAttempts = this.lessonExerciseSolveAttemptRepository.findByLesson(lesson);
             for (Exercise exercise : lesson.getExercises()) {
                 // use lesson attempt repository to check if exercise was already solved
-                if (solveAttempts.contains(exercise)) {
-                    // exercise was already solved, so return the solve attempt and not regular version of the exercise
-
+                for (LessonExerciseSolveAttempt lessonExerciseSolveAttempt : solveAttempts) {
+                    if (lessonExerciseSolveAttempt.getExercise().equals(exercise)) {
+                        // exercise was already solved, so return the solve attempt and not regular version of the exercise
+                        exercise.setRate(lessonExerciseSolveAttempt.getSelfEvaluation());
+                    }
                 }
             }
         }
