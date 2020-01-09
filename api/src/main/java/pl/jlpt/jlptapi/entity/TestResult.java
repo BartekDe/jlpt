@@ -20,11 +20,10 @@ public class TestResult {
     private Long id;
 
     @ManyToOne(targetEntity = Test.class)
-    @JoinColumn(name = "id")
-    private Long test;
+    private Test test;
 
     @ManyToOne(targetEntity = AppUser.class)
-    private Long user;
+    private AppUser user;
 
     private Timestamp date;
 

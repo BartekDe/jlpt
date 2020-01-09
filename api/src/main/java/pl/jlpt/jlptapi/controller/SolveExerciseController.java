@@ -99,8 +99,8 @@ public class SolveExerciseController {
         int scoreInt = (int) Math.ceil((score / solveAttempts.size()) * 100);
 
         TestResult testResult = TestResult.builder()
-                .test(test.getId())
-                .user(user.getId())
+                .test(test)
+                .user(user)
                 .score(scoreInt).build();
 
         this.entityManager.persist(testResult);
@@ -117,8 +117,8 @@ public class SolveExerciseController {
 
         List<TestLeaderboardDto> leaderboard = new ArrayList<>();
         for (TestResult tr : results) {
-            AppUser user = this.appUserRepository.findById(tr.getUser()).get();
-            Test test = this.testRepository.findById(tr.getTest()).get();
+            AppUser user = this.appUserRepository.findById(tr.getUser().getId()).get();
+            Test test = this.testRepository.findById(tr.getTest().getId()).get();
             TestLeaderboardDto data = TestLeaderboardDto.builder().score(tr.getScore())
                     .username(user.getUsername()).build();
             leaderboard.add(data);
