@@ -124,9 +124,29 @@ public class SolveExerciseController {
             leaderboard.add(data);
         }
 
-        leaderboard.sort((o1, o2) -> o1.score > o2.score ? 1 : 0);
+        leaderboard.sort((o1, o2) -> o2.score - o1.score);
 
         return new ResponseEntity<>(leaderboard, HttpStatus.OK);
     }
+//
+//    @GetMapping("/test/leaderboard")
+//    public ResponseEntity testLeaderboard() {
+//
+//        List<TestResult> results = this.testResultRepository.findAll(); // construct dto from this list of objects
+//
+//
+//        List<TestLeaderboardDto> leaderboard = new ArrayList<>();
+//        for (TestResult tr : results) {
+//            AppUser user = this.appUserRepository.findById(tr.getUser().getId()).get();
+//            Test test = this.testRepository.findById(tr.getTest().getId()).get();
+//            TestLeaderboardDto data = TestLeaderboardDto.builder().score(tr.getScore())
+//                    .username(user.getUsername()).build();
+//            leaderboard.add(data);
+//        }
+//
+//        leaderboard.sort((o1, o2) -> o2.score - o1.score);
+//
+//        return new ResponseEntity<>(leaderboard, HttpStatus.OK);
+//    }
 
 }

@@ -31,7 +31,7 @@ public class Lesson {
     private List<Exercise> exercises;
 
     @Column(nullable = true)
-    private boolean isTheorySeen;
+    private Boolean isTheorySeen;
 
     public void increaseSuccessCount(int count) {
         this.successCount += count;
