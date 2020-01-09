@@ -20,7 +20,8 @@ public class TestResult {
     private Long id;
 
     @ManyToOne(targetEntity = Test.class)
-    private Long testId;
+    @JoinColumn(name = "id")
+    private Long test;
 
     @ManyToOne(targetEntity = AppUser.class)
     private Long user;
