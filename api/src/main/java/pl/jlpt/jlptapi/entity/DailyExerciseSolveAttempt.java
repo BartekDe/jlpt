@@ -6,27 +6,26 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
-@Entity
 @Builder
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TestResult {
+public class DailyExerciseSolveAttempt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @ManyToOne(targetEntity = Test.class)
-    private Long testId;
-
     @ManyToOne(targetEntity = AppUser.class)
-    private Long AppUserId;
+    private AppUser user;
 
-    private Timestamp date;
+    @ManyToOne(targetEntity = DailyExerciseSet.class)
+    private DailyExerciseSet dailyExerciseSet;
 
-    private int score;
+    @ManyToOne(targetEntity = Exercise.class)
+    private Exercise exercise;
 
+    private boolean isRight;
 }
