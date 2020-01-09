@@ -12,9 +12,7 @@ import pl.jlpt.jlptapi.repository.*;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class SolveExerciseController {
@@ -33,6 +31,9 @@ public class SolveExerciseController {
 
     @Autowired
     private TestExerciseSolveAttemptRepository testExerciseSolveAttemptRepository;
+
+    @Autowired
+    private LessonExerciseSolveAttemptRepository lessonExerciseSolveAttemptRepository;
 
     @Autowired
     private AppUserRepository appUserRepository;
@@ -128,25 +129,27 @@ public class SolveExerciseController {
 
         return new ResponseEntity<>(leaderboard, HttpStatus.OK);
     }
-//
-//    @GetMapping("/daily/leaderboard")
-//    public ResponseEntity testLeaderboard() {
-//
-//        List<TestResult> results = this.testResultRepository.findAll(); // construct dto from this list of objects
-//
-//
-//        List<TestLeaderboardDto> leaderboard = new ArrayList<>();
-//        for (TestResult tr : results) {
-//            AppUser user = this.appUserRepository.findById(tr.getUser().getId()).get();
-//            Test test = this.testRepository.findById(tr.getTest().getId()).get();
-//            TestLeaderboardDto data = TestLeaderboardDto.builder().score(tr.getScore())
-//                    .username(user.getUsername()).build();
-//            leaderboard.add(data);
-//        }
-//
-//        leaderboard.sort((o1, o2) -> o2.score - o1.score);
-//
-//        return new ResponseEntity<>(leaderboard, HttpStatus.OK);
-//    }
+
+    @GetMapping("/lesson/leaderboard")
+    public ResponseEntity lessonLeaderboard() {
+
+        // show users sorted by percentage of correctly done exercises
+        List<AppUser> allUsers = this.appUserRepository.findAll();
+
+        Map<Integer, AppUser> userScores = new TreeMap<>();
+
+        for (AppUser user : allUsers) {
+            int userScore = 0;
+            List<LessonExerciseSolveAttempt> solveAttempts = this.lessonExerciseSolveAttemptRepository.findByUser(user);
+            for (LessonExerciseSolveAttempt solveAttempt : solveAttempts) {
+                if (solveAttempt.isRight()) {
+                    userScore++;
+                }
+            }
+            userScores.put(userScore, user);
+        }
+
+        return new ResponseEntity<>(userScores, HttpStatus.OK);
+    }
 
 }
