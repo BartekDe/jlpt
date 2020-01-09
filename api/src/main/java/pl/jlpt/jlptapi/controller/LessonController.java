@@ -49,9 +49,18 @@ public class LessonController {
     public ResponseEntity getLesson(@PathVariable Lesson lesson) {
 
         if (lesson == null) {
-
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Lesson not found");
         } else {
+            List<LessonExerciseSolveAttempt> solveAttempts = this.lessonExerciseSolveAttemptRepository.findByLesson(lesson);
+            for (Exercise exercise : lesson.getExercises()) {
+                // use lesson attempt repository to check if exercise was already solved
+                for (LessonExerciseSolveAttempt lessonExerciseSolveAttempt : solveAttempts) {
+                    if (lessonExerciseSolveAttempt.getExercise().getId().equals(exercise.getId())) {
+                        // exercise was already solved, so return the solve attempt and not regular version of the exercise
+                        exercise.setRate(lessonExerciseSolveAttempt.getSelfEvaluation());
+                    }
+                }
+            }
             return new ResponseEntity<>(lesson, HttpStatus.OK);
         }
     }
