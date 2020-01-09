@@ -187,8 +187,7 @@ public class SolveExerciseController {
             leaderboard.add(dailyLeaderboardDto);
         }
 
-        leaderboard.sort((o1, o2) -> o2.score - o1.score);
-        leaderboard.sort((o1, o2) -> o1.time - o2.time);
+        Collections.sort(leaderboard);
 
         return new ResponseEntity<>(leaderboard, HttpStatus.OK);
     }
