@@ -31,7 +31,7 @@ public class SolveExerciseController {
     private TestResultRepository testResultRepository;
 
     @Autowired
-    private ExerciseSolveAttemptRepository exerciseSolveAttemptRepository;
+    private TestExerciseSolveAttemptRepository testExerciseSolveAttemptRepository;
 
     @Autowired
     private AppUserRepository appUserRepository;
@@ -46,7 +46,7 @@ public class SolveExerciseController {
         Exercise exercise = this.exerciseRepository.getOne(exerciseAttemptDto.exerciseId);
         Lesson lesson = this.lessonRepository.getOne(exerciseAttemptDto.lessonId);
 
-        ExerciseSolveAttempt exerciseSolveAttempt = ExerciseSolveAttempt.builder()
+        LessonExerciseSolveAttempt lessonExerciseSolveAttempt = LessonExerciseSolveAttempt.builder()
                 .user(user)
                 .exercise(exercise)
                 .lesson(lesson)
@@ -54,7 +54,7 @@ public class SolveExerciseController {
                 .selfEvaluation(exerciseAttemptDto.rate)
                 .build();
 
-        this.entityManager.persist(exerciseSolveAttempt);
+        this.entityManager.persist(lessonExerciseSolveAttempt);
         this.entityManager.flush();
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -67,7 +67,7 @@ public class SolveExerciseController {
         Exercise exercise = this.exerciseRepository.getOne(exerciseAttemptDto.exerciseId);
         Test test = this.testRepository.getOne(exerciseAttemptDto.testId);
 
-        ExerciseSolveAttempt exerciseSolveAttempt = ExerciseSolveAttempt.builder()
+        LessonExerciseSolveAttempt lessonExerciseSolveAttempt = LessonExerciseSolveAttempt.builder()
                 .user(user)
                 .exercise(exercise)
                 .test(test)
@@ -75,7 +75,7 @@ public class SolveExerciseController {
                 .selfEvaluation(exerciseAttemptDto.rate)
                 .build();
 
-        this.entityManager.persist(exerciseSolveAttempt);
+        this.entityManager.persist(lessonExerciseSolveAttempt);
         this.entityManager.flush();
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -86,7 +86,7 @@ public class SolveExerciseController {
     public ResponseEntity finishSolvingTest(@PathVariable Test test, @AuthenticationPrincipal AppUser user) {
 
         // calculate score from TestExerciseSolveAttempts existing for this test
-        List<TestExerciseSolveAttempt> solveAttempts = this.exerciseSolveAttemptRepository.findByTest(test);
+        List<TestExerciseSolveAttempt> solveAttempts = this.testExerciseSolveAttemptRepository.findByTest(test);
 
         double score = 0;
 

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExerciseSolveAttempt {
+public class LessonExerciseSolveAttempt {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ExerciseSolveAttemptRepository extends JpaRepository<TestExerciseSolveAttempt, Long> {
+public interface TestExerciseSolveAttemptRepository extends JpaRepository<TestExerciseSolveAttempt, Long> {
 
     List<TestExerciseSolveAttempt> findByTest(Test test);
 }
