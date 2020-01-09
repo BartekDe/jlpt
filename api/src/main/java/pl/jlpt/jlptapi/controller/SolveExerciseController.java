@@ -159,7 +159,7 @@ public class SolveExerciseController {
 //    @GetMapping("/daily/leaderboard")
 //    public ResponseEntity dailyLeaderboard() {
 //
-//        List<DailyExerciseSolveAttempt> solveAttempts =
+//        List<DailyExerciseSolveAttempt> solveAttempts = new
 //
 //        // show users sorted by percentage of correctly done exercises
 //        List<AppUser> allUsers = this.appUserRepository.findAll();
@@ -179,6 +179,6 @@ public class SolveExerciseController {
 //
 //        return new ResponseEntity<>(userScores.descendingMap(), HttpStatus.OK);
 //    }
-
+//
 
 }
