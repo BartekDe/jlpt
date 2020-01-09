@@ -84,12 +84,8 @@ public class SolveExerciseController {
     @Transactional
     public ResponseEntity finishSolvingTest(@PathVariable Test test, @AuthenticationPrincipal AppUser user) {
 
-        System.out.println(test);
-
         // calculate score from TestExerciseSolveAttempts existing for this test
         List<TestExerciseSolveAttempt> solveAttempts = this.testExerciseSolveAttemptRepository.findByTestId(test.getId());
-
-        System.out.println(solveAttempts);
 
         double score = 0;
 

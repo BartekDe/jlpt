@@ -30,6 +30,9 @@ public class Lesson {
     @ManyToMany(targetEntity = Exercise.class)
     private List<Exercise> exercises;
 
+    @Column(nullable = true)
+    private boolean isTheorySeen;
+
     public void increaseSuccessCount(int count) {
         this.successCount += count;
     }
