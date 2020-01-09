@@ -7,5 +7,6 @@ public class ExerciseAttemptDto {
     public Long exerciseId;
     public boolean correct;
     public int rate;
+    public int time;
 
 }

@@ -23,7 +23,7 @@ public class TestResult {
     private Long testId;
 
     @ManyToOne(targetEntity = AppUser.class)
-    private Long AppUserId;
+    private Long user;
 
     private Timestamp date;
 

@@ -80,7 +80,7 @@ public class DailyExerciseController {
 
         DailyExerciseSolveAttempt dailyExerciseSolveAttempt = DailyExerciseSolveAttempt.builder()
                 .isRight(exerciseAttemptDto.correct).dailyExerciseSet(todaysExerciseSet).exercise(exercise)
-                .user(user).build();
+                .user(user).time(exerciseAttemptDto.time).build();
 
         this.entityManager.persist(dailyExerciseSolveAttempt);
         this.entityManager.flush();
