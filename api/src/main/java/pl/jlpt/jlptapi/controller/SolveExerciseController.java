@@ -6,14 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import pl.jlpt.jlptapi.dto.request.ExerciseAttemptDto;
+import pl.jlpt.jlptapi.dto.response.TestLeaderboardDto;
 import pl.jlpt.jlptapi.entity.*;
-import pl.jlpt.jlptapi.repository.ExerciseRepository;
-import pl.jlpt.jlptapi.repository.ExerciseSolveAttemptRepository;
-import pl.jlpt.jlptapi.repository.LessonRepository;
-import pl.jlpt.jlptapi.repository.TestRepository;
+import pl.jlpt.jlptapi.repository.*;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -29,7 +28,13 @@ public class SolveExerciseController {
     private TestRepository testRepository;
 
     @Autowired
+    private TestResultRepository testResultRepository;
+
+    @Autowired
     private ExerciseSolveAttemptRepository exerciseSolveAttemptRepository;
+
+    @Autowired
+    private AppUserRepository appUserRepository;
 
     @Autowired
     private EntityManager entityManager;
@@ -103,13 +108,23 @@ public class SolveExerciseController {
 
         return new ResponseEntity<>(testResult, HttpStatus.OK);
     }
-//
-//    @GetMapping("/test/leaderboard")
-//    public ResponseEntity testLeaderboard() {
-//
-//
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+
+    @GetMapping("/test/leaderboard")
+    public ResponseEntity testLeaderboard() {
+
+        List<TestResult> results = this.testResultRepository.findAll(); // construct dto from this list of objects
+
+
+        List<TestLeaderboardDto> leaderboard = new ArrayList<>();
+        for (TestResult tr : results) {
+            AppUser user = this.appUserRepository.findById(tr.getAppUserId()).get();
+            Test test = this.testRepository.findById(tr.getTestId()).get();
+            TestLeaderboardDto data = TestLeaderboardDto.builder().score(tr.getScore())
+                    .username(user.getUsername()).build();
+            leaderboard.add(data);
+        }
+
+        return new ResponseEntity<>(leaderboard, HttpStatus.OK);
+    }
 
 }
