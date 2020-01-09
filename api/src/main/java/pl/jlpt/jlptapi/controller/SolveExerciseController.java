@@ -67,15 +67,14 @@ public class SolveExerciseController {
         Exercise exercise = this.exerciseRepository.getOne(exerciseAttemptDto.exerciseId);
         Test test = this.testRepository.getOne(exerciseAttemptDto.testId);
 
-        LessonExerciseSolveAttempt lessonExerciseSolveAttempt = LessonExerciseSolveAttempt.builder()
+        TestExerciseSolveAttempt testExerciseSolveAttempt = TestExerciseSolveAttempt.builder()
                 .user(user)
                 .exercise(exercise)
                 .test(test)
                 .isRight(exerciseAttemptDto.correct)
-                .selfEvaluation(exerciseAttemptDto.rate)
                 .build();
 
-        this.entityManager.persist(lessonExerciseSolveAttempt);
+        this.entityManager.persist(testExerciseSolveAttempt);
         this.entityManager.flush();
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -85,8 +84,12 @@ public class SolveExerciseController {
     @Transactional
     public ResponseEntity finishSolvingTest(@PathVariable Test test, @AuthenticationPrincipal AppUser user) {
 
+        System.out.println(test);
+
         // calculate score from TestExerciseSolveAttempts existing for this test
-        List<TestExerciseSolveAttempt> solveAttempts = this.testExerciseSolveAttemptRepository.findByTest(test);
+        List<TestExerciseSolveAttempt> solveAttempts = this.testExerciseSolveAttemptRepository.findByTestId(test.getId());
+
+        System.out.println(solveAttempts);
 
         double score = 0;
 
