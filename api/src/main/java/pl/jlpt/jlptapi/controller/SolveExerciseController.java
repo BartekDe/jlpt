@@ -181,7 +181,7 @@ public class SolveExerciseController {
                     time += solveAttempt.getTime() != null ? solveAttempt.getTime() : 0;
                 }
             }
-            DailyLeaderboardDto dailyLeaderboardDto = DailyLeaderboardDto.builder().score(userScore).username(user.getUsername()).time(time).build();
+            DailyLeaderboardDto dailyLeaderboardDto = DailyLeaderboardDto.builder().score((userScore / 3) * 100).username(user.getUsername()).time(time).build();
             leaderboard.add(dailyLeaderboardDto);
         }
 
