@@ -10,5 +10,5 @@ import java.util.Optional;
 @Repository
 public interface TestExerciseSolveAttemptRepository extends JpaRepository<TestExerciseSolveAttempt, Long> {
 
-    List<TestExerciseSolveAttempt> findByTest(Test test);
+    List<TestExerciseSolveAttempt> findByTestId(Long testId);
 }
