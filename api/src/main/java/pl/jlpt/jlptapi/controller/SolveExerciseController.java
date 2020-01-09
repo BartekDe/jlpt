@@ -124,7 +124,7 @@ public class SolveExerciseController {
             leaderboard.add(data);
         }
 
-        leaderboard.sort((o1, o2) -> o1.score > o2.score ? 1 : 0);
+        leaderboard.sort((o1, o2) -> o2.score - o1.score);
 
         return new ResponseEntity<>(leaderboard, HttpStatus.OK);
     }
