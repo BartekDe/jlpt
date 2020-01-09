@@ -25,6 +25,8 @@ export class DailyExerciseViewComponent implements OnInit {
   tempArray: any;
   count: any;
   correctAnswer: boolean;
+  interval: any;
+  timeNeeded: number= 0;
 
   constructor(private httpClient: HttpClient,
     private router: Router,
@@ -88,6 +90,9 @@ export class DailyExerciseViewComponent implements OnInit {
 		},
 		() => {}
     ); 
+    this.interval = setInterval(() => {
+      this.timeNeeded++;
+    },1000)
   }
 
   sendAnswer()
@@ -97,11 +102,13 @@ export class DailyExerciseViewComponent implements OnInit {
     const dailyExerciseAnswerModel: DailyExerciseAnswerModel = {
       exerciseId: localStorage.getItem('exerciseID'),
       correct: this.correctAnswer,
+      time: this.timeNeeded
     };
     this.authService.sendAnswerDaily(dailyExerciseAnswerModel).subscribe(
       () => {
         console.log(dailyExerciseAnswerModel);
       },
     () => {});
+    clearInterval(this.interval);
   }
 }

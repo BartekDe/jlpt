@@ -26,6 +26,7 @@
             <th scope="row">{{i+1}}</th>
             <td>{{element.username}}</td>
             <td>{{element.score}}%</td>
+            <td *ngIf = "result == 3">{{element.time}}s</td>
           </tr>
         </tbody>
     </table>
