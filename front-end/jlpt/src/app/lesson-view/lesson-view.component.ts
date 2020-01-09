@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
-import { TestBed } from '@angular/core/testing';
 import {HttpClient} from '@angular/common/http';
 
 @Component({
@@ -8,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
   templateUrl: './lesson-view.component.html',
   styleUrls: ['./lesson-view.component.css']
 })
-//const opinion = 0;
+
 export class LessonViewComponent implements OnInit {
   pdfSrc: string | ArrayBuffer;
   totalPages: string;

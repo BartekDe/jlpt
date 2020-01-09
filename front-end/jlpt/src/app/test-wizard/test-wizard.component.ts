@@ -3,8 +3,7 @@ import {FormBuilder, NgForm, Validators} from '@angular/forms';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from '../auth.service';
 import {TestModel} from '../models/TestModel';
-
-						
+			
 const CONST_TYPE_CHOSE = [{id: "TranslatePol", name:'Przetłumacz na polski'}, 
 						{id: "TranslateHira", name:'Przetłumacz na hiragane'},
 						{id: "TranslateKata", name:'Przetłumacz na katakane'},
@@ -25,7 +24,11 @@ const CONST_TYPE_CHOSE = [{id: "TranslatePol", name:'Przetłumacz na polski'},
 export class TestWizardComponent implements OnInit{
   testForm: any;
   currentTypeName: string = '';
-  exercise_list: any;
+  exerciseList: any;
+  typeIndex = CONST_TYPE_CHOSE;
+  chosenExercisesIndex = [];
+  chosenTypeIndex = [];
+  tempArray = [];
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -35,16 +38,12 @@ export class TestWizardComponent implements OnInit{
 	  testDuration: ['', Validators.required]     
     });
   }
-  type_index = CONST_TYPE_CHOSE;
-  chosen_exercises_index = [];
-  chosen_type_index = [];
-  temp_array = [];
   
   ngOnInit(){
   this.httpClient.get('http://localhost:8080/creator/exercise/all?type=TranslatePol').subscribe(
       (data) => {
 		  console.log(data);
-		  this.exercise_list = data;
+		  this.exerciseList = data;
 		  this.currentTypeName = "Przetłumacz ... na polski";
 		  return data;
       },
@@ -55,48 +54,48 @@ export class TestWizardComponent implements OnInit{
   
   addExercise(exercise: any)
   {
-	let data = this.chosen_exercises_index.find(ob => ob['id'] === exercise.id);
+	let data = this.chosenExercisesIndex.find(ob => ob['id'] === exercise.id);
 	if(data === undefined)
 	{
-		this.chosen_exercises_index.push({id: exercise.id, name: exercise.name});
+		this.chosenExercisesIndex.push({id: exercise.id, name: exercise.name});
 	}
   }
   
-  addType(type_id: number)
+  addType(typeId: number)
   {
-	let data = this.chosen_type_index.find(ob => ob['id'] === type_id);
+	let data = this.chosenTypeIndex.find(ob => ob['id'] === typeId);
 	if(data === undefined)
 	{
-		this.chosen_type_index.push({id: type_id});
+		this.chosenTypeIndex.push({id: typeId});
 	}
-	this.httpClient.get('http://localhost:8080/creator/exercise/all?type='+type_id).subscribe(
+	this.httpClient.get('http://localhost:8080/creator/exercise/all?type='+typeId).subscribe(
 		(data) => {
 			console.log(data);
-			this.exercise_list = data;
+			this.exerciseList = data;
 			return data;
 		},
 		() => {}
 	  ); 
   }
   
-  addTypeName(type_name: string)
+  addTypeName(typeName: string)
   {
-	this.currentTypeName = type_name;
+	this.currentTypeName = typeName;
   }
   
-  deleteExercise(exercise_name: string)
+  deleteExercise(exerciseName: string)
   {
-	let index: number = this.chosen_exercises_index.findIndex(item => item.name === exercise_name);
-	this.chosen_exercises_index.splice(index, 1);
+	let index: number = this.chosenExercisesIndex.findIndex(item => item.name === exerciseName);
+	this.chosenExercisesIndex.splice(index, 1);
   }
   
   reset(form: NgForm) {
     form.reset();
-	this.chosen_exercises_index.length=0;
+	this.chosenExercisesIndex.length=0;
 	this.httpClient.get('http://localhost:8080/creator/exercise/all?type=TranslatePol').subscribe(
       (data) => {
 		  console.log(data);
-		  this.exercise_list = data;
+		  this.exerciseList = data;
 		  this.currentTypeName = "Przetłumacz ... na polski";
 		  return data;
       },
@@ -105,14 +104,14 @@ export class TestWizardComponent implements OnInit{
   }
   
   create() {
-	for(var i=0; i < this.chosen_exercises_index.length; i++)
+	for(var i=0; i < this.chosenExercisesIndex.length; i++)
     {
-	  this.temp_array[i]=this.chosen_exercises_index[i].id;
+	  this.tempArray[i]=this.chosenExercisesIndex[i].id;
     }
     const testModel: TestModel = {
 	  name: this.testForm.value.testName,
-	  duration: this.testForm.value.testDuration,
-	  exerciseIds: this.temp_array,
+	  timeLimit: this.testForm.value.testDuration,
+	  exerciseIds: this.tempArray,
 	};
 	console.log(testModel);
     this.authService.createTest(testModel).subscribe (

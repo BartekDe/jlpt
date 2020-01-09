@@ -1,13 +1,17 @@
 <div class="card" style="width: 80%">
-	<h3 class="card-title">Słownictwo 1</h3>
-	<p><ngb-progressbar class="timeBar" type="dark" [value]="95">23:39</ngb-progressbar></p>
+	<h3 [innerHTML]="labelText" class="card-title"></h3>
+	<p><ngb-progressbar class="timeBar" type="dark" [value]="timeLeft" [max]="timeStart">{{timeVisible}}</ngb-progressbar></p>
 	<div class="card-body">
-	<div *ngFor="let exercise of exercises_index">
+	<div *ngFor="let exercise of exerciseArray; index as i">
 		<a routerLink="/test-exercise-view">
-			<button class="btn btn-light">
-				<span>Ćwiczenie {{exercise.id}}</span>
+			<button (click)=goExercise(exercise.id) (click)=chooseIndex(i) class="btn btn-light"
+			[style.pointer-events] = "madeExercisesIndexArray.indexOf(i.toString()) == -1 ? 'auto' : 'none'">
+				<span>Ćwiczenie {{i+1}}</span>
 			</button>
 		</a>
 	</div>
+	<button id="finish" (click)=submitTest() routerLink='/tests' class="btn btn-light">
+		<span>Zakończ test</span>
+	</button>
 	</div>
 </div>

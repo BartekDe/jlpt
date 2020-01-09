@@ -1,42 +1,42 @@
 <div class="card" style="width: 80%">
-	<div class="card-body1" style="margin-bottom: 10px">
-		<h2>Przetłumacz '...' na hiraganę</h2>
-		<p><ngb-progressbar class="timeBar" type="dark" [value]="timeLeft" [max]="timeStart">{{timeVisible}}</ngb-progressbar></p>
+	<div class="card-body1">
+		<h2 [innerHTML]="labelText"></h2>
 	</div>
 	<div class="card-body2">
-		<div id="question1" class="btn btn-light" *ngIf = "exerciseType === 'DescribePict'"><img id = "imageQuestion" src={{imgSrc}}></div>
-		<div id="question1" class="btn btn-light" *ngIf = "exerciseType === 'ReadingCompTextPict'"><img id = "imageQuestion" src={{imgSrc}}>
-			<span>{{exerciseText}}</span>
+		<div id="question1" class="btn btn-light" *ngIf = "exercise_type === 'DescribePict'"><img id = "imageQuestion" src={{imgSrc}}></div>
+		<div id="question1" class="btn btn-light" *ngIf = "exercise_type === 'ReadingCompTextPict'"><img id = "imageQuestion" src={{imgSrc}}>
+			<span>{{exercise_text}}</span>
 		</div>
-		<div id="question2" class="btn btn-light" *ngIf = "exerciseType !== 'DescribePict' && exerciseType !== 'ReadingCompTextPict'">
-			<span>{{exerciseText}}</span>
+		<div id="question2" class="btn btn-light" *ngIf = "exercise_type !== 'DescribePict' && exercise_type !== 'ReadingCompTextPict'">
+			<span>{{exercise_text}}</span>
 		</div>
 		<button (click)=takeAnswer(1) class="btn btn-light"
 		[style.background-color] = "answer == 1 && rightPosition == 1 ? 'lime' : answer == 1 ? 'red' : ''" 
 		[style.border] = "answer == 1 ? '1px solid black' : ''"
 		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
-			<span>{{answerArray[0].name}}</span>
+			<span>{{answer_array[0].name}}</span>
 		</button>
 		<button (click)=takeAnswer(2) class="btn btn-light"
 		[style.background-color] = "answer == 2 && rightPosition == 2 ? 'lime' : answer == 2 ? 'red' : ''" 
 		[style.border] = "answer == 2 ? '1px solid black' : ''"
 		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
-			<span>{{answerArray[1].name}}</span>
+			<span>{{answer_array[1].name}}</span>
 		</button>
 		<button (click)=takeAnswer(3) class="btn btn-light"
 		[style.background-color] = "answer == 3 && rightPosition == 3 ? 'lime' : answer == 3 ? 'red' : ''" 
 		[style.border] = "answer == 3 ? '1px solid black' : ''"
 		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
-			<span>{{answerArray[2].name}}</span>
+			<span>{{answer_array[2].name}}</span>
 		</button>
 		<button (click)=takeAnswer(4) class="btn btn-light"
 		[style.background-color] = "answer == 4 && rightPosition == 4 ? 'lime' : answer == 4 ? 'red' : ''" 
 		[style.border] = "answer == 4 ? '1px solid black' : ''"
 		[style.pointer-events] = "answer == 0 ? 'auto' : 'none'">
-			<span>{{answerArray[3].name}}</span>
+			<span>{{answer_array[3].name}}</span>
 		</button>
 	</div>	
-		<button (click)=sendAnswer() routerLink='/test-exercises' class="btn btn-light sendButton">
-			<span>OK</span>
-		</button>
+	<button (click)=sendAnswer() routerLink='/daily-exercises' class="btn btn-light sendButton">
+		<span>OK</span>
+	</button>
+	
 </div>

@@ -8,6 +8,7 @@ import {TestExercisesComponent} from './test-exercises/test-exercises.component'
 import {ResultsComponent} from './results/results.component';
 import {ExerciseWizardComponent} from './exercise-wizard/exercise-wizard.component';
 import {ExerciseViewComponent} from './exercise-view/exercise-view.component';
+import {DailyExerciseViewComponent} from './daily-exercise-view/daily-exercise-view.component';
 import {TestExerciseViewComponent} from './test-exercise-view/test-exercise-view.component';
 import {LessonWizardComponent} from './lesson-wizard/lesson-wizard.component';
 import {LessonViewComponent} from './lesson-view/lesson-view.component';
@@ -30,6 +31,7 @@ const routes: Routes = [
   { path: 'daily-exercises', component: DailyExercisesComponent },
   { path: 'test-exercises', component: TestExercisesComponent },
   { path: 'exercise-view', component: ExerciseViewComponent },
+  { path: 'daily-exercise-view', component: DailyExerciseViewComponent },
   { path: 'test-exercise-view', component: TestExerciseViewComponent },
   { path: 'exercises-hiragana', component: AlphabetComponent, data: { kana: 'Hiragana' } },
   { path: 'exercises-katakana', component: AlphabetComponent, data: { kana: 'Katakana' } },

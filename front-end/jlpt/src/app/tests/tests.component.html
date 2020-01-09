@@ -1,12 +1,12 @@
 <div class="container">
-	<div *ngFor="let test of test_index">
+	<div *ngFor="let test of testList; index as i">
 		<div class="card" style="width: 31.3%">
 			<div class="card-body">
-				<h5 class="card-title">Test {{test.id}}</h5>
+				<h5 class="card-title">Test {{i+1}}</h5>
 				<h6 class="card-subtitle mb-2 text-muted">{{test.name}}</h6>
-				<h6 id="timeInfo" class="card-subtitle text-muted">Czas na wykonanie: {{test.time}} minut</h6>
-				<a id="buttonE" routerLink="/test-exercises" class="btn btn-dark">Ćwiczenia</a>
-				<img src="././assets/images/{{test.rateE}}.png" alt="img" id="IMG">
+				<h6 id="timeInfo" class="card-subtitle text-muted">Czas na wykonanie: {{test.timeLimit}} minut</h6>
+				<a id="buttonE" (click)=goElsewhere(test.id) (click)=giveTime(test.timeLimit) routerLink="/test-exercises" class="btn btn-dark">Ćwiczenia</a>
+				<!--<img src="././assets/images/{{test.rateE}}.png" alt="img" id="IMG">-->
 			</div>
 		</div>
 	</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-results',
@@ -7,28 +8,80 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultsComponent implements OnInit {
   result: number = 0;
-  constructor() {}
+  resultArray: any;
+
+  constructor(private httpClient: HttpClient) {}
 
   ngOnInit() {
+    this.httpClient.get('http://localhost:8080/test/leaderboard').subscribe(
+      (data) => {
+        console.log(data);
+        this.resultArray = data;
+        return data;
+      },
+      () => {
+      }
+    ); 
   }
 
   chooseResult(resultInput: number)
   {
-	  this.result = resultInput;
+    this.result = resultInput;
+    if(resultInput == 1)
+    {
+      this.httpClient.get('http://localhost:8080/test/leaderboard').subscribe(
+      (data) => {
+        console.log(data);
+        this.resultArray = data;
+        return data;
+      },
+      () => {
+      }
+      ); 
+    }
+    else if(resultInput == 2)
+    {
+      /*this.httpClient.get('http://localhost:8080/lesson/leaderboard').subscribe(
+      (data) => {
+        console.log(data);
+        this.resultArray = data;
+        return data;
+      },
+      () => {
+      }
+      );*/
+      this.resultArray = this.elements1;
+    }
+    else if(resultInput == 3)
+    {
+      /*this.httpClient.get('http://localhost:8080/daily/leaderboard').subscribe(
+      (data) => {
+        console.log(data);
+        this.resultArray = data;
+        return data;
+      },
+      () => {
+      }
+      );*/
+      this.resultArray = this.elements2;
+    }
   }
 
-  elements: any = [
-  {position: 1, name: 'AdamF', result: 100},
-  {position: 2, name: 'random_nickname', result: 98},
-  {position: 3, name: 'user5', result: 94},
-  {position: 4, name: 'Simon97', result: 88},
-  {position: 5, name: 'person370', result: 80},
-  {position: 6, name: 'user1', result: 80},
-  {position: 7, name: 'BD_100', result: 67},
-  {position: 8, name: 'user3', result: 60},
-  {position: 9, name: 'new_on_site', result: 45},
-  {position: 10, name: 'tester', result: 15},
+  elements1: any = [
+  {username: 'AdamF', score: 100},
+  {username: 'tester', score: 88},
+  {username: 'bartekbartek', score: 80},
+  {username: 'simon97', score: 75},
+  {username: 'user123', score: 60}
   ];
+
+  elements2: any = [
+    {username: 'bartekbartek', score: 92},
+    {username: 'AdamF', score: 90},
+    {username: 'user123', score: 82},
+    {username: 'simon97', score: 70},
+    {username: 'tester', score: 40}
+    ];
 
   headElements = ['Lp.', 'Nazwa użytkownika', 'Wynik'];
 

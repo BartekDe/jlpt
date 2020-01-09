@@ -5,18 +5,17 @@ import {AuthService} from '../auth.service';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 import {LessonModel} from '../models/LessonModel';
 
-						
-const CONST_TYPE_CHOOSE = [{id: "TranslatePol", name:'Przetłumacz na polski'}, 
-						{id: "TranslateHira", name:'Przetłumacz na hiragane'},
-						{id: "TranslateKata", name:'Przetłumacz na katakane'},
-						{id: "TranslateKanji", name:'Przetłumacz na kanji'},
-						{id: "FillGap", name:'Wstaw odpowiednie słowo w lukę'},
-						{id: "OrderWords", name:'Uszereguj zdanie, wskaż które słowo znajdzie się w miejscu z *'},
-						{id: "FillGapText", name:'Wstaw odpowiednie słowo w lukę w dłuższym tekście'},
-						{id: "ReadingCompText", name:'Czytanie ze zrozumieniem, odpowiedz na podstawie tekstu'},
-						{id: "ReadingCompTextPict", name:'Czytanie ze zrozumieniem i zdjęciem, odpowiedz na podstawie tekstu i zdjęcia'},
-						{id: "WriteInOtherWords", name:'Napisz innymi słowami'},
-						{id: "DescribePict", name:'Wskaż co przedstawia zdjęcie'}];
+const CONST_TYPE_CHOSE = [{id: 1, name:'Przetłumacz ... na polski'}, 
+						{id: 2, name:'Przetłumacz ... na hiragane'},
+						{id: 3, name:'Przetłumacz ... na katakane'},
+						{id: 4, name:'Przetłumacz ... na kanji'},
+						{id: 5, name:'Wstaw odpowiednie słowo w ...'},
+						{id: 6, name:'Uszereguj zdanie, wskaż które słowo znajdzie się w miejscu z *'},
+						{id: 7, name:'Wstaw odpowiednie słowo w ... w dłuższym tekście'},
+						{id: 8, name:'Czytanie ze zrozumieniem, odpowiedz na podstawie tekstu'},
+						{id: 9, name:'Czytanie ze zrozumieniem i zdjęciem, odpowiedz na podstawie tekstu i zdjęcia'},
+						{id: 10, name:'Napisz innymi słowami'},
+						{id: 11, name:'Wskaż co przedstawia zdjęcie'}];
 
 @Component({
   selector: 'app-lesson-wizard',
@@ -33,7 +32,11 @@ export class LessonWizardComponent implements OnInit{
   pdf: PDFDocumentProxy;
   currentTypeName: string = '';
   base64Str: any;
-  exercise_list: any;
+  exerciseList: any;
+  typeIndex = CONST_TYPE_CHOSE;
+  chosenExercisesIndex = [];
+  chosenTypeIndex = [];
+  tempArray = [];
 
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
@@ -43,61 +46,55 @@ export class LessonWizardComponent implements OnInit{
       longImageQuestion: ['', ]      
     });
   }
-  type_index = CONST_TYPE_CHOOSE;
-  chosen_exercises_index = [];
-  chosen_type_index = [];
-  temp_array = [];
   
   ngOnInit(){
   this.httpClient.get('http://localhost:8080/creator/exercise/all?type=TranslatePol').subscribe(
       (data) => {
 		  console.log(data);
-		  this.exercise_list = data;
+		  this.exerciseList = data;
 		  this.currentTypeName = "Przetłumacz ... na polski";
 		  return data;
       },
-	  () => {
-		  //console.log(this.exercise_list);
-	  }
+	  () => {}
     ); 
 	  
   }
   
   addExercise(exercise: any)
   {
-	let data = this.chosen_exercises_index.find(ob => ob['id'] === exercise.id);
+	let data = this.chosenExercisesIndex.find(ob => ob['id'] === exercise.id);
 	if(data === undefined)
 	{
-		this.chosen_exercises_index.push({id: exercise.id, name: exercise.name});
+		this.chosenExercisesIndex.push({id: exercise.id, name: exercise.name});
 	}
   }
   
-  addType(type_id: number)
+  addType(typeId: number)
   {
-	let data = this.chosen_type_index.find(ob => ob['id'] === type_id);
+	let data = this.chosenTypeIndex.find(ob => ob['id'] === typeId);
 	if(data === undefined)
 	{
-		this.chosen_type_index.push({id: type_id});
+		this.chosenTypeIndex.push({id: typeId});
 	}
-	this.httpClient.get('http://localhost:8080/creator/exercise/all?type='+type_id).subscribe(
+	this.httpClient.get('http://localhost:8080/creator/exercise/all?type='+typeId).subscribe(
 		(data) => {
 			console.log(data);
-			this.exercise_list = data;
+			this.exerciseList = data;
 			return data;
 		},
 		() => {}
 	  ); 
   }
   
-  addTypeName(type_name: string)
+  addTypeName(typeName: string)
   {
-	this.currentTypeName = type_name;
+	this.currentTypeName = typeName;
   }
   
-  deleteExercise(exercise_name: string)
+  deleteExercise(exerciseName: string)
   {
-	let index: number = this.chosen_exercises_index.findIndex(item => item.name === exercise_name);
-	this.chosen_exercises_index.splice(index, 1);
+	let index: number = this.chosenExercisesIndex.findIndex(item => item.name === exerciseName);
+	this.chosenExercisesIndex.splice(index, 1);
   }
 
   processFile(imageInput: any) {
@@ -136,11 +133,11 @@ export class LessonWizardComponent implements OnInit{
   reset(form: NgForm) {
 	this.pdfSrc="";
     form.reset();
-	  this.chosen_exercises_index.length=0;
+	  this.chosenExercisesIndex.length=0;
 	  this.httpClient.get('http://localhost:8080/creator/exercise/all?type=TranslatePol').subscribe(
       (data) => {
 		  console.log(data);
-		  this.exercise_list = data;
+		  this.exerciseList = data;
 		  this.currentTypeName = "Przetłumacz ... na polski";
 		  return data;
       },
@@ -149,14 +146,14 @@ export class LessonWizardComponent implements OnInit{
   }
   
   create() {
-	for(var i=0; i < this.chosen_exercises_index.length; i++)
+	for(var i=0; i < this.chosenExercisesIndex.length; i++)
     {
-	  this.temp_array[i]=this.chosen_exercises_index[i].id;
+	  this.tempArray[i]=this.chosenExercisesIndex[i].id;
     }
     const lessonModel: LessonModel = {
 	  name: this.lessonForm.value.lessonName,
     theory: this.base64Str,
-	  exerciseIds: this.temp_array,
+	  exerciseIds: this.tempArray,
 	};
 	console.log(lessonModel);
     this.authService.createLesson(lessonModel).subscribe (

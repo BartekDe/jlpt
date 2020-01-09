@@ -12,6 +12,7 @@ import { TestExercisesComponent } from './test-exercises/test-exercises.componen
 import { ResultsComponent } from './results/results.component';
 import { ExerciseWizardComponent } from './exercise-wizard/exercise-wizard.component';
 import { ExerciseViewComponent } from './exercise-view/exercise-view.component';
+import { DailyExerciseViewComponent } from './daily-exercise-view/daily-exercise-view.component';
 import { TestExerciseViewComponent } from './test-exercise-view/test-exercise-view.component';
 import { LessonWizardComponent } from './lesson-wizard/lesson-wizard.component';
 import { LessonViewComponent } from './lesson-view/lesson-view.component';
@@ -37,6 +38,7 @@ import { TestsComponent } from './tests/tests.component';
     ResultsComponent,
     ExerciseWizardComponent,
     ExerciseViewComponent,
+    DailyExerciseViewComponent,
     TestExerciseViewComponent,
     LessonWizardComponent,
     LessonViewComponent,

@@ -1,14 +1,12 @@
 <div class="card" style="width: 80%">
 	<h3 class="card-title">Zadania dnia</h3>
 	<div class="card-body">
-	<div *ngFor="let exercise of exerciseArray; index as i">
-		<a routerLink="/exercise-view">
+	<div *ngFor="let exercise of dailyExerciseArray; index as i">
+		<a routerLink="/daily-exercise-view">
 			<button (click)=goExercise(exercise.id) class="btn btn-light">
 				<span>Ćwiczenie {{i+1}}</span>
 			</button>
 		</a>
 	</div>
-
 	</div>
-	
 </div>

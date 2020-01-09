@@ -46,7 +46,18 @@ button:hover{
 	box-shadow: 1px 1px 1px 1px;
 }
 
-#question
+#question1
+{
+	width: 94%;
+	margin-left: 3%;
+	margin-bottom: 5%;
+	height: 150px;
+	pointer-events: none;
+	font-size: 140%;
+	padding-top: 30px;
+}
+
+#question2
 {
 	width: 94%;
 	margin-left: 3%;
@@ -57,18 +68,17 @@ button:hover{
 	padding-top: 30px;
 }
 
-#buttonPos, #buttonNeu, #buttonNeg
+.sendButton
 {
-	margin-right: 1%;
-	margin-left: 1%;
-	margin-bottom: 5%;
-	font-size: 100%;
-	width: 70px;
+	width: 100px;
 	height: 50px;
+	margin: auto;
+	margin-bottom: 10px;
 }
 
-#opPos, #opNeu, #opNeg
+#imageQuestion
 {
 	height: 100%;
-	width: 100%;
+	width: 100px;
+	padding-bottom: 20px;
 }

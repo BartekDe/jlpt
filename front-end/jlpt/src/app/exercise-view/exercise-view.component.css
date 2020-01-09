@@ -67,32 +67,14 @@ button:hover{
 	font-size: 100%;
 	width: 70px;
 	height: 50px;
-	/*float: right;*/
 }
 
-/*#buttonPos:hover, #buttonNeu:hover, #buttonNeg:hover
-{
-}*/
 
 #opPos, #opNeu, #opNeg
 {
 	height: 100%;
 	width: 100%;
 }
-
-/*.navigation1
-{
-	width: 100px;
-	height: 50px;
-	margin: auto;
-	margin-bottom: 10px;
-}
-
-#right
-{
-  	width: 25px;
-  	height: 20px;
-}*/
 
 .sendButton
 {

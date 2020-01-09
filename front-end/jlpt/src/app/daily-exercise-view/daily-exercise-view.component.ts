@@ -1,41 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import {TestExerciseAnswerModel} from '../models/TestExerciseAnswerModel';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {AuthService} from '../auth.service';
+import {DailyExerciseAnswerModel} from '../models/DailyExerciseAnswerModel';
 
 @Component({
-  selector: 'app-test-exercise-view',
-  templateUrl: './test-exercise-view.component.html',
-  styleUrls: ['./test-exercise-view.component.css']
+  selector: 'app-daily-exercise-view',
+  templateUrl: './daily-exercise-view.component.html',
+  styleUrls: ['./daily-exercise-view.component.css']
 })
-//const opinion = 0;
-export class TestExerciseViewComponent implements OnInit {
+
+export class DailyExerciseViewComponent implements OnInit {
   answer: number = 0;
-  tempArray: any;
-  labelText: string;
-  exerciseType: any;
-  imgSrc: any;
-  exerciseText: any;
-  rightAnswer: { name: any; }[];
-  wrongAnswerArray: { id: number; name: any; }[];
-  rightPosition: number;
-  answerArray = [];
   random: number;
-  tempName: any;
+  rightPosition: number;
+  tempName: string;
+  exerciseType: string;
+  imgSrc: string | ArrayBuffer;
+  exerciseText: string;
+  rightAnswer = [];
+  wrongAnswerArray = [];
+  answerArray = [];
+  labelText: string;
+  tempArray: any;
+  count: any;
   correctAnswer: boolean;
-  timeStart: number;
-  timeLeft: any;
-  interval: any;
-  timeVisibleSeconds: string = '';
-  timeVisibleMinutes: string = '';
-  timeVisibleHours: string = '';
-  timeVisible: string;
 
   constructor(private httpClient: HttpClient,
     private router: Router,
     private authService: AuthService) {};
-  
 
   takeAnswer(answerInput: number)
   {
@@ -51,7 +44,7 @@ export class TestExerciseViewComponent implements OnInit {
   ngOnInit() {
     this.httpClient.get('http://localhost:8080/creator/exercise/'+localStorage.getItem('exerciseID')).subscribe(
 		(data) => {
-      console.log(data);
+			console.log(data);
       this.tempArray = data;
       if(this.tempArray.type === "TranslatePol") this.labelText = "Przetłumacz '...' na polski";
       else if(this.tempArray.type === "TranslateHira") this.labelText = "Przetłumacz '...' na hiraganę";
@@ -95,72 +88,20 @@ export class TestExerciseViewComponent implements OnInit {
 		},
 		() => {}
     ); 
-    this.timeStart = (+ localStorage.getItem('time')) * 60;
-	  this.timeLeft = + localStorage.getItem('timeLeft');
-	  this.interval = setInterval(() => {
-		if(this.timeLeft > 0) {
-      this.timeLeft--;
-      localStorage.setItem('timeLeft', this.timeLeft.toString());
-		} else {
-      clearInterval(this.interval);
-      localStorage.removeItem('timeLeft');
-      localStorage.setItem('timeLeft', '');
-		  alert('KONIEC CZASU');
-		}
-		this.convertTime(this.timeLeft);
-	},1000)
-
   }
 
   sendAnswer()
   {
     if(this.answer === this.rightPosition) this.correctAnswer = true;
     else this.correctAnswer = false;
-    const testExerciseAnswerModel: TestExerciseAnswerModel = {
+    const dailyExerciseAnswerModel: DailyExerciseAnswerModel = {
       exerciseId: localStorage.getItem('exerciseID'),
-      testId: localStorage.getItem('testID'),
-      correct: this.correctAnswer
+      correct: this.correctAnswer,
     };
-    this.authService.sendAnswerTest(testExerciseAnswerModel).subscribe(
-    () => {
-      console.log(testExerciseAnswerModel);
-    },
+    this.authService.sendAnswerDaily(dailyExerciseAnswerModel).subscribe(
+      () => {
+        console.log(dailyExerciseAnswerModel);
+      },
     () => {});
-    
   }
-
-  convertTime(time: number)
-  {
-	  if(time > 3600) 
-	  {
-		this.timeVisibleHours = ((time - (time % 3600)) / 3600).toString();
-		time = time % 3600;
-		if((time - (time % 60)) < 10) this.timeVisibleMinutes = "0" + ((time - (time % 60)) / 60).toString();
-		else this.timeVisibleMinutes = ((time - (time % 60)) / 60).toString();
-		time = time % 60;
-		if(time < 10) this.timeVisibleSeconds = "0" + time.toString();
-		else this.timeVisibleSeconds = time.toString();
-	  }
-	  else if(time > 60)
-	  {
-		this.timeVisibleMinutes = ((time - (time % 60)) / 60).toString();
-		time = time % 60;
-		if(time < 10) this.timeVisibleSeconds = "0" + time.toString();
-		else this.timeVisibleSeconds = time.toString();
-	  }
-	  else
-	  {
-		this.timeVisibleSeconds = time.toString();
-	  }
-	  if(this.timeVisibleHours !== '')
-	  {
-		this.timeVisible = this.timeVisibleHours = ":" + this.timeVisibleMinutes + ":" + this.timeVisibleSeconds;
-	  }
-	  else if(this.timeVisibleMinutes !== '')
-	  {
-		this.timeVisible = this.timeVisibleMinutes + ":" + this.timeVisibleSeconds;
-	  }
-	  else this.timeVisible = this.timeVisibleSeconds;
-  }
-
 }

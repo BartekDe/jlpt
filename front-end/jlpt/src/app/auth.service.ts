@@ -7,6 +7,8 @@ import {LessonModel} from './models/LessonModel';
 import {TestModel} from './models/TestModel';
 import {ExerciseAnswerModel} from './models/ExerciseAnswerModel';
 import {ProfilModel} from './models/ProfilModel';
+import {TestExerciseAnswerModel} from './models/TestExerciseAnswerModel';
+import {DailyExerciseAnswerModel} from './models/DailyExerciseAnswerModel';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +42,18 @@ export class AuthService {
     return this.httpClient.post('http://localhost:8080/lesson/solve-exercise', exerciseAnswerMode);
   }
 
+  sendAnswerTest(testExerciseAnswerMode: TestExerciseAnswerModel) {
+    return this.httpClient.post('http://localhost:8080/test/solve-exercise', testExerciseAnswerMode);
+  }
+
+  sendAnswerDaily(dailyExerciseAnswerMode: DailyExerciseAnswerModel) {
+    return this.httpClient.post('http://localhost:8080/daily', dailyExerciseAnswerMode);
+  }
+
+  finishTest(id: string) {
+    return this.httpClient.post('http://localhost:8080/test/'+id+'/finish', '');
+  }
+
   getRole() {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -65,7 +79,7 @@ export class AuthService {
   }
 
   public createTest(testM: TestModel) {
-    return this.httpClient.post('http://localhost:8080/creator/test', testM);
+    return this.httpClient.post('http://localhost:8080/test', testM);
   }
 
   public changeUsername(profilModel: ProfilModel) {

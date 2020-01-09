@@ -1,6 +1,6 @@
 export class TestModel {
     name: string;
-    duration: number;
+    timeLimit: number;
 	exerciseIds: any;
 }
   

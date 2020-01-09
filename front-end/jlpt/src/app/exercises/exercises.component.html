@@ -4,7 +4,7 @@
 	<div *ngFor="let exercise of exerciseArray; index as i">
 		<a routerLink="/exercise-view">
 			<button (click)=goExercise(exercise.id) class="btn btn-light">
-				<!--<img src="././assets/images/{{exercise.rate}}.png" alt="opinion" id="op"/> (click)=goExercise(i) -->
+				<!--<img src="././assets/images/{{exercise.rate}}.png" alt="opinion" id="op"/>-->
 				<span>Ćwiczenie {{i+1}}</span>
 			</button>
 		</a>

@@ -30,7 +30,7 @@
       <input class="form-control border border-dark font-weight-bold" type="text" id="question"
              formControlName="question" autocomplete="off">
       <label class="form-control-placeholder" for="question">Pytanie</label></div>
-    <div class="input-group col-sm-4" *ngIf="questionType == 'ReadingCompTextPict'"> <!-- CHANGE -->
+    <div class="input-group col-sm-4" *ngIf="questionType == 'ReadingCompTextPict'">
       <input #imageInput
              class="form-control border border-dark btn btn-dark"
              id="longImageQuestion"
@@ -77,7 +77,7 @@
   </ng-template>
 
   <ng-template #Image>
-    <div class="input-group col-sm-4" *ngIf="questionType == 'DescribePict'"> <!-- CHANGE -->
+    <div class="input-group col-sm-4" *ngIf="questionType == 'DescribePict'">
         <input #imageInput
                class="form-control border border-dark btn btn-dark"
                id="imageQuestion"

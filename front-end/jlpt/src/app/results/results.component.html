@@ -2,7 +2,7 @@
 	<h3 class="card-title">Tabela wyników</h3>
 	<div class="card-body">
         <button (click)=chooseResult(1) class="btn btn-light"
-        [style.color] = "result == 1 ? 'white' : ''" [style.background-color] = "result == 1 ? 'black' : ''" [style.border] = "result == 1 ? '1px solid black' : ''">
+        [style.color] = "result == 1 || result == 0 ? 'white' : ''" [style.background-color] = "result == 1 || result == 0 ? 'black' : ''" [style.border] = "result == 1 ? '1px solid black' : ''">
 			<span>Wyniki testów</span>
         </button>
         <button (click)=chooseResult(2) class="btn btn-light"
@@ -22,10 +22,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr mdbTableCol *ngFor="let el of elements">
-            <th scope="row">{{el.position}}</th>
-            <td>{{el.name}}</td>
-            <td>{{el.result}}%</td>
+          <tr mdbTableCol *ngFor="let element of resultArray; index as i">
+            <th scope="row">{{i+1}}</th>
+            <td>{{element.username}}</td>
+            <td>{{element.score}}%</td>
           </tr>
         </tbody>
     </table>

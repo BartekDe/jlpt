@@ -9,8 +9,7 @@
 
 }
 
-h6
-{
+h6 {
 	font-size: 89.5%;
 }
 
@@ -37,14 +36,6 @@ h6
 	color: white;
 }
 
-/*#buttonT:hover
-{
-	width: 30%;
-	font-size: 150%;
-	margin-bottom: 1%;
-	margin-top: 7%;
-}*/
-
 #buttonT:hover
 {
 	color: black;
@@ -60,27 +51,11 @@ h6
 	color: white;
 }
 
-/*#buttonE:hover
-{
-	width: 45%;
-	font-size: 150%;
-	margin-bottom: 1%;
-	margin-top: 7%;
-}*/
-
 #buttonE:hover
 {
 	color: black;
 	background-color: white;
 }
-
-/*#IMGv, #IMGx, #IMGnone
-{
-	width: 10%;
-	margin-top: 10%;
-	margin-bottom: 5%;
-	margin-right: 4%;
-}*/
 
 #IMG
 {

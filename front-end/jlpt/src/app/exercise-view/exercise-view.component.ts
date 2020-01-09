@@ -1,17 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
 import {AuthService} from '../auth.service';
 import { ExerciseAnswerModel } from '../models/ExerciseAnswerModel';
-import { createOfflineCompileUrlResolver } from '@angular/compiler';
-
-const CONST_RIGHT_ANSWER = [{name: 'とけい'}];
-const CONST_WRONG_ANSWERS = [{id: 0, name: 'さいふ'}, 
-						{id: 1, name: 'ちず'},
-						{id: 2, name: 'じしょ'},
-						{id: 3, name: 'めがね'},
-						{id: 4, name: 'でんわ'}];
-
 
 @Component({
   selector: 'app-exercise-view',
@@ -25,27 +15,18 @@ export class ExerciseViewComponent implements OnInit {
   random: number;
   rightPosition: number;
   tempName: string;
-  //right_answer = CONST_RIGHT_ANSWER;
-  //right_answer = [{name: 'とけい'}];
-  //wrong_answer_array = CONST_WRONG_ANSWERS;
-  /*wrong_answer_array = [{id: 0, name: 'さいふ'}, 
-  {id: 1, name: 'ちず'},
-  {id: 2, name: 'じしょ'},
-  {id: 3, name: 'めがね'},
-  {id: 4, name: 'でんわ'}];*/
-  exercise_type: string;
+  exerciseType: string;
   imgSrc: string | ArrayBuffer;
-  exercise_text: string;
-  right_answer = [];
-  wrong_answer_array = [];
-  answer_array = [];
+  exerciseText: string;
+  rightAnswer = [];
+  wrongAnswerArray = [];
+  answerArray = [];
   labelText: string;
   tempArray: any;
   count: any;
   correctAnswer: boolean;
 
   constructor(private httpClient: HttpClient,
-    private router: Router,
     private authService: AuthService) {};
   
   makeOpinion(opinionInput: number)
@@ -80,11 +61,11 @@ export class ExerciseViewComponent implements OnInit {
       else if(this.tempArray.type === "ReadingCompTextPict") this.labelText = "Odpowiedz na podstawie zdjęcia i tekstu";
       else if(this.tempArray.type === "WriteInOtherWords") this.labelText = "Napisz innymi słowami";
       else if(this.tempArray.type === "DescribePict") this.labelText = "Wskaż co przedstawia zdjęcie";
-      this.exercise_type = this.tempArray.type;
+      this.exerciseType = this.tempArray.type;
       this.imgSrc = this.tempArray.contentImage;
-      this.exercise_text = this.tempArray.content;
-      this.right_answer = [{name: this.tempArray.correctAnswer}];
-      this.wrong_answer_array = [{id: 0, name: this.tempArray.answer1}, 
+      this.exerciseText = this.tempArray.content;
+      this.rightAnswer = [{name: this.tempArray.correctAnswer}];
+      this.wrongAnswerArray = [{id: 0, name: this.tempArray.answer1}, 
                                 {id: 1, name: this.tempArray.answer2},
                                 {id: 2, name: this.tempArray.answer3},
                                 {id: 3, name: this.tempArray.answer4},
@@ -92,7 +73,7 @@ export class ExerciseViewComponent implements OnInit {
 
       //wylosowanie miejsca poprawnej odpowiedzi
       this.rightPosition = this.getRandomInt(1, 4);
-      this.answer_array.push({id: this.rightPosition, name: this.right_answer[0].name});
+      this.answerArray.push({id: this.rightPosition, name: this.rightAnswer[0].name});
 
       //dolosowanie błędnych odpowiedzi
       let temp = 0;
@@ -100,27 +81,19 @@ export class ExerciseViewComponent implements OnInit {
       {
         this.random = this.getRandomInt(0, 4-i+1);
         if(i+temp == this.rightPosition) {temp = 1;}
-        this.answer_array.push({id: i+temp, name: this.wrong_answer_array[this.random].name});
-        this.tempName = this.wrong_answer_array[this.random].name
-        let index: number = this.wrong_answer_array.findIndex(item => item.name === this.tempName);
-	      this.wrong_answer_array.splice(index, 1);
+        this.answerArray.push({id: i+temp, name: this.wrongAnswerArray[this.random].name});
+        this.tempName = this.wrongAnswerArray[this.random].name
+        let index: number = this.wrongAnswerArray.findIndex(item => item.name === this.tempName);
+	      this.wrongAnswerArray.splice(index, 1);
       }
-      this.answer_array.sort((a, b) => (a.id > b.id) ? 1 : -1);
-      console.log(this.answer_array);
+      this.answerArray.sort((a, b) => (a.id > b.id) ? 1 : -1);
+      console.log(this.answerArray);
 			return data;
 		},
 		() => {}
     ); 
 
   }
-
-  /*nextExercise()
-  {
-    this.count = localStorage.getItem('exerciseIndex');
-    this.count+= 1;
-    localStorage.setItem('exerciseIndex', this.count);
-    this.router.navigate(['/exercise-view']);
-  }*/
 
   sendAnswer()
   {
@@ -133,10 +106,9 @@ export class ExerciseViewComponent implements OnInit {
       rate: this.opinion.toString()
     };
     this.authService.sendAnswer(exerciseAnswerModel).subscribe(
-    () => {
-      console.log(exerciseAnswerModel);
-    },
-    () => { console.log('DUPA'); console.log(exerciseAnswerModel); });
+      () => {
+        console.log(exerciseAnswerModel);
+      },
+    () => {});
   }
-
 }

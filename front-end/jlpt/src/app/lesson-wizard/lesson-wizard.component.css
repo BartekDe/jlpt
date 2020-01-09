@@ -46,13 +46,6 @@
   text-align: center;
 }
 
-/*.przyciskiNav
-{
-  width: 100%; 
-  text-align: center; 
-  margin-bottom: 10px;
-}*/
-
 .lewo, .prawo
 {
   background-color: #f2f2f2;
@@ -61,12 +54,6 @@
   width: 45px;
   height: 30px;
 }
-
-/*.przyciskiZoom
-{
-  width: 100%; 
-  text-align: center;
-}*/
 
 .smaller, .bigger
 {
