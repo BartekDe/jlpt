@@ -91,7 +91,7 @@ public class LessonController {
                 if (theoryOnLesson.getLesson().getId().equals(lesson.getId())
                     && theoryOnLesson.getAppUser().getId().equals(appUser.getId())
                 ) {
-                    lesson.setTheorySeen(true);
+                    lesson.setIsTheorySeen(true);
                 }
             }
         }

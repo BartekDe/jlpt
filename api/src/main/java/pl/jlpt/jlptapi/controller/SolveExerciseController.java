@@ -129,7 +129,7 @@ public class SolveExerciseController {
         return new ResponseEntity<>(leaderboard, HttpStatus.OK);
     }
 //
-//    @GetMapping("/test/leaderboard")
+//    @GetMapping("/daily/leaderboard")
 //    public ResponseEntity testLeaderboard() {
 //
 //        List<TestResult> results = this.testResultRepository.findAll(); // construct dto from this list of objects
