@@ -54,4 +54,6 @@ public class Exercise {
 
     @ManyToMany(targetEntity = Exercise.class)
     private List<Test> test;
+
+    private int rate;
 }
