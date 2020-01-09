@@ -11,9 +11,9 @@ public class DailyLeaderboardDto implements Comparable<DailyLeaderboardDto> {
 
     @Override
     public int compareTo(DailyLeaderboardDto dailyLeaderboardDto) {
-        int result = this.score - dailyLeaderboardDto.score;
+        int result = dailyLeaderboardDto.score - this.score;
         if (result==0) {
-            return this.time - dailyLeaderboardDto.time;
+            return dailyLeaderboardDto.time - this.time;
         } else {
             return result;
         }
