@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import pl.jlpt.jlptapi.dto.request.ExerciseAttemptDto;
+import pl.jlpt.jlptapi.dto.response.LessonLeaderboardDto;
 import pl.jlpt.jlptapi.dto.response.TestLeaderboardDto;
 import pl.jlpt.jlptapi.entity.*;
 import pl.jlpt.jlptapi.repository.*;
@@ -136,7 +137,7 @@ public class SolveExerciseController {
         // show users sorted by percentage of correctly done exercises
         List<AppUser> allUsers = this.appUserRepository.findAll();
 
-        NavigableMap<Integer, AppUser> userScores = new TreeMap<>();
+        List<LessonLeaderboardDto> leaderboard = new ArrayList<>();
 
         for (AppUser user : allUsers) {
             int userScore = 0;
@@ -146,10 +147,38 @@ public class SolveExerciseController {
                     userScore++;
                 }
             }
-            userScores.put(userScore, user);
+            LessonLeaderboardDto leaderboardDto = LessonLeaderboardDto.builder().score(userScore).username(user.getUsername()).build();
+            leaderboard.add(leaderboardDto);
         }
 
-        return new ResponseEntity<>(userScores.descendingMap(), HttpStatus.OK);
+        leaderboard.sort((o1, o2) -> o2.score - o1.score);
+
+        return new ResponseEntity<>(leaderboard, HttpStatus.OK);
     }
+//
+//    @GetMapping("/daily/leaderboard")
+//    public ResponseEntity dailyLeaderboard() {
+//
+//        List<DailyExerciseSolveAttempt> solveAttempts =
+//
+//        // show users sorted by percentage of correctly done exercises
+//        List<AppUser> allUsers = this.appUserRepository.findAll();
+//
+//        NavigableMap<Integer, AppUser> userScores = new TreeMap<>();
+//
+//        for (AppUser user : allUsers) {
+//            int userScore = 0;
+//            List<LessonExerciseSolveAttempt> solveAttempts = this.lessonExerciseSolveAttemptRepository.findByUser(user);
+//            for (LessonExerciseSolveAttempt solveAttempt : solveAttempts) {
+//                if (solveAttempt.isRight()) {
+//                    userScore++;
+//                }
+//            }
+//            userScores.put(userScore, user);
+//        }
+//
+//        return new ResponseEntity<>(userScores.descendingMap(), HttpStatus.OK);
+//    }
+
 
 }
