@@ -28,4 +28,6 @@ public class DailyExerciseSolveAttempt {
     private Exercise exercise;
 
     private boolean isRight;
+
+    private int time;
 }
