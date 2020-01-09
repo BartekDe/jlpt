@@ -10,8 +10,9 @@ import {HttpClient} from '@angular/common/http';
 export class ExercisesComponent implements OnInit {
   labelText: string;
   tempArray: any;
-  exerciseArray = [];
+  exerciseArray: any;
   indexTemp: any;
+  opinion: string;
 
   constructor(private httpClient: HttpClient) {};
 
@@ -21,7 +22,7 @@ export class ExercisesComponent implements OnInit {
 			console.log(data);
 			this.tempArray = data;
 			this.labelText = this.tempArray.name;
-			this.exerciseArray = this.tempArray.exercises;
+      this.exerciseArray = this.tempArray.exercises;
 			return data;
 		},
 		() => {

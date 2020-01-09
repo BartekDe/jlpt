@@ -43,7 +43,7 @@ export class ResultsComponent implements OnInit {
     }
     else if(resultInput == 2)
     {
-      /*this.httpClient.get('http://localhost:8080/lesson/leaderboard').subscribe(
+      this.httpClient.get('http://localhost:8080/lesson/leaderboard').subscribe(
       (data) => {
         console.log(data);
         this.resultArray = data;
@@ -51,13 +51,13 @@ export class ResultsComponent implements OnInit {
       },
       () => {
       }
-      );*/
-      this.resultArray = this.elements1;
-      this.headElements = ['Lp.', 'Nazwa użytkownika', 'Wynik'];
+      );
+      //this.resultArray = this.elements1;
+      this.headElements = ['Lp.', 'Nazwa użytkownika', 'Prawidłowe rozwiązania'];
     }
     else if(resultInput == 3)
     {
-      /*this.httpClient.get('http://localhost:8080/daily/leaderboard').subscribe(
+      this.httpClient.get('http://localhost:8080/daily/leaderboard').subscribe(
       (data) => {
         console.log(data);
         this.resultArray = data;
@@ -65,8 +65,8 @@ export class ResultsComponent implements OnInit {
       },
       () => {
       }
-      );*/
-      this.resultArray = this.elements2;
+      );
+      //this.resultArray = this.elements2;
       this.headElements = ['Lp.', 'Nazwa użytkownika', 'Wynik', 'Czas'];
     }
   }

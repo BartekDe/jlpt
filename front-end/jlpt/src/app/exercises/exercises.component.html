@@ -4,7 +4,10 @@
 	<div *ngFor="let exercise of exerciseArray; index as i">
 		<a routerLink="/exercise-view">
 			<button (click)=goExercise(exercise.id) class="btn btn-light">
-				<!--<img src="././assets/images/{{exercise.rate}}.png" alt="opinion" id="op"/>-->
+				<img src="././assets/images/noOpinion.png" alt="opinion" id="op" *ngIf="exercise.rate == null"/>
+				<img src="././assets/images/positive.png" alt="opinion" id="op" *ngIf="exercise.rate == 1"/>
+				<img src="././assets/images/neutral.png" alt="opinion" id="op" *ngIf="exercise.rate == 2"/>
+				<img src="././assets/images/negative.png" alt="opinion" id="op" *ngIf="exercise.rate == 3"/>
 				<span>Ćwiczenie {{i+1}}</span>
 			</button>
 		</a>

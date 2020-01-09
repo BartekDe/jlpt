@@ -9,6 +9,9 @@ import {Router} from '@angular/router';
 })
 export class LessonsComponent implements OnInit {
   lessonList: any;
+  exerciseList = [];
+  doneExercisesArray = [];
+  doneTheoryArray = [];
 
   constructor(private httpClient: HttpClient,
     private router: Router) {};
@@ -18,6 +21,33 @@ export class LessonsComponent implements OnInit {
       (data) => {
       console.log(data);
       this.lessonList = data;
+      for(let i=0; i<this.lessonList.length; i++)
+      {
+        if(this.lessonList[i].name !== 'Hiragana' && this.lessonList[i].name !== 'Katakana' && this.lessonList[i].name !== 'Kanji')
+        {
+          let exerciseList = this.lessonList[i].exercises;
+          if(exerciseList.map(function(e) { return e.rate; }).every(function (el) {return el !== null;}))
+          {
+            this.doneExercisesArray[i] = "done";
+          }
+          else if(exerciseList.map(function(e) { return e.rate; }).every(function (el) {return el === null;}))
+          {
+            this.doneExercisesArray[i] = "none";
+          }
+          else if(exerciseList.map(function(e) { return e.rate; }).some(function (el) {return el === null;}))
+          {
+            this.doneExercisesArray[i] = "notDone";
+          }
+        }
+        else
+        {
+          if(this.lessonList[i].successCount > 100) this.doneExercisesArray[i] = "done";
+          else this.doneExercisesArray[i] = "none";
+        }
+        
+        if(this.lessonList[i].isTheorySeen === true) this.doneTheoryArray[i] = "done";
+        else if(this.lessonList[i].isTheorySeen === null) this.doneTheoryArray[i] = "none";
+      }
 		  return data;
       },
 	  () => {

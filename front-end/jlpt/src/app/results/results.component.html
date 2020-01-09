@@ -25,7 +25,8 @@
           <tr mdbTableCol *ngFor="let element of resultArray; index as i">
             <th scope="row">{{i+1}}</th>
             <td>{{element.username}}</td>
-            <td>{{element.score}}%</td>
+            <td *ngIf = "result == 2">{{element.score}}</td>
+            <td *ngIf = "result != 2">{{element.score}}%</td>
             <td *ngIf = "result == 3">{{element.time}}s</td>
           </tr>
         </tbody>

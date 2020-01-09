@@ -85,14 +85,14 @@ export class TestExercisesComponent implements OnInit {
 			console.log(data);
 			this.resultArray = data;
 			this.result = this.resultArray.score.toString();
+			alert('ZAKOŃCZONO TEST\nWYNIK: ' + this.result + '%');
+			setTimeout(() => {
+				this.router.navigate(['/tests']);
+			}, 5000);
 		},
 		() => {
 		}
 	);
-	alert('ZAKOŃCZONO TEST\nWYNIK: ' + this.result + '%');
-	setTimeout(() => {
-		this.router.navigate(['/tests']);
-	}, 5000);
   }
 
   convertTime(time: number)

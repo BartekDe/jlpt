@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 import {HttpClient} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lesson-view',
@@ -18,7 +19,8 @@ export class LessonViewComponent implements OnInit {
   labelText: string;
   tempArray: any;
   
-  constructor(private httpClient: HttpClient) {};
+  constructor(private httpClient: HttpClient,
+    private router: Router) {};
   
   callBackFn(pdf: PDFDocumentProxy) {
 	this.numberOfPages = pdf.numPages;
@@ -54,6 +56,17 @@ export class LessonViewComponent implements OnInit {
 	  () => {
 	  }
     ); 
+    this.httpClient.post('http://localhost:8080/creator/lesson/theory/'+localStorage.getItem('lessonID'), '').subscribe(
+      () => {},
+      () => {});
+  }
+
+  checkExercise(name: string)
+  {
+    if(name === "Hiragana") this.router.navigate(['/exercises-hiragana']);
+    else if(name === "Katakana") this.router.navigate(['/exercises-katakana']);
+    else if(name === "Kanji") this.router.navigate(['/exercises-kanji']);
+    else this.router.navigate(['/exercises']);
   }
 
 }
