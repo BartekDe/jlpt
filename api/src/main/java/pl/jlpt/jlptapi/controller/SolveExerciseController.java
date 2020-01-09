@@ -136,7 +136,7 @@ public class SolveExerciseController {
         // show users sorted by percentage of correctly done exercises
         List<AppUser> allUsers = this.appUserRepository.findAll();
 
-        Map<Integer, AppUser> userScores = new TreeMap<>();
+        NavigableMap<Integer, AppUser> userScores = new TreeMap<>();
 
         for (AppUser user : allUsers) {
             int userScore = 0;
@@ -149,7 +149,7 @@ public class SolveExerciseController {
             userScores.put(userScore, user);
         }
 
-        return new ResponseEntity<>(userScores, HttpStatus.OK);
+        return new ResponseEntity<>(userScores.descendingMap(), HttpStatus.OK);
     }
 
 }
