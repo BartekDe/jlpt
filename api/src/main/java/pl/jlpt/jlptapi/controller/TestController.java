@@ -58,7 +58,7 @@ public class TestController {
             exIds.put(i, tests.get(i).getId());
         }
 
-        return ResponseEntity.ok(tests);
+        return new ResponseEntity<>(tests, HttpStatus.OK);
     }
 
     @GetMapping("/tests/{test}")
