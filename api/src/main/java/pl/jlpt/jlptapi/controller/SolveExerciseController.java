@@ -13,6 +13,7 @@ import pl.jlpt.jlptapi.repository.*;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -122,6 +123,8 @@ public class SolveExerciseController {
                     .username(user.getUsername()).build();
             leaderboard.add(data);
         }
+
+        leaderboard.sort((o1, o2) -> o1.score > o2.score ? 1 : 0);
 
         return new ResponseEntity<>(leaderboard, HttpStatus.OK);
     }
