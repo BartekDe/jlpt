@@ -49,6 +49,7 @@ public class LessonController {
     public ResponseEntity getLesson(@PathVariable Lesson lesson) {
 
         if (lesson == null) {
+
             throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Lesson not found");
         } else {
             return new ResponseEntity<>(lesson, HttpStatus.OK);

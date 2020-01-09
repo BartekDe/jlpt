@@ -29,5 +29,6 @@ public class DailyExerciseSolveAttempt {
 
     private boolean isRight;
 
+    @Column(nullable = true)
     private int time;
 }
