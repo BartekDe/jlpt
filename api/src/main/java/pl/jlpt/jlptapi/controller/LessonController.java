@@ -111,7 +111,7 @@ public class LessonController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping("/{lesson}/increase-success-count")
+    @PostMapping("/{lesson}/increase-success-count")
     @Transactional
     public ResponseEntity increaseLessonSuccessCount(@PathVariable Lesson lesson) {
 

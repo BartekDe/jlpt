@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {AuthService} from '../../auth.service';
 import {hiragana, katakana, kanji} from './alphabets';
 
 @Component({
@@ -25,7 +26,8 @@ export class AlphabetComponent implements OnInit {
   onReading = '';
   kunReading = '';
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.sub = this.route.data.subscribe(
@@ -47,6 +49,10 @@ export class AlphabetComponent implements OnInit {
     if (this.mode === 'Sprawdzian') {
       if (this.translateRomaji === this.findRomaji) {
         this.score ++;
+        this.authService.sendAlphabetScore(localStorage.getItem('lessonID')).subscribe(
+          () => { console.log(localStorage.getItem('lessonID')); },
+          () => { console.log(localStorage.getItem('lessonID') + ' FAIL'); }
+        );
         this.last = 'Dobrze';
       } else {
         this.last = 'Pomyłka';

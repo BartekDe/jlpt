@@ -94,4 +94,8 @@ export class AuthService {
     return this.httpClient.post('http://localhost:8080/user', '');
   }
 
+  public sendAlphabetScore(type: any){
+     return this.httpClient.post('http://localhost:8080/creator/lesson/' + type + '/increase-success-count', '');
+  }
+
 }
