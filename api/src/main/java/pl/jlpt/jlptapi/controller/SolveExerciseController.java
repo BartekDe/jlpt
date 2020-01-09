@@ -176,10 +176,10 @@ public class SolveExerciseController {
             int userScore = 0;
             int time = 0;
             for (DailyExerciseSolveAttempt solveAttempt : todaysDailySolves) {
-                if (solveAttempt.isRight()) {
+                if (solveAttempt.isRight() && solveAttempt.getUser().getId().equals(user.getId())) {
                     userScore++;
+                    time += solveAttempt.getTime() != null ? solveAttempt.getTime() : 0;
                 }
-                time += solveAttempt.getTime() != null ? solveAttempt.getTime() : 0;
             }
             DailyLeaderboardDto dailyLeaderboardDto = DailyLeaderboardDto.builder().score(userScore).username(user.getUsername()).time(time).build();
             leaderboard.add(dailyLeaderboardDto);
