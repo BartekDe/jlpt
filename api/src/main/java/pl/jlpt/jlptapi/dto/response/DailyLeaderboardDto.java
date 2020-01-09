@@ -13,7 +13,7 @@ public class DailyLeaderboardDto implements Comparable<DailyLeaderboardDto> {
     public int compareTo(DailyLeaderboardDto dailyLeaderboardDto) {
         int result = dailyLeaderboardDto.score - this.score;
         if (result==0) {
-            return dailyLeaderboardDto.time - this.time;
+            return this.time - dailyLeaderboardDto.time;
         } else {
             return result;
         }
