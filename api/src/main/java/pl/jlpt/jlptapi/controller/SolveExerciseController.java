@@ -173,15 +173,15 @@ public class SolveExerciseController {
         List<AppUser> allUsers = this.appUserRepository.findAll();
 
         for (AppUser user : allUsers) {
-            int userScore = 0;
+            double userScore = 0;
             int time = 0;
             for (DailyExerciseSolveAttempt solveAttempt : todaysDailySolves) {
                 if (solveAttempt.isRight() && solveAttempt.getUser().getId().equals(user.getId())) {
                     userScore++;
-                    time += solveAttempt.getTime() != null ? solveAttempt.getTime() : 0;
                 }
+                time += solveAttempt.getTime() != null ? solveAttempt.getTime() : 0;
             }
-            DailyLeaderboardDto dailyLeaderboardDto = DailyLeaderboardDto.builder().score((userScore / 3) * 100).username(user.getUsername()).time(time).build();
+            DailyLeaderboardDto dailyLeaderboardDto = DailyLeaderboardDto.builder().score((int)Math.ceil((userScore / 3) * 100)).username(user.getUsername()).time(time).build();
             leaderboard.add(dailyLeaderboardDto);
         }
 
