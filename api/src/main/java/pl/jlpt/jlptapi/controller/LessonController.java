@@ -66,7 +66,7 @@ public class LessonController {
             for (Exercise exercise : lesson.getExercises()) {
                 // use lesson attempt repository to check if exercise was already solved
                 for (LessonExerciseSolveAttempt lessonExerciseSolveAttempt : solveAttempts) {
-                    if (lessonExerciseSolveAttempt.getExercise().equals(exercise)) {
+                    if (lessonExerciseSolveAttempt.getExercise().getId().equals(exercise.getId())) {
                         // exercise was already solved, so return the solve attempt and not regular version of the exercise
                         exercise.setRate(lessonExerciseSolveAttempt.getSelfEvaluation());
                     }
