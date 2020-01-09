@@ -11,5 +11,5 @@ import java.util.List;
 @Repository
 public interface DailyExerciseSolveAttemptRepository extends JpaRepository<DailyExerciseSolveAttempt, Long> {
 
-    List<DailyExerciseSolveAttempt> findByExerciseSetDate(Date date);
+    List<DailyExerciseSolveAttempt> findByDailyExerciseSetDate(Date date);
 }

@@ -165,7 +165,7 @@ public class SolveExerciseController {
 
         java.sql.Date today = new java.sql.Date((new java.util.Date()).getTime());
 
-        List<DailyExerciseSolveAttempt> todaysDailySolves = this.dailyExerciseSolveAttemptRepository.findByExerciseSetDate(today);
+        List<DailyExerciseSolveAttempt> todaysDailySolves = this.dailyExerciseSolveAttemptRepository.findByDailyExerciseSetDate(today);
 
         List<DailyLeaderboardDto> leaderboard = new ArrayList<>();
 
